@@ -4,7 +4,7 @@
   <title><![CDATA[Lowbagger World 2.0]]></title>
   <link href="http://chebizarro.github.io/atom.xml" rel="self"/>
   <link href="http://chebizarro.github.io/"/>
-  <updated>2014-10-07T20:17:58-07:00</updated>
+  <updated>2014-10-19T11:06:35-07:00</updated>
   <id>http://chebizarro.github.io/</id>
   <author>
     <name><![CDATA[Chris Daley]]></name>
@@ -12,5 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[first pasta post por favor]]></title>
+    <link href="http://chebizarro.github.io/blog/2014/10/19/first-pasta-post-por-favor/"/>
+    <updated>2014-10-19T11:04:56-07:00</updated>
+    <id>http://chebizarro.github.io/blog/2014/10/19/first-pasta-post-por-favor</id>
+    <content type="html"><![CDATA[<p>This is my first post as a test of using the Android app more than anything. I guess I should plop in an obligatory</p>
+
+<h1>Hello World!</h1>
+
+<p>There, satisfied?</p>
+]]></content>
+  </entry>
   
 </feed>
