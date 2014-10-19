@@ -4,7 +4,7 @@
   <title><![CDATA[Lowbagger World 2.0]]></title>
   <link href="http://chebizarro.github.io/atom.xml" rel="self"/>
   <link href="http://chebizarro.github.io/"/>
-  <updated>2014-10-19T14:14:05-07:00</updated>
+  <updated>2014-10-19T14:35:30-07:00</updated>
   <id>http://chebizarro.github.io/</id>
   <author>
     <name><![CDATA[Chris Daley]]></name>
@@ -25,6 +25,8 @@
 <p>Once a concept, such as how handles and connection points interact, is grasped it is relatively easy to do some very interesting things programmatically.</p>
 
 <h3>Useful sources of information for using Python with Dia</h3>
+
+<p><a href="https://projects-old.gnome.org/dia/python.html">The Python Dia Module documentation</a></p>
 
 <h2>Connection Points and Handles</h2>
 
