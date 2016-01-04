@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+<meta name="author" content="Chris Daley" />
+<meta name="description" content="Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out how what it's used for and how you can get your hands on it..." />
+<meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD">
+<meta property="og:site_name" content="Enter the Panopticon"/>
+<meta property="og:title" content="Gherkin for Vala"/>
+<meta property="og:description" content="Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out how what it's used for and how you can get your hands on it..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://chrisdaley.biz/gherkin-for-vala.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-04 20:50:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://chrisdaley.biz/author/chris-daley.html">
+<meta property="article:section" content="Vala"/>
+<meta property="article:tag" content="Vala"/>
+<meta property="article:tag" content="Open Source"/>
+<meta property="article:tag" content="Programming"/>
+<meta property="article:tag" content="TDD"/>
+<meta property="article:tag" content="BDD"/>
+<meta property="og:image" content="../images/logo.png">  <title>Enter the Panopticon &ndash; Gherkin for Vala</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://chrisdaley.biz">
+        <img src="../images/logo.png" alt="Enter the Panopticon" title="Enter the Panopticon">
+      </a>
+      <h1><a href="http://chrisdaley.biz">Enter the Panopticon</a></h1>
+      <p>given enough eyeballs, all bugs are shallow</p>
+      <nav>
+        <ul class="list">
+          <li><a href="http://chrisdaley.biz/pages/about.html#about">About</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/chebizarro" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/chris-daley-b7830616" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/chebizarro" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://chrisdaley.biz">Home</a>
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/pages/about.html">About</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="gherkin-for-vala">Gherkin for Vala</h1>
+    <p>Posted on Mon 04 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a></p>
+  </header>
+  <div>
+    <p>I've had some spare time recently to work on some pet projects and get them into a decent enough shape that they could be subjected to the unflinching gaze of the Panopticon. One in particular is a port of the Gherkin language to Vala that I recently finished. So what is Gherkin exactly and why should you care?</p>
+<p>From the <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin wiki</a>:</p>
+<blockquote>
+<p>Gherkin is the language that Cucumber understands. It is a Business Readable, Domain Specific Language that lets you describe software’s behaviour without detailing how that behaviour is implemented.</p>
+</blockquote>
+<p>Gherkin is available for a host of languages and is tightly integrated into JUnit for example. Its syntax is pretty straightforward and designed to be intelligible by non-technical people:</p>
+<div class="highlight"><pre>  Feature: Some terse yet descriptive text of what is desired
+  Textual description of the business value of this feature
+  Business rules that govern the scope of the feature
+   Any additional information that will make the feature easier to understand
+
+   Scenario: Some determinable business situation
+     Given some precondition
+       And some other precondition
+      When some action by the actor
+       And some other action
+       And yet another action
+      Then some testable outcome is achieved
+       And something else we can check happens too
+
+   Scenario: A different situation
+       ...
+</pre></div>
+<p>The Gherkin parser for Vala, which you can get <a href="https://github.com/chebizarro/gherkin-vala">here</a> reads in Feature files and builds a tree of elements that can then either be manipulated directly or output as JSON.</p>
+<p>The parser by itself is not tremendously useful, but is one of the building blocks for a comprehensive testing framework for Vala and by extension, GObject that I am presently scoping. If this is something you're interested in, and I assume it is since you've read this far, then I'd encourage you to join the conversation.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>
+      <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>
+      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>
+      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>
+      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'cdaley-biz';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Chris Daley 2015 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71968606-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Gherkin for Vala",
+  "headline": "Gherkin for Vala",
+  "datePublished": "2016-01-04 20:50:00-08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Daley",
+    "url": "http://chrisdaley.biz/author/chris-daley.html"
+  },
+  "image": "../images/logo.png",
+  "url": "http://chrisdaley.biz/gherkin-for-vala.html",
+  "description": "Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out how what it's used for and how you can get your hands on it..."
+}
+</script></body>
+</html>
