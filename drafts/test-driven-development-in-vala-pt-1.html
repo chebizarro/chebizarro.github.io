@@ -13,7 +13,7 @@
   <meta name="robots" content="" />
 <meta name="author" content="Chris Daley" />
 <meta name="description" content="Vala is an Open Source Object Oriented Programming language similar to Java and C# that is both powerful and fun to use. Based on the GObject type system, it gives you full access to an entire Open Source ecosystem, from GTK+ for GUIs to GStreamer for multimedia. One thing it presently lacks though is a good framework for Test Driven Development, essential for designing and delivering quality end user experiences. In the spirit of Open Source, I've decided to use some of my spare time to do something about that. Read on to find out what..." />
-<meta name="keywords" content="Vala, Open Source, Programming, TDD">
+<meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD">
 <meta property="og:site_name" content="Enter the Panopticon"/>
 <meta property="og:title" content="Towards a Test Driven Development Framework in Vala Part 1."/>
 <meta property="og:description" content="Vala is an Open Source Object Oriented Programming language similar to Java and C# that is both powerful and fun to use. Based on the GObject type system, it gives you full access to an entire Open Source ecosystem, from GTK+ for GUIs to GStreamer for multimedia. One thing it presently lacks though is a good framework for Test Driven Development, essential for designing and delivering quality end user experiences. In the spirit of Open Source, I've decided to use some of my spare time to do something about that. Read on to find out what..."/>
@@ -28,6 +28,7 @@
 <meta property="article:tag" content="Open Source"/>
 <meta property="article:tag" content="Programming"/>
 <meta property="article:tag" content="TDD"/>
+<meta property="article:tag" content="BDD"/>
 <meta property="og:image" content="../images/logo.png">  <title>Enter the Panopticon &ndash; Towards a Test Driven Development Framework in Vala Part 1.</title>
 </head>
 <body>
@@ -69,7 +70,15 @@
 <p>There was only one problem. I'm a big fan of <a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a> and <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> and after many hours of intense Google-Fu, I was able to fine precious little on the topic in regards to Vala. What <a href="https://esite.ch/2012/06/writing-tests-for-vala/">there was</a> boiled down to using the GLib Test library and a nice little adapter class to group individual test cases into a test suite. The end result was run through <code>glib-tester</code> on the command line, usually as part of a toolchain like Autotools. This was straightforward enough for simple applications with limited user interactions, but it doesn't really scale for BDD. Some work had been done on a framework called <a href="https://github.com/yorba/valadate">Valadate</a> but it was abandoned by its maintainers a few years ago. This was a real blocker for me going forward. My philosophy is that you can occasionally write great software in moments of furious creativity but it takes boring old testing to consistently produce good software. </p>
 <p><img alt="Feel the hate flow throw you" src="http://chrisdaley.biz/images/unit-tests-dv.jpg" style="width: 625px; height: auto; max-width: 100%;"/></p>
 <p>The thing with Free and Open Source Software is that it's only free at the cashier. Once you get it home you have to pay an ongoing maintenance cost in time if you want to keep using it. That time could be spent making minor contributions like filing bug reports through to helping new users in forums or translating apps all the way to implementing features yourself. I see real potential in Vala but I feel that it's usability is being hampered by this missing feature. The developers of the language have given the world a great gift and their time is better spent maintaining it. The current solution is <em>mostly</em> good enough, but generates a lot of extra code to be maintained and has no support for BDD. "Somebody should do something about it" is a phrase that makes me groan whenever I hear it, because I usually think that that someone should be the person saying it. Well, someone should do something about it.</p>
-<p>So this blog post is a first effort to get the ball rolling on that something. Although I have some free time now, it's not an endless wellspring. I also don't want to start a vaporware or abandonedware project that gets added to the list of good ideas people had at one point in time. I would like to build something that is sustainable, that evolves with its users and that could be easily passed on to other maintainers should I no longer have enough time to devote to it. I imagine this is how many Open Source projects start, </p>
+<p>So this blog post is an effort to get the ball rolling on that something. Although I have some free time now, it's not an endless wellspring. I also don't want to start a vaporware or abandonedware project that gets added to the list of good ideas people had at one point in time. I would like to build something that is sustainable, that evolves with its users and that could be easily passed on to other maintainers should I no longer have enough time to devote to it. I imagine this has been the manifesto of a thousand failed Open Source projects, but it's better than nothing, so here goes...</p>
+<h3>Getting the ball rolling</h3>
+<p>Since this a project to bring TDD and BDD to Vala, I would like to use Agile techniques to plan and develop it. The first steps in this case are setting up a Product Vision and gathering user stories, an interesting challenge given that in this situation, the developers are the end users as well. I'll take a stab at the first one (quoted because it's a legal requirement or something for Vision Statements).</p>
+<blockquote>
+<p>For Vala developers who need to test their code, &lt; insert cool tool name &gt; is a powerful testing framework that provides  behavioral, functional and unit testing features to help them write great Open Source software. Unlike other testing frameworks, &lt; insert cool tool name &gt; is designed especially for Vala while integrating seamlessly into existing toolchains.</p>
+</blockquote>
+<p>I guess that makes me the Product Owner as well. I don't really care what it's called, Valadate is as good as any but I'm open to suggestions. If there are enough ideas we might have a poll.</p>
+<p>The next step will be the requirements gathering, one I have a number of ideas about but I would like to throw it out to the Vala community who I'm sure will have some ideas of their own. I've started a Trello Board to that effect and if you would like to suggest a feature or comment on one that's already there, <a href="https://trello.com/b/tPsTRdhu/requirements-gathering">head on over</a> and make yourself heard. If that's not your medium, you can ping me on <a href="http://twitter.com/chebizarro">Twitter</a> or hit me up on the Vala IRC channel (irc.gimp.org #vala), as <code>bizarro</code>. </p>
+<p>That's all for now, in the next post I'll summarize the requirements that have been gathered and lay out the options for the system architecture. Thanks for tuning in.</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -77,6 +86,7 @@
       <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>
       <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>
       <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>
+      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>
     </p>
   </div>
 <div id="disqus_thread"></div>
