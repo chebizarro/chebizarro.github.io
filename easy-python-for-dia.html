@@ -12,11 +12,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
 <meta name="author" content="Chris Daley" />
-<meta name="description" content="Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool. It's very easy to extend with plugins written in Python to add new features but the actual process of writing those plugins is a little bit more complicated." />
+<meta name="description" content="Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool and it's very easy to extend with plugins written in Python. The only catch is that you have to restart Dia everytime you change your code and there's no way to do unit tests. Until now that is. Read on to find out more about how to write and test your Dia plugins without leaving your favourite IDE." />
 <meta name="keywords" content="Dia, Python, Open Source, Programming, TDD, BDD">
 <meta property="og:site_name" content="Enter the Panopticon"/>
 <meta property="og:title" content="An easier way to write Python plugins for Dia"/>
-<meta property="og:description" content="Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool. It's very easy to extend with plugins written in Python to add new features but the actual process of writing those plugins is a little bit more complicated."/>
+<meta property="og:description" content="Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool and it's very easy to extend with plugins written in Python. The only catch is that you have to restart Dia everytime you change your code and there's no way to do unit tests. Until now that is. Read on to find out more about how to write and test your Dia plugins without leaving your favourite IDE."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="http://chrisdaley.biz/easy-python-for-dia.html"/>
 <meta property="og:type" content="article"/>
@@ -67,7 +67,8 @@
     <p>Posted on Thu 07 January 2016 in <a href="http://chrisdaley.biz/category/python.html">Python</a></p>
   </header>
   <div>
-    <p>Firstly, the Python API is hard to find <a href="https://projects-old.gnome.org/dia/pydia.html">online</a>. You can generate a diagram of the API from within Dia itself from the Help menu, but this doesn't give you a whole lot of information and the format is a little incovenient. The API can be a little tricky to navigate, and I'll share some tips on that in a later post, but the biggest problem lies in testing the plugins that you write. Dia loads all of its plugins at startup and they can't be modified during runtime which makes testing and debugging a laborious process. It's possible to write and test the parts of your plugin that don't depend on Dia separately but once you start interacting with the UI it all starts to get bogged down again.</p>
+    <p><a href="https://wiki.gnome.org/action/show/Apps/Dia">Dia</a> is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool. It's very easy to extend with plugins written in Python to add new features but the actual process of writing those plugins is a little bit more complicated.</p>
+<p>Firstly, the Python API is hard to find <a href="https://projects-old.gnome.org/dia/pydia.html">online</a>. You can generate a diagram of the API from within Dia itself from the Help menu, but this doesn't give you a whole lot of information and the format is a little incovenient. The API can be a little tricky to navigate, and I'll share some tips on that in a later post, but the biggest problem lies in testing the plugins that you write. Dia loads all of its plugins at startup and they can't be modified during runtime which makes testing and debugging a laborious process. It's possible to write and test the parts of your plugin that don't depend on Dia separately but once you start interacting with the UI it all starts to get bogged down again.</p>
 <p><img alt="My what a big API you have!" src="http://chrisdaley.biz/images/dia-python-api.png" style="width: 587px; height: auto; max-width: 100%;"/></p>
 <p>Frustrated by this and wanting to develop a plugin using Test Driven Development (TDD) techniques, I wrote a small Python module that mocks the Dia API. This way you can write and test the vast majority of your plugin without having to run Dia at all! There are some limitations - any interactions with the UI for example have to be done in Dia either manually or with an automation framework, and you can't generate usable diagrams from it. It should, however, reduce the amount of time and bugs it takes to get your plugin up and running. Don't forget to Open Source it and share it with the world!</p>
 <p>If this is something you might find useful, you can check it out <a href="https://github.com/chebizarro/dia-test">here</a>. I originally developed it to meet the needs of a particular project I was working on at the time so there are some parts that may not be fully implemented, but I'm happy to take bug reports and pull requests. </p>
@@ -140,7 +141,7 @@
   },
   "image": "../images/logo.png",
   "url": "http://chrisdaley.biz/easy-python-for-dia.html",
-  "description": "Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool. It's very easy to extend with plugins written in Python to add new features but the actual process of writing those plugins is a little bit more complicated."
+  "description": "Dia is a free and open source diagram creation program that runs on the main dekstop platforms. It's getting a bit long in the tooth, but its still a great tool and it's very easy to extend with plugins written in Python. The only catch is that you have to restart Dia everytime you change your code and there's no way to do unit tests. Until now that is. Read on to find out more about how to write and test your Dia plugins without leaving your favourite IDE."
 }
 </script></body>
 </html>
