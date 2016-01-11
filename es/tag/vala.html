@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 
@@ -13,29 +13,29 @@
   <meta name="robots" content="" />
   <meta name="author" content="Chris Daley" />
   <meta name="description" content="Open Source | Software | Data | Community" />
-<meta property="og:site_name" content="Enter the Panopticon"/>
+<meta property="og:site_name" content="Ingrese el Panóptico"/>
 <meta property="og:type" content="blog"/>
-<meta property="og:title" content="Enter the Panopticon"/>
+<meta property="og:title" content="Ingrese el Panóptico"/>
 <meta property="og:description" content="Open Source | Software | Data | Community"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://chrisdaley.biz"/>
+<meta property="og:url" content="http://chrisdaley.biz/es"/>
 <meta property="og:image" content="../images/logo.png">
-  <title>Enter the Panopticon &ndash; Tag: Vala</title>
+  <title>Ingrese el Panóptico &ndash; Tag: Vala</title>
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://chrisdaley.biz">
-        <img src="../images/logo.png" alt="Enter the Panopticon" title="Enter the Panopticon">
+      <a href="http://chrisdaley.biz/es">
+        <img src="../images/logo.png" alt="Ingrese el Panóptico" title="Ingrese el Panóptico">
       </a>
-      <h1><a href="http://chrisdaley.biz">Enter the Panopticon</a></h1>
+      <h1><a href="http://chrisdaley.biz/es">Ingrese el Panóptico</a></h1>
       <p>given enough eyeballs, all bugs are shallow</p>
       
       <nav>
         <ul class="list">
-		   <li class="active"><a href="http://chrisdaley.biz">English</a></li>
-		   <li><a href="http://chrisdaley.biz/es">Castellano</a></li>
-          <li><a href="http://chrisdaley.biz/pages/about.html#about">About</a></li>
+		   <li><a href="http://chrisdaley.biz">English</a></li>
+		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
+          <li><a href="http://chrisdaley.biz/es/pages/about.html#about">About</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -47,7 +47,7 @@
   </aside>
   <main>
     <nav>
-      <a href="http://chrisdaley.biz">Home</a>
+      <a href="http://chrisdaley.biz/es">Home</a>
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
@@ -56,31 +56,31 @@
 
 <article>
   <header>
-    <h2><a href="http://chrisdaley.biz/test-driven-development-in-vala-pt-1.html#test-driven-development-in-vala-pt-1">Towards a Test Driven Development Framework in Vala Part 1.</a></h2>
+    <h2><a href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-1.html#test-driven-development-in-vala-pt-1">Hacia un framework de desarrollo guiado por pruebas para Vala - primera parte</a></h2>
     <p>
-      Posted on Fri 08 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a>
+      Posted on Fri 08 January 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a>
       &#8226; Tagged with
-      <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>,      <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>,      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>,      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>,      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>      &#8226; <a href="http://chrisdaley.biz/test-driven-development-in-vala-pt-1.html#disqus_thread">Leave a comment</a>
+      <a href="http://chrisdaley.biz/es/tag/vala.html">Vala</a>,      <a href="http://chrisdaley.biz/es/tag/open-source.html">Open Source</a>,      <a href="http://chrisdaley.biz/es/tag/codigo-abierto.html">Código Abierto</a>,      <a href="http://chrisdaley.biz/es/tag/programming.html">Programming</a>,      <a href="http://chrisdaley.biz/es/tag/tdd.html">TDD</a>,      <a href="http://chrisdaley.biz/es/tag/bdd.html">BDD</a>      &#8226; <a href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-1.html#disqus_thread">Leave a comment</a>
     </p>
   </header>
   <div>
-      <p><a href="https://wiki.gnome.org/Projects/Vala">Vala</a> is an Open Source Object Oriented Programming language similar to Java and C# that is both powerful and fun to use. Based on the GObject type system, it gives you full access to an entire Open Source ecosystem, from GTK+ for GUIs to GStreamer for multimedia. One thing it presently lacks though is a good framework for <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development</a>, essential for designing and delivering quality end user experiences. In the spirit of Open Source, I've decided to use some of my spare time to do something about that. Read on to find out what...</p>
-      <a class="btn" href="http://chrisdaley.biz/test-driven-development-in-vala-pt-1.html#test-driven-development-in-vala-pt-1">Continue reading</a>
+      <p><a href="https://wiki.gnome.org/Projects/Vala">Vala</a> es un lenguaje orientado a objetos de código abierto - es parecido a los Java y C# y es a la misma vez potente y divertido de usar. Esta basado en el sistema de objetos de GObject, lo que te da acceso completo a un ecosistema de código abierto, desde GTK + para la GUI hasta GStreamer para multimedia. Sin embargo, actualmente le falta un buen framework para <a href="https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas">desarrollo guiado por pruebas</a> o TDD (por sus siglas en ingles) , lo que es esencial para el diseño y entrega de una experiencia de usuario de calidad. En el espíritu del código abierto, he decidido utilizar una parte de mi tiempo libre para hacer algo al respecto de este tema. Siga leyendo para saber mas ...</p>
+      <a class="btn" href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-1.html#test-driven-development-in-vala-pt-1">Continue reading</a>
   </div>
   <hr />
 </article>
 <article>
   <header>
-    <h2><a href="http://chrisdaley.biz/gherkin-for-vala.html#gherkin-for-vala">Gherkin for Vala</a></h2>
+    <h2><a href="http://chrisdaley.biz/es/gherkin-for-vala-en.html#gherkin-for-vala">Gherkin for Vala</a></h2>
     <p>
-      Posted on Mon 04 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a>
+      Posted on Mon 04 January 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a>
       &#8226; Tagged with
-      <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>,      <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>,      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>,      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>,      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>      &#8226; <a href="http://chrisdaley.biz/gherkin-for-vala.html#disqus_thread">Leave a comment</a>
+      <a href="http://chrisdaley.biz/es/tag/vala.html">Vala</a>,      <a href="http://chrisdaley.biz/es/tag/open-source.html">Open Source</a>,      <a href="http://chrisdaley.biz/es/tag/programming.html">Programming</a>,      <a href="http://chrisdaley.biz/es/tag/tdd.html">TDD</a>,      <a href="http://chrisdaley.biz/es/tag/bdd.html">BDD</a>      &#8226; <a href="http://chrisdaley.biz/es/gherkin-for-vala-en.html#disqus_thread">Leave a comment</a>
     </p>
   </header>
   <div>
       <p><a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin</a> is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to <a href="https://wiki.gnome.org/Projects/Vala">Vala</a> was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out what it's used for and how you can get your hands on it...</p>
-      <a class="btn" href="http://chrisdaley.biz/gherkin-for-vala.html#gherkin-for-vala">Continue reading</a>
+      <a class="btn" href="http://chrisdaley.biz/es/gherkin-for-vala-en.html#gherkin-for-vala">Continue reading</a>
   </div>
 </article>
 
@@ -117,8 +117,8 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Enter the Panopticon ",
-  "url" : "http://chrisdaley.biz",
+  "name": " Ingrese el Panóptico ",
+  "url" : "http://chrisdaley.biz/es",
   "image": "../images/logo.png",
   "description": "Open Source | Software | Data | Community"
 }
