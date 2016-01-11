@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Hacia un framework de desarrollo guiado por pruebas para Vala - primera parte</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/category/open-source.html">Open Source</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li class="active"><a href="/category/vala.html">Vala</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/test-driven-development-in-vala-pt-1-es.html" rel="bookmark"
+           title="Permalink to Hacia un framework de desarrollo guiado por pruebas para Vala - primera parte">Hacia un framework de desarrollo guiado por pruebas para Vala - primera parte</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-01-08T10:50:00+00:00">
+                Published: Fri 08 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/chris-daley.html">Chris Daley</a>
+        </address>
+<p>In <a href="/category/vala.html">Vala</a>.</p>
+<p>tags: <a href="/tag/vala.html">Vala</a> <a href="/tag/open-source.html">Open Source</a> <a href="/tag/codigo-abierto.html">Código Abierto</a> <a href="/tag/programming.html">Programming</a> <a href="/tag/tdd.html">TDD</a> <a href="/tag/bdd.html">BDD</a> </p>Translations:
+        <a href="/test-driven-development-in-vala-pt-1.html">en</a>
+
+</footer><!-- /.post-info -->      <p>Encontre <a href="https://wiki.gnome.org/Projects/Vala">Vala</a> por la primera vez cuando estaba averiguando la posibilidad de portear un viejo programa de código abierto desde GTK + 2 a GTK + 3. Yo no estaba muy seguro de qué hacer con Vala en aquel momento - era un lenguaje de programación orientado a objetos basado en el sistema de objetos de GObject y utilizaba C como el lenguaje intermediario con el compilador de gcc. Después de leer un montón de muestras, me llamó la atención la elegancia y parsimonia de la sintaxis y cómo fue comprensible de inmediato por mi familiaridad con Java y C #. Jugué con algunas aplicaciones de ejemplo y me sorprendió tal divertido fue utilizarlo también. Era GObject sin las interminables resmas de código repetitivo. Propiedades ya tenía sentido y el uso de señales resultaba mojo de pavo. Fue soportado por los ambientes de desarrollo integrado (IDE) tal como cualquier otro lenguaje, especialmente por Geany, mi herramienta preferida. Me enganché.</p>
+<p>Había un problema solamente. Soy un gran fan de <a href="https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas">desarrollo guiado por pruebas</a> o TDD (por sus siglas en ingles)  y después de muchas horas de intensa Google-Fu, encontré muy poco sobre el tema en respecto al Vala. Lo que <a href="https://esite.ch/2012/06/writing-tests-for-vala/">hubo</a> fue básicamente utilizar las funciones de prueba de la biblioteca GLib y una pequeña clase adaptador para agrupar los casos de prueba particulares en un conjunto de pruebas. El resultado final se llevó a cabo a través de <code>gtester</code> por la línea de comandos, en general como parte de una cadena de herramientas como Autotools. Esto bastaba para aplicaciones sencillas con interacciones limitadas con el usario, pero en realidad no escalar para Desarrollo guiado por comportamiento (BDD en ingles). Alguien había desarrollado un framework llamado <a href="https://github.com/yorba/valadate">Valadate</a> pero esto fue abandonada por sus mantenedores ya hace unos años. Esto fue una verdadera bloqueo para mí. La filosofía mía es que de vez en cuando se puede escribir gran software en los momentos de creatividad furiosos pero se precisan pruebas aburridas para producir buen software consistentemente.</p>
+<p><img alt="Su falta de fe me resulta molesta" src="/images/unit-tests-dv.jpg" /></p>
+<p>La trampa con el software libre es que solamente no cuesta nada en el cajero. Una vez que llegues a casa, tienes que pagar el costo de mantenimiento en tiempo si quieres seguir utilizándolo. Ese tiempo podría ser gastado en hacer contribuciones menores, como la presentación de informes de errores hasta dar ayudar a los nuevos usuarios en los foros o la traducción de aplicaciones hasta agregando y desarrollando funciones. Yo veo mucha potencia en Vala pero siento que esta falta le debilita. Los desarrolladores del lenguaje han dado un gran regalo al mundo y su tiempo seria mejor gastado en mantenerlo. La solución que aun existe es <em>casi</em> suficiente, pero genera una gran cantidad de código para mantener y no tiene soporte para BDD. "Alguien debería hacer algo" es una frase que me molesta mucho al escuchar, porque creo que ese alguien debería ser la persona que la dijo. Bueno, alguien debería hacer algo...</p>
+<p>Así que esta entrada del blog es un esfuerzo para tomar la iniciativa. Aunque en este momento tengo un poquito de tiempo libre, eso no var a ser el caso por siempre. Asimismo, no quiero empezar un proyecto vaporware o abandonadoware que seria agregado a la lista de buenas ideas que alguien tenía. Me gustaría construir algo que sea sostenible, que evolucione con sus usuarios y que podrían ser traspasado a otros mantenedores si ya no tenga tiempo suficiente para dedicarme an ello. Me imagino que esto ha sido el manifiesto de miles de proyectos de código abierto fallados, pero es mejor que nada - así que hay va ...</p>
+<h3>Tomar la iniciativa</h3>
+<p>Dado que el objetivo es capacitar Vala con TDD y BDD, me gustaría utilizar las técnicas de Agile para planificar y desarrollarlo. En este caso, los primeros pasos serian la creación de una visión de producto y la recopilación de requisitos. Voy a tomar el primer paso (citado porque VISIÓN DE PRODUCTO).</p>
+<blockquote>
+<p>Para los desarrolladores de Vala que necesitan probar su código, &lt; insertar el chulo nombre de herramienta &gt; es un framework de pruebas de gran potencia que proporciona funciones de pruebas de las características de comportamiento, funcionales y  unitarias para ayudarles a escribir gran software de código abierto. La diferencia con los otros frameworks de prueba y &lt; insertar el chulo nombre de herramienta &gt; es que está diseñado especialmente para Vala, y integra perfectamente en las cadenas de herramientas ya existentes.</p>
+</blockquote>
+<p>Supongo me toca a mi ser el propietario del producto también. De veras, no me importa cómo sera llamado - Valadate es suficiente bueno tal como cualquiera, pero estoy abierto a sugerencias. Si hay suficientes ideas siempre podemos tener una encuesta.</p>
+<p>El siguiente paso será la recopilación de requisitos, lo que ya tengo algunas ideas, pero me gustaría saber lo que los usuarios potenciales piensan. Por eso he armado una pizarra Trello y si deseas sugerir una función o comentar sobre una que ya existe, <a href="http://bit.ly/1ZSrRA6">haz clik aquí</a> y hazte oír. Si eso no es su medio preferido, me puedes pingear en <a href="http://twitter.com/chebizarro">Twitter</a> o llamame en el canal de IRC de Vala (irc.gimp.org #vala), apodo: <code>bizarro</code>. Una herramienta como esta va a vivir o morir debido a su aptitud para el uso, así que no te callas por favor!</p>
+<p>Ya esta, en el próximo post voy a resumir los requisitos que aun se han ajuntado y poner a la mesa las opciones para la arquitectura del sistema además de un calendario provisional para la primera versión. Gracias por escuchar y no olvides de unirse a la conversación si tiene algo que decir.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
