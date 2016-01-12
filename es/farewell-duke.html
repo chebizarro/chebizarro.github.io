@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+<meta name="author" content="Chris Daley" />
+<meta name="description" content="Estaba mirando el asteroide 131 Vala, lo que dio su nombre al lenguaje de programación, en el JPL Small Object Database cuando me llego la noticia triste del fallecimiento de el David Bowie. Me di cuenta que el venerable Orbit Viewer applet ya no estaba funcionando y querría ver unos cuerpos celestes moverse esa mañana. Por eso acabe porteando el Applet desde Java a Vala, como tributo al Thin White Duke. Siga leyendo para ver los resultados..." />
+<meta name="keywords" content="Vala, Código Abierto, JPL, David Bowie">
+<meta property="og:site_name" content="Entrar al Panóptico"/>
+<meta property="og:title" content="Adiós Thin White Duke - un tributo a David Bowie en Vala"/>
+<meta property="og:description" content="Estaba mirando el asteroide 131 Vala, lo que dio su nombre al lenguaje de programación, en el JPL Small Object Database cuando me llego la noticia triste del fallecimiento de el David Bowie. Me di cuenta que el venerable Orbit Viewer applet ya no estaba funcionando y querría ver unos cuerpos celestes moverse esa mañana. Por eso acabe porteando el Applet desde Java a Vala, como tributo al Thin White Duke. Siga leyendo para ver los resultados..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://chrisdaley.biz/es/farewell-duke.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-11 17:00:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://chrisdaley.biz/es/author/chris-daley.html">
+<meta property="article:section" content="Vala"/>
+<meta property="article:tag" content="Vala"/>
+<meta property="article:tag" content="Código Abierto"/>
+<meta property="article:tag" content="JPL"/>
+<meta property="article:tag" content="David Bowie"/>
+<meta property="og:image" content="../images/logo.png"><!-- https://developers.google.com/custom-search/docs/structured_data?hl=es&csw=1#microformats -->
+<!--
+<PageMap>
+<DataObject type="document">
+    <Attribute name="title">Adiós Thin White Duke - un tributo a David Bowie en Vala</Attribute>
+    <Attribute name="author">Chris Daley</Attribute>
+    <Attribute name="description">Estaba mirando el asteroide 131 Vala, lo que dio su nombre al lenguaje de programación, en el JPL Small Object Database cuando me llego la noticia triste del fallecimiento de el David Bowie. Me di cuenta que el venerable Orbit Viewer applet ya no estaba funcionando y querría ver unos cuerpos celestes moverse esa mañana. Por eso acabe porteando el Applet desde Java a Vala, como tributo al Thin White Duke. Siga leyendo para ver los resultados...</Attribute>
+    <Attribute name="page_count">1</Attribute>
+    <Attribute name="rating">5</Attribute>
+    <Attribute name="last_update">2016-01-11T17:00:00-08:00</Attribute>
+</DataObject>
+<DataObject type="metatags">
+    <Attribute name="category" value="Vala"/>
+        <Attribute name="category" value="Vala"/>
+        <Attribute name="category" value="Código Abierto"/>
+        <Attribute name="category" value="JPL"/>
+        <Attribute name="category" value="David Bowie"/>
+</DataObject>
+
+
+-->  <title>Entrar al Panóptico &ndash; Adiós Thin White Duke - un tributo a David Bowie en Vala</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://chrisdaley.biz/es">
+        <img src="../images/logo.png" alt="Entrar al Panóptico" title="Entrar al Panóptico">
+      </a>
+      <h1><a href="http://chrisdaley.biz/es">Entrar al Panóptico</a></h1>
+      <p>Dado un número suficientemente elevado de ojos, todos los errores se vuelven obvios</p>
+      
+      <nav>
+        <ul class="list">
+		   <li><a href="http://chrisdaley.biz">English</a></li>
+		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
+          <li><a href="http://chrisdaley.biz/es/pages/about.html#about">About</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/chebizarro" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/chris-daley-b7830616" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/chebizarro" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://chrisdaley.biz/es">Home</a>
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/pages/about.html">About</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="farewell-duke">Adiós Thin White Duke - un tributo a David Bowie en Vala</h1>
+    <p>Posted on Mon 11 January 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a></p>
+  </header>
+  <div>
+    <p>Estaba mirando el asteroide 131 Vala, lo que dio su nombre al lenguaje de programación, en el <a href="http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=131;cad=1;old=0;orb=1;cov=0;log=0#orb">JPL Small Object Database</a>  cuando me llego la noticia triste del fallecimiento de el David Bowie. Como muchos de mi edad, crecía sin saber nada de un mundo sin viaje espacial, el amenazo de guerra nuclear o el Thin White Duke. No había otro artista capaz de captar aquel sentido de asombro y miedo de una especie caminando en la cuerda floja hacia su destino. Podríamos tropezar y caer en el olvido o alcanzaremos las estrellas? Eran todos los héroes como el Major Tom? Fragil y imperfecto, sin embargo con coraje cautivador.</p>
+<p>Estuve pensando en esas cosas cuando estaba mirando el website de JPL y me di cuenta que el venerable Orbit Viewer applet ya no estaba funcionando. Yo querría ver unos cuerpos celestes moverse esa mañana con una banda sonora de David Bowie así que descargue el código fuente del applet y lo porte a Vala. Para la musica, agregue un pequeño tocador de gstreamer que carga y tocar un archivo Midi de <a href="http://www.midiworld.com/files/1018/">midiworld.com</a>.</p>
+<p>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="//www.youtube.com/embed/4lQcdikEdJU" width="560"></iframe>
+</p>
+<p>Portear código de Java a Vala es relativamente fácil, especialmente cuando el código es más viejo y no tiene muchos de los trucos raros que se han introducido en el lenguaje tras los anos. La parte más rápida fue la biblioteca de funciones para calcular las orbitas, ya que esto es mas o menos pura matemática. La parte mas complicada fue la interfaz, la que cree de nuevo en Glade y las rutinas de dibujar para animar todo. Estaba trabajando en un port del motor de física BOX2D, así que he resuelto muchos de esos problemas antes. El resultado final se ve arriba.</p>
+<p>Todavía le falta un poquito de trabajo antes de ser completo - solamente el buton de reproducción funcionar y aun no hay forma de ajustar el puerto de vista - pero esos son fáciles de implementar. Si le interesa a alguien, pondré todo en un repositorio de Github - tanto las rutinas de la física y la animación son bien interesante para principiantes aún con la falta de comentarios. </p>
+<p>Pues bien, gracias por mirar y gracias a ti Starman, para todos los años dorados...</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://chrisdaley.biz/es/tag/vala.html">Vala</a>
+      <a href="http://chrisdaley.biz/es/tag/codigo-abierto.html">Código Abierto</a>
+      <a href="http://chrisdaley.biz/es/tag/jpl.html">JPL</a>
+      <a href="http://chrisdaley.biz/es/tag/david-bowie.html">David Bowie</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'cdaley-biz';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Chris Daley 2015 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71968606-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Adiós Thin White Duke - un tributo a David Bowie en Vala",
+  "headline": "Adiós Thin White Duke - un tributo a David Bowie en Vala",
+  "datePublished": "2016-01-11 17:00:00-08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Daley",
+    "url": "http://chrisdaley.biz/es/author/chris-daley.html"
+  },
+  "image": "../images/logo.png",
+  "url": "http://chrisdaley.biz/es/farewell-duke.html",
+  "description": "Estaba mirando el asteroide 131 Vala, lo que dio su nombre al lenguaje de programación, en el JPL Small Object Database cuando me llego la noticia triste del fallecimiento de el David Bowie. Me di cuenta que el venerable Orbit Viewer applet ya no estaba funcionando y querría ver unos cuerpos celestes moverse esa mañana. Por eso acabe porteando el Applet desde Java a Vala, como tributo al Thin White Duke. Siga leyendo para ver los resultados..."
+}
+</script></body>
+</html>
