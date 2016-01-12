@@ -12,24 +12,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
 <meta name="author" content="Chris Daley" />
-<meta name="description" content="Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out what it's used for and how you can get your hands on it..." />
-<meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD">
+<meta name="description" content="I was looking at the asteroid 131 Vala, the origin of the programming language's name, on the JPL Small Object Database when I heard the sad news of David Bowie's passing. I noticed that the venerable old Orbit Viewer applet was no longer working and I wanted to watch some celestial bodies move that morning. So I ported the applet to Vala as a tribute to the Thin White Duke. Read on to see the results..." />
+<meta name="keywords" content="Vala, Open Source, JPL, David Bowie">
 <meta property="og:site_name" content="Enter the Panopticon"/>
-<meta property="og:title" content="Gherkin for Vala"/>
-<meta property="og:description" content="Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out what it's used for and how you can get your hands on it..."/>
+<meta property="og:title" content="Farewell oh Thin White Duke - a tribute to David Bowie in Vala"/>
+<meta property="og:description" content="I was looking at the asteroid 131 Vala, the origin of the programming language's name, on the JPL Small Object Database when I heard the sad news of David Bowie's passing. I noticed that the venerable old Orbit Viewer applet was no longer working and I wanted to watch some celestial bodies move that morning. So I ported the applet to Vala as a tribute to the Thin White Duke. Read on to see the results..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://chrisdaley.biz/gherkin-for-vala.html"/>
+<meta property="og:url" content="http://chrisdaley.biz/farewell-duke.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2016-01-04 20:50:00-08:00"/>
+<meta property="article:published_time" content="2016-01-11 17:00:00-08:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="http://chrisdaley.biz/author/chris-daley.html">
 <meta property="article:section" content="Vala"/>
 <meta property="article:tag" content="Vala"/>
 <meta property="article:tag" content="Open Source"/>
-<meta property="article:tag" content="Programming"/>
-<meta property="article:tag" content="TDD"/>
-<meta property="article:tag" content="BDD"/>
-<meta property="og:image" content="../images/logo.png">  <title>Enter the Panopticon &ndash; Gherkin for Vala</title>
+<meta property="article:tag" content="JPL"/>
+<meta property="article:tag" content="David Bowie"/>
+<meta property="og:image" content="../images/logo.png">  <title>Enter the Panopticon &ndash; Farewell oh Thin White Duke - a tribute to David Bowie in Vala</title>
 </head>
 <body>
   <aside>
@@ -65,42 +64,25 @@
 
 <article>
   <header>
-    <h1 id="gherkin-for-vala">Gherkin for Vala</h1>
-    <p>Posted on Mon 04 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a></p>
+    <h1 id="farewell-duke">Farewell oh Thin White Duke - a tribute to David Bowie in Vala</h1>
+    <p>Posted on Mon 11 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a></p>
   </header>
   <div>
-    <p>I've had some spare time recently to work on some pet projects and get them into a decent enough shape that they could be subjected to the withering gaze of the Panopticon. One in particular is a port of the Gherkin language to Vala. So what is Gherkin exactly and why should you care?</p>
-<p>From the <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin wiki</a>:</p>
-<blockquote>
-<p>Gherkin is the language that <a href="https://cucumber.io/">Cucumber</a> understands. It is a Business Readable, Domain Specific Language that lets you describe software’s behaviour without detailing how that behaviour is implemented.</p>
-</blockquote>
-<p>Gherkin is available for a host of languages and is tightly integrated into JUnit for example. Its syntax is pretty straightforward and designed to be intelligible by non-technical people:</p>
-<p>```
-  Feature: Some terse yet descriptive text of what is desired
-  Textual description of the business value of this feature
-  Business rules that govern the scope of the feature
-   Any additional information that will make the feature easier to understand</p>
-<p>Scenario: Some determinable business situation
-     Given some precondition
-       And some other precondition
-      When some action by the actor
-       And some other action
-       And yet another action
-      Then some testable outcome is achieved
-       And something else we can check happens too</p>
-<p>Scenario: A different situation
-       ...
-```     <br/>
-The Gherkin parser for Vala, which you can get <a href="https://github.com/chebizarro/gherkin-vala">here</a> reads in Feature files and builds a tree of elements that can then either be manipulated directly or output as JSON.</p>
-<p>The parser by itself is not tremendously useful, but is one of the building blocks for a comprehensive testing framework for Vala and by extension, GObject that I am presently scoping. If this is something you're interested in, and I assume it is since you've read this far, then I'd encourage you to join the conversation.</p>
+    <p>I was looking at the asteroid 131 Vala, the origin of the programming language's name, on the <a href="http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=131;cad=1;old=0;orb=1;cov=0;log=0#orb">JPL Small Object Database</a> when I heard the sad news of David Bowie's passing. Like many of my age, I grew up not knowing of a world without space travel, the threat of nuclear war or the Thin White Duke. No other artist captured that sense of both wonder and fear of a species walking a tight rope towards its destiny. Would we stumble and fall into oblivion or would we make it to the stars? Were all our heros like Major Tom? Brittle and flawed yet compellingly corageous.  </p>
+<p>I was thinking these things and more while browsing the JPL website and I noticed that the venerable old Orbit Viewer applet was no longer working. I wanted to watch some celestial bodies move that morning to the sounds of David Bowie so I downloaded the applet source and ported it to Vala. For the music, I added a small gstreamer player that loads and plays a midi file from <a href="http://www.midiworld.com/files/1018/">midiworld.com</a>.</p>
+<p>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="//www.youtube.com/embed/4lQcdikEdJU" width="560"></iframe>
+</p>
+<p>Porting Java code to Vala is relatively easy, especially when it is older code and doesn't have too many of the odd little workarounds that have crept into the language over the years. The quickest part was the library of functions for calculating the orbits, as this is pretty much pure math. The trickiest bit was the interface, which I recreated in Glade and the drawing routines for animating the whole thing. I have been working on a port of the Box2D physics engine, so I have already solved most of these problems before. The end result you see above.</p>
+<p>It still needs some work before it's complete - only the play button works and there's no way to adjust the viewport yet, but these are fairly trivial to implement. If anyone is interested in the code, I'll post a link to a Github repo - both the physics and animation routines are particularly interesting if you're starting out, even with the lack of comments.</p>
+<p>Thanks for watching, and thanks Starman, for all those Golden Years...</p>
   </div>
   <div class="tag-cloud">
     <p>
       <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>
       <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>
-      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>
-      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>
-      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>
+      <a href="http://chrisdaley.biz/tag/jpl.html">JPL</a>
+      <a href="http://chrisdaley.biz/tag/david-bowie.html">David Bowie</a>
     </p>
   </div>
 <div id="disqus_thread"></div>
@@ -145,9 +127,9 @@ The Gherkin parser for Vala, which you can get <a href="https://github.com/chebi
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "name": "Gherkin for Vala",
-  "headline": "Gherkin for Vala",
-  "datePublished": "2016-01-04 20:50:00-08:00",
+  "name": "Farewell oh Thin White Duke - a tribute to David Bowie in Vala",
+  "headline": "Farewell oh Thin White Duke - a tribute to David Bowie in Vala",
+  "datePublished": "2016-01-11 17:00:00-08:00",
   "dateModified": "",
   "author": {
     "@type": "Person",
@@ -155,8 +137,8 @@ The Gherkin parser for Vala, which you can get <a href="https://github.com/chebi
     "url": "http://chrisdaley.biz/author/chris-daley.html"
   },
   "image": "../images/logo.png",
-  "url": "http://chrisdaley.biz/gherkin-for-vala.html",
-  "description": "Gherkin is a markup language used extensively in Behavior Driven Development (BDD) for writing tests. Porting it to Vala was one of the first steps in building a comprehensive testing framework for the language, an ongoing process that will be featured in a series of upcomming posts. In the meantime, read on to find out what it's used for and how you can get your hands on it..."
+  "url": "http://chrisdaley.biz/farewell-duke.html",
+  "description": "I was looking at the asteroid 131 Vala, the origin of the programming language's name, on the JPL Small Object Database when I heard the sad news of David Bowie's passing. I noticed that the venerable old Orbit Viewer applet was no longer working and I wanted to watch some celestial bodies move that morning. So I ported the applet to Vala as a tribute to the Thin White Duke. Read on to see the results..."
 }
 </script></body>
 </html>
