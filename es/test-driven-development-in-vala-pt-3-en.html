@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+<meta name="author" content="Chris Daley" />
+<meta name="description" content="Continuous Integration or CI is widely used in Test Driven Design for keeping the project's codebase tight, reducing errors and making sure there is always a working build available for deployment. Since once of the objectives of Valadate is to integrate with existing toolchains, I took a short DevOps break to set up Jenkins on a spare Raspberry Pi with some interesting results. Read on to see what they were..." />
+<meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD, Jenkins, Continuous Integration, DevOps">
+<meta property="og:site_name" content="Entrar al Panóptico"/>
+<meta property="og:title" content="Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins"/>
+<meta property="og:description" content="Continuous Integration or CI is widely used in Test Driven Design for keeping the project's codebase tight, reducing errors and making sure there is always a working build available for deployment. Since once of the objectives of Valadate is to integrate with existing toolchains, I took a short DevOps break to set up Jenkins on a spare Raspberry Pi with some interesting results. Read on to see what they were..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-3-en.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-19 10:50:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://chrisdaley.biz/es/author/chris-daley.html">
+<meta property="article:section" content="Vala"/>
+<meta property="article:tag" content="Vala"/>
+<meta property="article:tag" content="Open Source"/>
+<meta property="article:tag" content="Programming"/>
+<meta property="article:tag" content="TDD"/>
+<meta property="article:tag" content="BDD"/>
+<meta property="article:tag" content="Jenkins"/>
+<meta property="article:tag" content="Continuous Integration"/>
+<meta property="article:tag" content="DevOps"/>
+<meta property="og:image" content="../images/logo.png"><!-- https://developers.google.com/custom-search/docs/structured_data?hl=es&csw=1#microformats -->
+<!--
+<PageMap>
+<DataObject type="document">
+    <Attribute name="title">Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins</Attribute>
+    <Attribute name="author">Chris Daley</Attribute>
+    <Attribute name="description">Continuous Integration or CI is widely used in Test Driven Design for keeping the project's codebase tight, reducing errors and making sure there is always a working build available for deployment. Since once of the objectives of Valadate is to integrate with existing toolchains, I took a short DevOps break to set up Jenkins on a spare Raspberry Pi with some interesting results. Read on to see what they were...</Attribute>
+    <Attribute name="page_count">1</Attribute>
+    <Attribute name="rating">5</Attribute>
+    <Attribute name="last_update">2016-01-19T10:50:00-08:00</Attribute>
+</DataObject>
+<DataObject type="metatags">
+    <Attribute name="category" value="Vala"/>
+        <Attribute name="category" value="Vala"/>
+        <Attribute name="category" value="Open Source"/>
+        <Attribute name="category" value="Programming"/>
+        <Attribute name="category" value="TDD"/>
+        <Attribute name="category" value="BDD"/>
+        <Attribute name="category" value="Jenkins"/>
+        <Attribute name="category" value="Continuous Integration"/>
+        <Attribute name="category" value="DevOps"/>
+</DataObject>
+
+
+-->  <title>Entrar al Panóptico &ndash; Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://chrisdaley.biz/es">
+        <img src="../images/logo.png" alt="Entrar al Panóptico" title="Entrar al Panóptico">
+      </a>
+      <h1><a href="http://chrisdaley.biz/es">Entrar al Panóptico</a></h1>
+      <p>Dado un número suficientemente elevado de ojos, todos los errores se vuelven obvios</p>
+      
+      <nav>
+        <ul class="list">
+		   <li><a href="http://chrisdaley.biz">English</a></li>
+		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
+          <li><a href="http://chrisdaley.biz/es/pages/about.html#about">About</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/chebizarro" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/chris-daley-b7830616" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/chebizarro" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://chrisdaley.biz/es">Home</a>
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="/pages/about.html">About</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="test-driven-development-in-vala-pt-3">Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins</h1>
+    <p>Posted on Tue 19 January 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a></p>
+  </header>
+  <div>
+    <p><a href="https://en.wikipedia.org/wiki/Continuous_integration">Continuous Integration</a> or CI is widely used in Test Driven Design for keeping the project's codebase tight, reducing errors and making sure there is always a working build available for deployment. It provides a means to automate the whole build and testing process, so developers can focus on writing their tests and the code that passes them. By setting up a system that builds and tests the software on its supported platforms, deployment issues can be identified early and distribution of new releases automated.</p>
+<p>Since once of the objectives of Valadate is to integrate with existing toolchains, and wanting to leverage the numerous benefits of CI for the project itself, I took a short DevOps break to set up a <a href="https://jenkins-ci.org/">Jenkins</a> based system on my local network. Jenkins is a widely used open source Continuous Integration server written in Java, so it can pretty much run anywhere, providing the system has enough juice. Taking this to its extreme, I decided to install it on a spare Raspberry Pi 2 I had lying around. So why Jenkins and why on a Raspberry Pi?</p>
+<p>Firstly, Jenkins is a robust and well maintained platform that is widely used. It has a plethora of plugins that integrate it tightly with Git, Docker, TAP and numerous other CI tools and protocols. It works on the master-slave model, where the master server directs the build operations of any number of slaves. A slave can be any other computer on the network that Jenkins can communicate with, either directly through SSH or with a plugin. It is highly configurable and it just works. It seemed like a good choice to start with.</p>
+<p><img alt="The Jenkins web interface" src="http://chrisdaley.biz/es/../images/jenkins.png" style="width: 400px; height: auto; max-width: 100%;"/></p>
+<p>Secondly, the Raspberry Pi. One of my considerations when setting up the CI system was that the master server should be internet accessible and available 24-7. Given that when it isn't running jobs the server is mostly idle, using a full powered computer would be a waste of electricity and CO2. It occurred to me that one of my spare Rapsberry Pis could do the job, so after a quick Google to confirm that it was possible, I proceeded with the install. The one comprehensive guide I had found had suggested a lot mucking about with downloading source packages, but since it was for the previous version of Raspbian I tried '''sudo apt-get install jenkins''' and whaddya know, it just worked.</p>
+<p>With the Jenkins server up and running, I added my recent <a href="http://github.com/chebizarro/gherkin-vala">port of Gherkin</a> as a test job and set up a machine running Fedora 23 as a slave and in 5 minutes it had checked out, compiled and run the unit tests on it and...</p>
+<p><img alt="Build Status" src="http://chrisdaley.biz/es/../images/passing.png" style="width: 90px; height: auto; max-width: 100%;"/></p>
+<p>\O/ \O/ \O/</p>
+<p>Emboldened by my initial success, I moved onto setting up a Docker slave. For this setup, I revived an old server that had been mothballed, with the idea that as a build slave it doesn't need to be online all the time and with Wake On Lan (WOL) I can have Jenkins wake the server up when it needs to do a build and put it back to sleep when its done. This is still on the to-do list, but seems fairly straightforward.</p>
+<p>In this configuration, the slave is a Docker host that starts up and runs a container built from a Dockerfile in the repositories root. It is this container that runs the build, not the host, so it is possible to test your software on pretty much any platform that can be dockerized. Cool eh? So I set up an Ubuntu container and...</p>
+<p><img alt="Build Status" src="http://chrisdaley.biz/es/../images/failing.png" style="width: 81px; height: auto; max-width: 100%;"/></p>
+<p>Huh?!? I looked at the log and...</p>
+<pre><code>./.libs/libgherkin3.so: undefined reference to `g_value_init_from_instance'
+</code></pre>
+<p>Dammit! In my rush to port Gherkin, I had done it on my new Fedora 23 box and hadn't actually tested it on Ubuntu at all. I checked the docs and sure enough, GLib.Value.init_from_instance() is available from GLib 2.42 on only and Ubuntu 15.04 ships with 2.40. D'oh! So now I either have to refactor the code or declare GLib 2.42 a prerequisite.</p>
+<p>This particular case is a really good example of the benefits of Continuous Integration. If I had had the Jenkins server set up before I ported the code, I would have noticed the incompatibility almost immediately and would have been able to deal with it then, rather than refactoring later.</p>
+<p>As nice as it would be to ignore the existence of other operating systems, the sad truth is that not everyone uses Linux as their primary desktop, including many people who might want to use my software. With this harsh reality in mind, I decided to set up Windows and Mac OSX slaves to test the cross platform compatibility of my projects.</p>
+<p>For the Windows slave, I set up a new Windows 7 VM in VirtualBox, running on the same server as the Docker host. For the build toolchain, I installed MinGW64 and MSYS2 and all of the necessary libraries and voila! Well, not quite voila, the MinGW linker is soooo sloooow that it took quite some time to debug but is now working just fine. The process isn't quite fully automated - I still need to manually spin it up and shut it down. There is a VirtualBox plugin to do this, but it doesn't presently support version 5. I also learned the hard way that you need to disable automatic updating for Windows, otherwise it will get stuck at the failed boot recovery screen. I am also thinking that for speed, I will cross compile the Windows binaries in a Docker container and run the tests in the Windows VM to make sure they work.</p>
+<p>Now, if you've been to any major Linux conference in the last few years, you'd be forgiven for thinking you were at WWDC with all the Apple hardware being toted about. Heck, my wife, an Open Source guru, was a long time MacBook Air user until she got a Microsoft Surface. And it's true, it is some of the coolest, most expensive hardware you can run a Linux Virtual Machine on. Don't get me wrong, I have one on my desk, I just mostly use it for email, IRC and the occasional Photoshop session (at least until Gimp gets better tablet support). Unfortunately, it's been a little neglected so it needs a bit of a clean up before it can be pressed into service, which will hopefully be by the start of next week.</p>
+<p>Along the way I also discovered that our crappy Comcast provided Cable Modem doesn't support hairpin DNS resolutions when I forwarded the Jenkins server ports. I tried to solve this by setting up dnsmasq on the Raspberry Pi but it still required manually editing the resolv.conf files on each machine. In the end I just put the Comcast Modem into bridge mode and set up a trusty old WRT-54GL running DD-WRT as the new Gateway/Router. It still has some problems with IPv6 DHCP but otherwise is running just fine.</p>
+<p>So there you have it, a working cross-platform Continuous Integration system building Vala based projects. It's live on the internet now, so you can check it out <a href="http://jenkins.valadate.org:8080">here</a>(Github login required).</p>
+<p>OK, now we're ready to start building Valadate! Tune in again soon for Part 4. Who tests the tester?</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://chrisdaley.biz/es/tag/vala.html">Vala</a>
+      <a href="http://chrisdaley.biz/es/tag/open-source.html">Open Source</a>
+      <a href="http://chrisdaley.biz/es/tag/programming.html">Programming</a>
+      <a href="http://chrisdaley.biz/es/tag/tdd.html">TDD</a>
+      <a href="http://chrisdaley.biz/es/tag/bdd.html">BDD</a>
+      <a href="http://chrisdaley.biz/es/tag/jenkins.html">Jenkins</a>
+      <a href="http://chrisdaley.biz/es/tag/continuous-integration.html">Continuous Integration</a>
+      <a href="http://chrisdaley.biz/es/tag/devops.html">DevOps</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'cdaley-biz';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; Chris Daley 2015 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71968606-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins",
+  "headline": "Towards a Test Driven Development Framework in Vala Part 3. DevOps - Continuous Integration with Jenkins",
+  "datePublished": "2016-01-19 10:50:00-08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Daley",
+    "url": "http://chrisdaley.biz/es/author/chris-daley.html"
+  },
+  "image": "../images/logo.png",
+  "url": "http://chrisdaley.biz/es/test-driven-development-in-vala-pt-3-en.html",
+  "description": "Continuous Integration or CI is widely used in Test Driven Design for keeping the project's codebase tight, reducing errors and making sure there is always a working build available for deployment. Since once of the objectives of Valadate is to integrate with existing toolchains, I took a short DevOps break to set up Jenkins on a spare Raspberry Pi with some interesting results. Read on to see what they were..."
+}
+</script></body>
+</html>
