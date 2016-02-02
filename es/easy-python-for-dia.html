@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -85,6 +86,7 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
+      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
@@ -95,7 +97,7 @@
   <div>
     <p><a href="https://wiki.gnome.org/action/show/Apps/Dia">Dia</a> es software libre para la creación de diagramas libre y es multiplataforma. Ya está un poquito viejo, pero siga siendo una gran herramienta. Es muy fácil agregarle funciones nuevas con complementos (plugins) desarrollados en Python pero el proceso mismo de escribir esos complementos es un poco más complicado.</p>
 <p>En primero, la interfaz de programación de aplicaciones (API) de Dia para Python es difícil de encontrar en  <a href="https://projects-old.gnome.org/dia/pydia.html">línea</a>. Siempre puedes generar un diagrama de la API desde adentro de Dia mismo pero ese no te daría mucha información y el formato es un poco inconveniente. La API puede ser un poquito difícil de navegar y voy a compartir algunos trucos sobre ese tema en un post más adelante pero el problema más grande se yace en probando los complementos que escribes. Dia carga todos los complementos al inicio y no se pueden modificar durante la ejecución del programa, así que el proceso de probar y depurar resulta laborioso. Es posible escribir y probar las piezas de tu complemento que no dependen en Dia aparte pero una vez que comiences la interacción con la interfaz, se atasca de nuevo.</p>
-<p><img alt="Vaya API grande!" src="http://chrisdaley.biz/es/../images/dia-python-api.png" style="width: 587px; height: auto; max-width: 100%;"/></p>
+<p><img alt="Vaya API grande!" src="http://chrisdaley.biz/es/../images/dia-python-api.png" /></p>
 <p>Frustrado por eso y deseando desarrollar un complemento siguiendo las técnicas de desarrollo guiado por pruebas (TDD), escribí un pequeño modulo de Python que simular la API de Dia. Así que puedes escribir y probar la gran mayoría de tu complemento sin tener que ejecutar Dia en absoluto! Hay limitaciones - por ejemplo cualquiera interacción con la interfaz tiene que ser hecho dentro de Dia, o a mano o con un automation framework y no se puede generar diagramas útiles. Sin embargo, debería reducir la cantidad de tiempo y bugs que cueste poner en marcha tu complemento. No olvides de darle una licencia de software libre y compartirlo con el mundo! </p>
 <p>Si eso es algo que te serviría, puedes darle un vistazo <a href="https://github.com/chebizarro/dia-test">ahi</a>. Originalmente, lo desarrolle para satisfacer las necesidades de un proyecto determinado en lo que estaba trabajando asi que hay unas partes que no están completas pero estoy dispuesto de tomar avisos de bugs y pull requests. </p>
 <p>Es fácil instalar:</p>

@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -81,6 +82,7 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
+      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
@@ -95,7 +97,7 @@
 <p>Para los desarrolladores de Vala que necesitan probar su código, &lt; insertar el chulo nombre de herramienta &gt; es un framework de pruebas de gran potencia que <strong>proporciona funciones de pruebas de las características de comportamiento, funcionales y  unitarias</strong> para ayudarles a escribir gran software de código abierto. La diferencia con los otros frameworks de prueba y &lt; insertar el chulo nombre de herramienta &gt; es que está <strong>diseñado especialmente para Vala</strong>, y <strong>integra perfectamente en las cadenas de herramientas ya existentes</strong>.</p>
 </blockquote>
 <p>Echamos un vistazo a los requisitos que hemos recopilado hasta ya y averiguamos si esas características se caben con esa visión. </p>
-<p><img alt="Product Backlog" src="http://chrisdaley.biz/es/../images/requirements.png" style="width: 400px; height: auto; max-width: 100%;"/></p>
+<p><img alt="Product Backlog" src="http://chrisdaley.biz/es/../images/requirements.png" /></p>
 <h4>proporciona funciones de pruebas de las características de comportamiento, funcionales y  unitarias</h4>
 <ul>
 <li>Descubrimiento de pruebas</li>
@@ -123,7 +125,7 @@
 <h3>La arquitectura de sistema y TDD</h3>
 <p>Uno de los conceptos erróneos que tienen los novatos a TDD es que no escribes nada hasta que hay una prueba. Eso confunde a mucha gente y las deja sin saber donde empezar, como una aplicación sencilla de la linea de comando requiere una cierta cantidad de código repetitivo antes de procesar el input del usuario. Desde este punto, muchos novatos escribirían montones de pruebas redundantes o inventan ruedas ya bien probadas de nuevo o renuncian TDD por completo. Hay pocas veces cuando tu código sera ejecutando sin dependencias (si solo libc) pues siempre estas escribiendo código dentro de un framework existente, si no aproximadamente. La mayoría de estas interacciones con otros frameworks debería ser encapsulado en las pruebas de integración, las que son desarrollada en paralelo con las pruebas unitarias. Las pruebas que informen nuestro diseño de sistema son las que prueban sus características únicas. Nuestra arquitectura de sistema define esas interacciones y limites y nos da un esqueleto básico para empezar a escribir nuestra base de código. Una vez que esta hecha, podemos empezar a escribir las pruebas concretas que nos van a guiar el diseño.</p>
 <p>Con un proyecto como este tenemos la ventaja de unas muestras de la técnica anterior, la arquitectura de <a href="https://es.wikipedia.org/wiki/XUnit">xUnit</a> siendo la mayor entre ellas. xUnit es un framework flojo que incluye JUnit y Nunit y estipula que cualquier implementación tenga una arquitectura común, como se puede ver en el diagrama abajo.</p>
-<p><img alt="Diagrama de clases de xUnit" src="http://chrisdaley.biz/es/../images/architecture.png" style="width: 400px; height: auto; max-width: 100%;"/></p>
+<p><img alt="Diagrama de clases de xUnit" src="http://chrisdaley.biz/es/../images/architecture.png" /></p>
 <p>De este diagrama podemos aun ver como vamos a estructurar el código. Como mínimo, vamos a crear archivos y pruebas distintos para Test, TestRunner, TestSuite, TestCase, TestFixture and TestResult. Si, pruebas para pruebas. Hubiera dicho que esto resultaría interesante... Este nos van a dar el mínimo que necesitamos para armar una cadena de herramientas y crear un repositorio de código. Enhorabuena, estamos al punto de empezar! Salvo que todavía no tiene nombre... </p>
 <blockquote>
 <p>¿Qué tiene un nombre? Lo que llamamos rosa olería tan fragante con cualquier otro nombre.</p>
@@ -131,7 +133,7 @@
 </blockquote>
 <p>Gracias Guili. Todavía no estoy totalmente entusiasmado con el nombre de Valadate, aunque refleja la Vision de Producto de ser diseñado especialmente para Vala y que no está solamente para las pruebas unitarias. Llamarle VUnit reflejara su procedencia de xUnit pero no es como si hubiera una API rígida para conformarse. Técnicamente en este etapa del desarrollo, no importa nada sino que me gustaría evitar los cambios innecesarios más tarde. Todavía se queda más trabajo antes de empezar escribir código, así que voy a dejarlo filtrarse por una dia o dos antes de tomar una decisión firma. Pues bien, ya es la hora de decir algo si te sientes apasionado de una u otra forma.</p>
 <p>Pero por lo menos tiene un logotipo! Dime lo que piensas...</p>
-<p><img alt="Un sistema solar estilizado visto por un ángulo oblicuo" src="http://chrisdaley.biz/es/../images/valadate_logo.png" style="width: 69px; height: auto; max-width: 100%;"/></p>
+<p><img alt="Un sistema solar estilizado visto por un ángulo oblicuo" src="http://chrisdaley.biz/es/../images/valadate_logo.png" /></p>
 <p>La base fue diseñado por <a href="https://thenounproject.com/misirlou/">misirlou</a> y agregue los colores chulos. La idea es que simboliza el asteroide epónimo que da el Vala su nombre.</p>
 <p>Pues ya está, vuelva a sintonizar prontito cuando voy a hablar de los Roadmap y Backlog además como instale Jenkina CI en un Raspberry Pi.</p>
   </div>

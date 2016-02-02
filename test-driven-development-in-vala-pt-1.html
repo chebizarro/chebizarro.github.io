@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/style.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/pygments.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/font-awesome.min.css">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Enter the Panopticon Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -81,6 +82,7 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
+      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
@@ -91,7 +93,7 @@
   <div>
     <p>I first came across <a href="https://wiki.gnome.org/Projects/Vala">Vala</a> when scoping out the possibility of updating a venerable old Open Source program from GTK+2 to GTK+3. I wasn't quite sure what to make of Vala at first - it was an Object Oriented Programming language based on the GObject type system that used C as an intermediary language for the gcc compiler. I looked through a bunch of the samples, and was struck by the elegance and parsimony of the syntax and how instantly understandable it was from my familiarity with Java and C#. I played with a few example apps and I was surprised at how much fun it was to use as well. It was GObject without the endless reams of boilerplate code. Properties actually made sense now and using signals is a snap. IDE support was about as good as any other language, especially in Geany, my tool of choice. I was hooked.</p>
 <p>There was only one problem. I'm a big fan of <a href="https://en.wikipedia.org/wiki/Test-driven_development">TDD</a> and <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> and after many hours of intense Google-Fu, I was able to find precious little on the topic in regards to Vala. What <a href="https://esite.ch/2012/06/writing-tests-for-vala/">there was</a> boiled down to using the GLib Test library and a nice little adapter class to group individual test cases into a test suite. The end result was run through <code>gtester</code> on the command line, usually as part of a toolchain like Autotools. This was straightforward enough for simple applications with limited user interactions, but it doesn't really scale for BDD. Some work had been done on a framework called <a href="https://github.com/yorba/valadate">Valadate</a> but it was abandoned by its maintainers a few years ago. This was a real blocker for me going forward. My philosophy is that you can occasionally write great software in moments of furious creativity but it takes boring old testing to consistently produce good software. </p>
-<p><img alt="Feel the hate flow throw you" src="http://chrisdaley.biz/images/unit-tests-dv.jpg" style="width: 625px; height: auto; max-width: 100%;"/></p>
+<p><img alt="Feel the hate flow throw you" src="http://chrisdaley.biz/images/unit-tests-dv.jpg" /></p>
 <p><em>Feel the hate flow throw you</em></p>
 <p>The thing with Free and Open Source Software is that it's only free at the cashier. Once you get it home you have to pay an ongoing maintenance cost in time if you want to keep using it. That time could be spent making minor contributions like filing bug reports through to helping new users in forums or translating apps all the way to implementing features yourself. I see real potential in Vala but I feel that it's usability is being hampered by this missing feature. The developers of the language have given the world a great gift and their time is better spent maintaining it. The current solution is <em>mostly</em> good enough, but generates a lot of extra code to be maintained and has no support for BDD. "Somebody should do something about it" is a phrase that makes me groan whenever I hear it, because I usually think that that someone should be the person saying it. Well, someone should do something about it.</p>
 <p>So this blog post is an effort to get the ball rolling on that something. Although I have some free time now, it's not an endless wellspring. I also don't want to start a vaporware or abandonedware project that gets added to the list of good ideas people had at one point in time. I would like to build something that is sustainable, that evolves with its users and that could be easily passed on to other maintainers should I no longer have enough time to devote to it. I imagine this has been the manifesto of a thousand failed Open Source projects, but it's better than nothing, so here goes...</p>
