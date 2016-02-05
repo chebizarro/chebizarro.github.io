@@ -5,7 +5,9 @@
 &lt;p&gt;Frustrado por eso y deseando desarrollar un complemento siguiendo las técnicas de desarrollo guiado por pruebas (TDD), escribí un pequeño modulo de Python que simular la API de Dia. Así que puedes escribir y probar la gran mayoría de tu complemento sin tener que ejecutar Dia en absoluto! Hay limitaciones - por ejemplo cualquiera interacción con la interfaz tiene que ser hecho dentro de Dia, o a mano o con un automation framework y no se puede generar diagramas útiles. Sin embargo, debería reducir la cantidad de tiempo y bugs que cueste poner en marcha tu complemento. No olvides de darle una licencia de software libre y compartirlo con el mundo! &lt;/p&gt;
 &lt;p&gt;Si eso es algo que te serviría, puedes darle un vistazo &lt;a href="https://github.com/chebizarro/dia-test"&gt;ahi&lt;/a&gt;. Originalmente, lo desarrolle para satisfacer las necesidades de un proyecto determinado en lo que estaba trabajando asi que hay unas partes que no están completas pero estoy dispuesto de tomar avisos de bugs y pull requests. &lt;/p&gt;
 &lt;p&gt;Es fácil instalar:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ python setup.py install
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ python setup.py install
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;No hay ninguna diferencia en la manera de escribir tu código y cualquier complemento existente puede usar el modulo sin ser modificado. Cuando el complemento se ejecuta fuera de Dia, se carga el modulo de simulación, cuando se ejecuta dentro de Dia, se carga lo verdadero.&lt;/p&gt;
 &lt;p&gt;Ya estas listo para empezar de escribir complementos para Dia en la manera mas fácil!&lt;/p&gt;</summary><category term="Dia"></category><category term="Python"></category><category term="Open Source"></category><category term="Programming"></category><category term="TDD"></category><category term="BDD"></category><category term="Software Libre"></category></entry></feed>

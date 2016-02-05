@@ -5,7 +5,9 @@
 &lt;p&gt;Frustrated by this and wanting to develop a plugin using Test Driven Development (TDD) techniques, I wrote a small Python module that mocks the Dia API. This way you can write and test the vast majority of your plugin without having to run Dia at all! There are some limitations - any interactions with the UI for example have to be done in Dia either manually or with an automation framework, and you can't generate usable diagrams from it. It should, however, reduce the amount of time and bugs it takes to get your plugin up and running. Don't forget to Open Source it and share it with the world!&lt;/p&gt;
 &lt;p&gt;If this is something you might find useful, you can check it out &lt;a href="https://github.com/chebizarro/dia-test"&gt;here&lt;/a&gt;. I originally developed it to meet the needs of a particular project I was working on at the time so there are some parts that may not be fully implemented, but I'm happy to take bug reports and pull requests. &lt;/p&gt;
 &lt;p&gt;Installation is easy:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ python setup.py install
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ python setup.py install
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;There is no practical difference in how you write your code and any existing plugin can use the module without modification. When the plugin runs outside of Dia, it loads the mock module, when it is run inside Dia, it loads the real one.&lt;/p&gt;
 &lt;p&gt;Now you're all set up to start writing plugins for Dia the easy way!&lt;/p&gt;</summary><category term="Dia"></category><category term="Python"></category><category term="Open Source"></category><category term="Programming"></category><category term="TDD"></category><category term="BDD"></category></entry></feed>

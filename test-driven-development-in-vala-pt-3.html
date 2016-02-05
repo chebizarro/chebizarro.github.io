@@ -110,8 +110,10 @@
 <p>In this configuration, the slave is a Docker host that starts up and runs a container built from a Dockerfile in the repositories root. It is this container that runs the build, not the host, so it is possible to test your software on pretty much any platform that can be dockerized. Cool eh? So I set up an Ubuntu container and...</p>
 <p><img alt="Build Status" src="http://chrisdaley.biz/images/failing.png" /></p>
 <p>Huh?!? I looked at the log and...</p>
-<pre><code>./.libs/libgherkin3.so: undefined reference to `g_value_init_from_instance'
-</code></pre>
+<div class="highlight"><pre>./.libs/libgherkin3.so: undefined reference to `g_value_init_from_instance&#39;
+</pre></div>
+
+
 <p>Dammit! In my rush to port Gherkin, I had done it on my new Fedora 23 box and hadn't actually tested it on Ubuntu at all. I checked the docs and sure enough, GLib.Value.init_from_instance() is available from GLib 2.42 on only and Ubuntu 15.04 ships with 2.40. D'oh! So now I either have to refactor the code or declare GLib 2.42 a prerequisite.</p>
 <p>This particular case is a really good example of the benefits of Continuous Integration. If I had had the Jenkins server set up before I ported the code, I would have noticed the incompatibility almost immediately and would have been able to deal with it then, rather than refactoring later.</p>
 <p>As nice as it would be to ignore the existence of other operating systems, the sad truth is that not everyone uses Linux as their primary desktop, including many people who might want to use my software. With this harsh reality in mind, I decided to set up Windows and Mac OSX slaves to test the cross platform compatibility of my projects.</p>

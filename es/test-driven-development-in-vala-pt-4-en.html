@@ -5,17 +5,18 @@
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
   <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
 <meta name="author" content="Chris Daley" />
-<meta name="description" content="" />
+<meta name="description" content="After a short break to work on one of my other projects (a Rock 'n Roll band) and finish setting up Jenkins, I'm back at work on the project now officially known as Valadate. In this post I will go over integrating the original project's code as well as the first set of unit tests on which the new project will be based. Now that there's an actual Github repository, we can set up other ways for people to get involved as well. Read on to find out what they are..." />
 <meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD">
 <meta property="og:site_name" content="Entrar al Panóptico"/>
 <meta property="og:title" content="Towards a Test Driven Development Framework in Vala Part 4. Who Tests the Tester?"/>
-<meta property="og:description" content=""/>
+<meta property="og:description" content="After a short break to work on one of my other projects (a Rock 'n Roll band) and finish setting up Jenkins, I'm back at work on the project now officially known as Valadate. In this post I will go over integrating the original project's code as well as the first set of unit tests on which the new project will be based. Now that there's an actual Github repository, we can set up other ways for people to get involved as well. Read on to find out what they are..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-4-en.html"/>
 <meta property="og:type" content="article"/>
@@ -34,7 +35,7 @@
 <DataObject type="document">
     <Attribute name="title">Towards a Test Driven Development Framework in Vala Part 4. Who Tests the Tester?</Attribute>
     <Attribute name="author">Chris Daley</Attribute>
-    <Attribute name="description"></Attribute>
+    <Attribute name="description">After a short break to work on one of my other projects (a Rock 'n Roll band) and finish setting up Jenkins, I'm back at work on the project now officially known as Valadate. In this post I will go over integrating the original project's code as well as the first set of unit tests on which the new project will be based. Now that there's an actual Github repository, we can set up other ways for people to get involved as well. Read on to find out what they are...</Attribute>
     <Attribute name="page_count">1</Attribute>
     <Attribute name="rating">5</Attribute>
     <Attribute name="last_update">2016-01-27T16:50:00-08:00</Attribute>
@@ -81,6 +82,7 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
+      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
@@ -89,7 +91,82 @@
     <p>Posted on Wed 27 January 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a></p>
   </header>
   <div>
-    
+    <p>After a short break to work on one of my other projects (<a href="http://www.last.fm/music/Calisse">a Rock 'n Roll band</a>) and finish setting up <a href="http://jenkins.valadate.org:8080">Jenkins</a>, I'm back at work on the project now officially known as <a href="https://github.com/chebizarro/valadate">Valadate</a>.</p>
+<p>As I've mentioned before, there were some initial attempts at developing a TDD framework for Vala, the most extensive of them being <a href="https://github.com/yorba/valadate">Valadate</a>. After some consideration, and a review of the existing codebase, I decided that the most practical approach would be to assume maintainership of it and refactor/rewrite as necessary to meet the new requirements that have been gathered.</p>
+<p>Presently, the existing Valadate package provides a number of utility classes for such things as asynchronous tests and temporary directories as well as a command line Test Runner. The procedure for writing tests is to create a concrete implementation of the Valadate Fixture interface with each unit test being a method whose name starts with <code>test_</code>. The test is then compiled into a binary (shared library) which is run by the Test Runner. Test discovery is done by loading the .vapi and .gir files generated by Vala when the binary is compiled. The build system is <a href="https://en.wikipedia.org/wiki/Waf">Waf</a>, but for the purposes of reviewing the code, I ported it to autotools, a build system I am more comfortable with, although it can still be built with Waf.</p>
+<p>The code compiles, but it has suffered from some bitrot, with quite a number of deprecation warnings, especially the asynchronous tests. The actual framework is quite lean and uses the GLib Test and TestSuite classes to group and run the tests it finds in the binary. In total there probably isn't more than 1000 SLOC in the whole project. While I see some interesting ideas in the current code, I have decided that the best approach is to start again from scratch and incorporate whatever is useful and send the remainder to binary heaven || hell.</p>
+<p>So now that I have the repository for Valadate forked and updated to build with autotools, I will use this as the <code>master</code> from which we will derive the various development branches, using the widely practiced <a href="https://guides.github.com/introduction/flow/">"GitHub Flow"</a>, a repository management process which embodies the principles of Continuos Integration. In a nutshell, it involves six discrete steps:</p>
+<ol>
+<li>Create a branch for developing a new feature</li>
+<li>Add commits to the branch</li>
+<li>Open pull requests</li>
+<li>Discuss and review the code</li>
+<li>Deploy</li>
+<li>Merge</li>
+</ol>
+<p>The underlying principle (or "one rule" as GitHub calls it) is that the <code>master</code> branch is always deployable - which in the case of a tool like Valadate means it can be pulled, compiled and run at any time. So while the existing <code>master</code> branch of Valadate is not exactly production ready, it is in the state where the Yorba Foundation stopped maintaining it. This at least gives us a baseline from which to start and some continuity with the original project, if only giving credit to the original developers for their hard work.</p>
+<p>We're ready to branch our new version, so what do we call it? The most commonly used system is <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a> which follows the MAJOR.MINOR.PATCH convention:</p>
+<ul>
+<li>MAJOR version when you make incompatible API changes,</li>
+<li>MINOR version when you add functionality in a backwards-compatible manner, and</li>
+<li>PATCH version when you make backwards-compatible bug fixes.</li>
+</ul>
+<p>The last release of Valadate was 0.1.1 and it's not entirely clear if they were strictly following the Semantic Versioning scheme. There are separate API and SO version numbers which may not be applicable in our first release. So for simplicity, I will use the original version number as the starting point. As we are going to make some fairly substantial changes that would break the hell out of the 0 API, we should probably increment that to 1. Since we are starting from scratch, the MINOR version will revert to 0 as well. So the branch name that we will begin working on our new implementation under will be 1.0.0.</p>
+<p>Sweet. Let's dial up those digits:</p>
+<p><code>$ git checkout -b version-1.0.0</code></p>
+<p>The local repository is now a new branch called <code>version-1.0.0</code>, which will allow us to start really overhauling the code without affecting the "deployable" <code>master</code> branch. Since we're going to break more things than a stoner in a bong shop, we may as well reorganise the file layout to something more conventional and dispose with the Waf build system altogether.</p>
+<p>Our new repository directory structure looks like this:</p>
+<ul>
+<li>valadate<ul>
+<li>libvaladate</li>
+<li>src</li>
+<li>tests<ul>
+<li>libvaladate</li>
+<li>src</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>This structure is a fairly commonly used pattern in developing medium to large size projects, you essentially replicate the source tree within the tests folder. This makes it easier to locate individual tests and means your integration tests will follow the same basic pattern as the main source tree does at compile time. With smaller projects, you could just get away with a simple <code>tests</code> directory - with the relatively small SLOC that Valadate has now it could probably all reside within a single source file! Given that we expect the project to grow significantly though, especially when we start adding complex features like BDD tests and a GUI as well as several layers of tests of tests, we should probably start with a more scalable structure.</p>
+<p>OK, now we're finally ready to start writing tests. Given that this is a Testing Framework, we're facing a potential chicken and egg situation - what framework do we use to test our framework? In this case, the solution is pretty straightforward, we have the GLib Test suite at our disposal which we can use to write the base tests that will guide the design of the framework. Once these tests all pass, we can move on to using Valadate to test itself when adding more complex testing features like Gherkin/Cucumber. Finally, we can use those features for even more complex testing such as user acceptance and integration tests for the project as a whole. The process is iterative and cascading, meaning that as features at one level are sufficiently tested they will become available for the next successive layer of tests. You could think of it like an Onion, if you like, or a series of waterfalls but my mental image at the moment is more like this:</p>
+<p>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="//www.youtube.com/embed/eMqGdRqj1_0" width="560"></iframe>
+</p>
+<p>But that's just me. Use whatever metaphor you like, it's your head after all.</p>
+<p>So we begin using the basic or 'naked' (as I like to call it) <a href="https://developer.gnome.org/glib/stable/glib-Testing.html">GLib Testing Framework</a>. Now the GLib Testing Framework is actually pretty powerful and was originally designed according to the xUnit interface. It's fairly straightforward to use, as this example from the <a href="https://wiki.gnome.org/Projects/Vala/TestSample">Gnome Vala Wiki</a> shows:</p>
+<div class="highlight"><pre><span class="kt">void</span> <span class="n">add_foo_tests</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">Test</span><span class="p">.</span><span class="n">add_func</span> <span class="p">(</span><span class="s">&quot;/vala/test&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="n">assert</span> <span class="p">(</span><span class="s">&quot;foo&quot;</span> <span class="o">+</span> <span class="s">&quot;bar&quot;</span> <span class="o">==</span> <span class="s">&quot;foobar&quot;</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">main</span> <span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Test</span><span class="p">.</span><span class="n">init</span> <span class="p">(</span><span class="kd">ref</span> <span class="n">args</span><span class="p">);</span>
+    <span class="n">add_foo_tests</span> <span class="p">();</span>
+    <span class="n">Test</span><span class="p">.</span><span class="n">run</span> <span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>It also has the gtester and gtester-report utilities which are well integrated with existing toolchains and are able to output test results in a variety of formats.</p>
+<p>The main drawbacks of the GLib Testing Framework, and hence the need for Valadate at all, are:</p>
+<ul>
+<li>It is not particularly Object Oriented - the base classes are all <code>[Compact]</code> classes and do not inherit from a common Test base class. This makes extending them in Vala difficult.</li>
+<li>The test report functions need a lot of configuration to produce usable output, including several 'drivers' or shell scripts for postprocessing.</li>
+<li>It is not particularly well documented</li>
+<li>It doesn't scale very well to large projects or for Behavior Driven Design.</li>
+<li>It's verbose and difficult to read.</li>
+</ul>
+<p>Most of these limitations are solveable in one form or another, so it should serve as a sufficient base to get started. If we follow the principles of Test Driven Design it should become obvious when we need to build something more powerful or flexible.</p>
+<p>Which tests and features do we write first? Well, that's determined by the requirements we've gathered and how we've prioritised them. One of the many great things of having a wife who is a CTO for a foundation developing open source land tenure software is that I get to vicariously experience how she manages her team's workflow and the tools they use to do that. One of the recent tools that they have started using for project management is <a href="https://waffle.io/">Waffle</a>, which integrates seemlessly with GitHub Issues and Pull Requests. Waffle is the next step beyond the <a href="http://bit.ly/1ZSrRA6">Trello board</a> that I was using to initially gather the requirements for Valadate. Waffle allows anyone to add a feature request or file a bug to the Backlog either through the <a href="https://waffle.io/chebizarro/valadate">Waffle board</a> for the project or by simply creating a <a href="https://github.com/chebizarro/valadate/issues/new">new issue</a> on the GitHub page. The latter is the most straightforward as you don't need to log into Waffle at all.</p>
+<p>One of my wife's philosophies of Open Source is that it's not enough to just release your source code. A true Open Source project is also developed in the open, meaning that the history behind why certain design decisions were made, and by who, is recorded and all issues and pull requests are reviewed and where they meet the project's (i.e. enduser's) requirements, are fixed or merged, regardless of the source. Public repositories are, at the very least mirrors if not the working versions of the current master and branches, not just static snapshots of a final release.</p>
+<p>Taking an Open from the Start approach is also something that is essential in building a strong, diverse community of users around your product. Sarah Sharp, a long time Linux Kernel contributer, has written extensively about this on her <a href="http://sarah.thesharps.us/2015/10/06/what-makes-a-good-community/">blog</a>. One of the things that I'm going to take the opportunity to lock down now is a Code of Conduct for contributors. I'm not going to go into the pros and cons of having a Code of Conduct - as I don't see any cons in the first place! So, as Sarah says on her blog -</p>
+<blockquote>
+<p>We don’t write legal agreements without expert help. We don’t write our own open source licenses. We don’t roll our own cryptography without expert advice. We shouldn’t roll our own Code of Conduct.<a href="http://sarah.thesharps.us/2016/01/25/code-of-conducts-warning-signs/">1</a></p>
+</blockquote>
+<p>With that in mind, I've signed the project on to the <a href="http://todogroup.org/opencodeofconduct/#Valadate/chebizarro@gmail.com">Open Code of Conduct</a>, which is used by GitHub and is inspired by the codes of conduct and diversity statements of projects like Django, Python and Ubuntu. It's worth a read, even if it's your bread and butter, but here's my summary - "don't be an asshat" - and you can tweet me on that.</p>
+<p>So that's all for this post, join me again soon for Part 5 where I will outline the product roadmap for the first release and delve into when we know we've tested enough with coverage reports. Thanks for reading and please feel free to join the conversation if you have something to say!</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -153,7 +230,7 @@
   },
   "image": "../images/logo.png",
   "url": "http://chrisdaley.biz/es/test-driven-development-in-vala-pt-4-en.html",
-  "description": ""
+  "description": "After a short break to work on one of my other projects (a Rock 'n Roll band) and finish setting up Jenkins, I'm back at work on the project now officially known as Valadate. In this post I will go over integrating the original project's code as well as the first set of unit tests on which the new project will be based. Now that there's an actual Github repository, we can set up other ways for people to get involved as well. Read on to find out what they are..."
 }
 </script></body>
 </html>

@@ -112,8 +112,10 @@
 <p>Con esta configuración, el esclavo es un anfitrión de Docker y se arranca y ejecutar un contenedor armado de un Dockerfile en la raíz del repositorio. Es este contenedor que ejecutar la compilación, no el anfitrión, asimismo es posible probar tu software en casi cualquier plataforma que se puede dockerize. Que guay no? Entonces, arme un contenedor de Ubuntu y...</p>
 <p><img alt="Build Status" src="http://chrisdaley.biz/es/../images/failing.png" /></p>
 <p>Como que? Mire el log y...</p>
-<pre><code>./.libs/libgherkin3.so: undefined reference to `g_value_init_from_instance'
-</code></pre>
+<div class="highlight"><pre>./.libs/libgherkin3.so: undefined reference to `g_value_init_from_instance&#39;
+</pre></div>
+
+
 <p>Maldito sea! En la prisa de portear Gherkin, lo hice en mi nuevo sistema de Fedora 23 y no lo había probado nada en Ubuntu. Comprobé los documentos y por cierto, GLib.Value.init_from_instance() está disponible a partir de la version 2.42 de GLib y el Ubuntu 15.04 solamente lleva la versión 2.40. D'oh! Así que tengo que refactorizarlo o declarar GLib 2.42 como requisito.</p>
 <p>Este caso en particular es un muy buen ejemplo de los beneficios de Integración Continua. Si tuviera el servidor de Jenkins armado antes de portear el código, me habría dado cuenta de la incompatibilidad casi de inmediato y lo habría arreglado en aquel momento, más bien que refactorizarlo más tarde. </p>
 <p>Aunque seria bonito ignorar la existencia de los otros sistemás operativos, la verdad triste es que no todo el mundo usar el Linux como su escritorio principal, incluso ya mucha gente que tal vez querría usar mi software. Conciente de esa realidad brutal, decidí armar esclavos de Windows y Mac OSX para probar la compatibilidad multiplataforma de mis proyectos. </p>
