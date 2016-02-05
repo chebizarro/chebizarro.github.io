@@ -1,57 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Enter the Panopticon</title><link href="http://chrisdaley.biz/" rel="alternate"></link><link href="http://chrisdaley.biz/feeds/all.atom.xml" rel="self"></link><id>http://chrisdaley.biz/</id><updated>2016-02-09T17:00:00-08:00</updated><entry><title>Common Design Patterns in Vala Pt. 1 - The Singleton Pattern</title><link href="http://chrisdaley.biz/design-patterns-in-vala-pt-1.html" rel="alternate"></link><updated>2016-02-09T17:00:00-08:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-02-09:design-patterns-in-vala-pt-1.html</id><summary type="html">&lt;h1&gt;Common Design Patterns in Vala&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A great deal of creativity is about pattern recognition, and what you need to discern patterns is tons of data. Your mind collects that data by taking note of random details and anomalies easily seen every day: quirks and changes that, eventually, add up to insights.&lt;/p&gt;
-&lt;p&gt;Margaret Heffernan&lt;a href="http://www.brainyquote.com/quotes/quotes/m/margarethe556955.html#CfxADVwuY27IKvyW.99"&gt;1&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Design Patterns are like templates that you can apply to your program to solve common problems. They are not like the other finished code samples that you can copy and paste into your program's source and run with little or no modification rather they are more like recipes for how you might structure your program's code.&lt;/p&gt;
-&lt;p&gt;Just about every piece of software you use today has been written conforming to one set of patterns or another. Everything from how the system allocates memory to how a user chooses an item from a program's menu follow well established, time tested patterns. They are one of the cornerstone's of modern software enginerring best practice.&lt;/p&gt;
-&lt;p&gt;Not only do patterns help you structure your thinking but they also help you write code that others can more easily read (and contribute to). A program that uses common design patterns is one whose intent is intelligible across language barriers, both human and machine. The more clear the patterns in your code are, the fewer comments you will need to leave and the easier it will be for others to follow.&lt;/p&gt;
-&lt;p&gt;In an Object Oriented Language like Vala, most patterns are used to show the interactions and behaviour between objects without necessarily specifying which classes or interfaces should be used. Those choices are left to the programmer to make. Design patterns let you see the trees for the forest. &lt;/p&gt;
-&lt;p&gt;In this series of articles, we are going to look at some of the most common design patterns in use today and how they can be implemented in Vala. We'll start with one of the easiest patterns to learn how to use and identify.&lt;/p&gt;
-&lt;h1&gt;Singletons&lt;/h1&gt;
-&lt;p&gt;The Singleton or Single Instance pattern is one of the simplest and most common design patterns in Object Oriented Programming. It is used to create objects so is often categorised as one of the "Creational" patterns.&lt;/p&gt;
-&lt;p&gt;A Singleton is a class that is responsible for ensuring there is only ever one instance of itself during runtime and it provides a method to access it without needing to instantiate it.&lt;/p&gt;
-&lt;p&gt;The most straightforward implementation of this is one that would be familiar to Java programmers. We create a class that has a &lt;code&gt;private&lt;/code&gt; constructor and a &lt;code&gt;static&lt;/code&gt; instance of itself with a &lt;code&gt;public&lt;/code&gt; method to access it.&lt;/p&gt;
-&lt;p&gt;In UML, the Singlton would look like this.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Singleton Class Diagram in UML" src="http://chrisdaley.biz/images/singleton.png" title="Singleton Class Diagram in UML" /&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HiveMindOverlord&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-
-    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;HiveMindOverlord&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;HiveMindOverlord&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-
-    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;HiveMindOverlord&lt;/span&gt; &lt;span class="n"&gt;get_instance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;null&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;HiveMindOverlord&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="n"&gt;HiveMindOverlord&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;This definition ensures there will only ever be one instance of our &lt;code&gt;HiveMindOverlord&lt;/code&gt; and we can get a reference to that through the static method &lt;code&gt;get_instance()&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;```vala
-public test_singleton {&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;// The HiveMindOverlord constructor is private so
-// we cannot instantiate one using the new operator
-
-var overlord = HiveMindOverlord.get_instance();
-
-// The get_instance method has returned a valid instance
-assert (overlord is HiveMindOverlord);
-
-// You can now do things that one does with an
-// instance of our HiveMindOverlord
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;}```&lt;/p&gt;
-&lt;p&gt;If you're familiar with another OOP language, you might note that in Vala you can't initialise a static class member without first creating an instance of that class. Hence the &lt;code&gt;get_instance()&lt;/code&gt; method checks that the instance variable isn't null and if it is, it creates a new one. This ensures that is only ever one instance created and that it is available from the first call.&lt;/p&gt;</summary><category term="Vala"></category><category term="Open Source"></category><category term="Design Patterns"></category></entry><entry><title>Towards a Test Driven Development Framework in Vala Part 4. Who Tests the Tester?</title><link href="http://chrisdaley.biz/test-driven-development-in-vala-pt-4.html" rel="alternate"></link><updated>2016-02-04T16:50:00-08:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-02-04:test-driven-development-in-vala-pt-4.html</id><summary type="html">&lt;p&gt;After a short break to work on one of my other projects (&lt;a href="http://www.last.fm/music/Calisse"&gt;a Rock 'n Roll band&lt;/a&gt;) and finish setting up &lt;a href="http://jenkins.valadate.org:8080"&gt;Jenkins&lt;/a&gt;, I'm back at work on the project now officially known as &lt;a href="https://github.com/chebizarro/valadate"&gt;Valadate&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Enter the Panopticon</title><link href="http://chrisdaley.biz/" rel="alternate"></link><link href="http://chrisdaley.biz/feeds/all.atom.xml" rel="self"></link><id>http://chrisdaley.biz/</id><updated>2016-02-04T16:50:00-08:00</updated><entry><title>Towards a Test Driven Development Framework in Vala Part 4. Who Tests the Tester?</title><link href="http://chrisdaley.biz/test-driven-development-in-vala-pt-4.html" rel="alternate"></link><updated>2016-02-04T16:50:00-08:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-02-04:test-driven-development-in-vala-pt-4.html</id><summary type="html">&lt;p&gt;After a short break to work on one of my other projects (&lt;a href="http://www.last.fm/music/Calisse"&gt;a Rock 'n Roll band&lt;/a&gt;) and finish setting up &lt;a href="http://jenkins.valadate.org:8080"&gt;Jenkins&lt;/a&gt;, I'm back at work on the project now officially known as &lt;a href="https://github.com/chebizarro/valadate"&gt;Valadate&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;As I've mentioned before, there were some initial attempts at developing a TDD framework for Vala, the most extensive of them being &lt;a href="https://github.com/yorba/valadate"&gt;Valadate&lt;/a&gt;. After some consideration, and a review of the existing codebase, I decided that the most practical approach would be to assume maintainership of it and refactor/rewrite as necessary to meet the new requirements that have been &lt;a href="http://bit.ly/1ZSrRA6"&gt;gathered&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Presently, the existing Valadate package provides a number of utility classes for such things as asynchronous tests and temporary directories as well as a command line Test Runner. The procedure for writing tests is to create a concrete implementation of the Valadate Fixture interface with each unit test being a method whose name starts with &lt;code&gt;test_&lt;/code&gt;. The test is then compiled into a binary (shared library) which is run by the Test Runner. Test discovery is done by loading the .vapi and .gir files generated by Vala when the binary is compiled. The build system is &lt;a href="https://en.wikipedia.org/wiki/Waf"&gt;Waf&lt;/a&gt;, but for the purposes of reviewing the code, I ported it to autotools, a build system I am more comfortable with.&lt;/p&gt;
 &lt;p&gt;The code compiles, but it has suffered from some bitrot, with quite a number of deprecation warnings, especially the asynchronous tests. The actual framework is quite lean and uses the GLib Test and TestSuite classes to group and run the tests it finds in the binary. In total there probably isn't more than 1000 SLOC in the whole project. While I see some interesting ideas in the current code, I have decided that the best approach is to start again from scratch and incorporate whatever is useful and send the remainder to binary heaven || hell.&lt;/p&gt;
