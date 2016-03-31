@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/font-awesome.min.css">
-  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Enter the Panopticon Atom">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
 <meta name="author" content="Chris Daley" />
-<meta name="description" content="Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption! Read on to find out how you can get your hands on it..." />
-<meta name="keywords" content="Vala, Open Source, Programming, TDD, BDD, CoC">
-<meta property="og:site_name" content="Enter the Panopticon"/>
-<meta property="og:title" content="Towards a Test Driven Development Framework in Vala Part 6. First Release!"/>
-<meta property="og:description" content="Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption! Read on to find out how you can get your hands on it..."/>
+<meta name="description" content="Pues bien, resulta que la gestión de una banda de Rock cuesta más tiempo que pensaba, sobre todo si el lanzamiento de su primer disco ya está en marcha. Además, resulta que la construcción de paquetes de Debian es re-difícil, especialmente si uno quiere armar un sistema de Jenkins CI para automatizar el proceso. A pesar de todo esto, me emociona mucho anunciar que la Versión 1.0 de Valadate está lista para el consumo publico, retrasado por solo pocas semanas que lo previsto. Siga leyendo para saber donde puedes agarrarlo..." />
+<meta name="keywords" content="Vala, Open Source, Código Abierto, Programming, TDD, BDD">
+<meta property="og:site_name" content="Entrar al Panóptico"/>
+<meta property="og:title" content="Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!"/>
+<meta property="og:description" content="Pues bien, resulta que la gestión de una banda de Rock cuesta más tiempo que pensaba, sobre todo si el lanzamiento de su primer disco ya está en marcha. Además, resulta que la construcción de paquetes de Debian es re-difícil, especialmente si uno quiere armar un sistema de Jenkins CI para automatizar el proceso. A pesar de todo esto, me emociona mucho anunciar que la Versión 1.0 de Valadate está lista para el consumo publico, retrasado por solo pocas semanas que lo previsto. Siga leyendo para saber donde puedes agarrarlo..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://chrisdaley.biz/test-driven-development-in-vala-pt-6.html"/>
+<meta property="og:url" content="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-6.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-03-31 15:00:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://chrisdaley.biz/author/chris-daley.html">
+<meta property="article:author" content="http://chrisdaley.biz/es/author/chris-daley.html">
 <meta property="article:section" content="Vala"/>
 <meta property="article:tag" content="Vala"/>
 <meta property="article:tag" content="Open Source"/>
+<meta property="article:tag" content="Código Abierto"/>
 <meta property="article:tag" content="Programming"/>
 <meta property="article:tag" content="TDD"/>
 <meta property="article:tag" content="BDD"/>
-<meta property="article:tag" content="CoC"/>
 <meta property="og:image" content="../images/logo.png"><!-- https://developers.google.com/custom-search/docs/structured_data?hl=es&csw=1#microformats -->
 <!--
 <PageMap>
 <DataObject type="document">
-    <Attribute name="title">Towards a Test Driven Development Framework in Vala Part 6. First Release!</Attribute>
+    <Attribute name="title">Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!</Attribute>
     <Attribute name="author">Chris Daley</Attribute>
-    <Attribute name="description">Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption! Read on to find out how you can get your hands on it...</Attribute>
+    <Attribute name="description">Pues bien, resulta que la gestión de una banda de Rock cuesta más tiempo que pensaba, sobre todo si el lanzamiento de su primer disco ya está en marcha. Además, resulta que la construcción de paquetes de Debian es re-difícil, especialmente si uno quiere armar un sistema de Jenkins CI para automatizar el proceso. A pesar de todo esto, me emociona mucho anunciar que la Versión 1.0 de Valadate está lista para el consumo publico, retrasado por solo pocas semanas que lo previsto. Siga leyendo para saber donde puedes agarrarlo...</Attribute>
     <Attribute name="page_count">1</Attribute>
     <Attribute name="rating">5</Attribute>
     <Attribute name="last_update">2016-03-31T15:00:00-07:00</Attribute>
@@ -45,29 +45,29 @@
     <Attribute name="category" value="Vala"/>
         <Attribute name="category" value="Vala"/>
         <Attribute name="category" value="Open Source"/>
+        <Attribute name="category" value="Código Abierto"/>
         <Attribute name="category" value="Programming"/>
         <Attribute name="category" value="TDD"/>
         <Attribute name="category" value="BDD"/>
-        <Attribute name="category" value="CoC"/>
 </DataObject>
 
 
--->  <title>Enter the Panopticon &ndash; Towards a Test Driven Development Framework in Vala Part 6. First Release!</title>
+-->  <title>Entrar al Panóptico &ndash; Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!</title>
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://chrisdaley.biz">
-        <img src="../images/logo.png" alt="Enter the Panopticon" title="Enter the Panopticon">
+      <a href="http://chrisdaley.biz/es">
+        <img src="../images/logo.png" alt="Entrar al Panóptico" title="Entrar al Panóptico">
       </a>
-      <h1><a href="http://chrisdaley.biz">Enter the Panopticon</a></h1>
-      <p>given enough eyeballs, all bugs are shallow</p>
+      <h1><a href="http://chrisdaley.biz/es">Entrar al Panóptico</a></h1>
+      <p>Dado un número suficientemente elevado de ojos, todos los errores se vuelven obvios</p>
       
       <nav>
         <ul class="list">
-		   <li class="active"><a href="http://chrisdaley.biz">English</a></li>
-		   <li><a href="http://chrisdaley.biz/es">Castellano</a></li>
-          <li><a href="http://chrisdaley.biz/pages/about.html#about">About</a></li>
+		   <li><a href="http://chrisdaley.biz">English</a></li>
+		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
+          <li><a href="http://chrisdaley.biz/es/pages/about.html#about">About</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -79,7 +79,7 @@
   </aside>
   <main>
     <nav>
-      <a href="http://chrisdaley.biz">Home</a>
+      <a href="http://chrisdaley.biz/es">Home</a>
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
@@ -89,52 +89,52 @@
 
 <article>
   <header>
-    <h1 id="test-driven-development-in-vala-pt-6">Towards a Test Driven Development Framework in Vala Part 6. First Release!</h1>
-    <p>Posted on Thu 31 March 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a></p>
+    <h1 id="test-driven-development-in-vala-pt-6">Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!</h1>
+    <p>Posted on Thu 31 March 2016 in <a href="http://chrisdaley.biz/es/category/vala.html">Vala</a></p>
   </header>
   <div>
-    <p>Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption!</p>
-<p>I'll go through the full feature set (warts and all) shortly, but for those who can't wait to dive in, here's how you can install it...</p>
-<h4>From Source</h4>
-<p>For the adventurous, you can download the source and build and install it yourself. You will need to have the automake toolchain set up on your system and the development libraries for the following installed:</p>
+    <p>Pues bien, resulta que la gestión de una banda de Rock cuesta más tiempo que pensaba, sobre todo si el lanzamiento de su primer disco ya esta en marcha. Además, resulta que la construcción de paquetes de Debian es re-difícil, especialmente si uno quiere armar un sistema de Jenkins CI para automatizar el proceso. A pesar de todo esto, me emociona mucho anunciar que la Versión 1.0 de Valadate está lista para el consumo publico, retrasado por solo pocas semanas que lo previsto. </p>
+<p>Voy a explicar el conjunto completo de funciones (con todas las verrugas que hay) en un ratito pero para ell@s que no pueden esperar más, se puede instalar así...</p>
+<h4>Desde el código fuente</h4>
+<p>Para los atrevidos, se puede descargar el código fuente y construir y instalarlo si mismos. Hay que tener la toolchain de automake instalada y configurada y las bibliotecas de desarrollo instaladas para los siguientes paquetes:</p>
 <ul>
 <li>glib-2.0</li>
 <li>libxml-2.0</li>
 <li>libxslt</li>
 <li>json-glib-1.0</li>
 </ul>
-<p>You'll also need Gtk-Doc and Valadoc if you want to build the API documentation.</p>
-<p>Grab the source:</p>
+<p>Además, si quieres construir los documentos de la API, se necesitaran Gtk-Doc y Valadoc.</p>
+<p>Agarrar el código fuente:</p>
 <p><code>git clone https://github.com/chebizarro/valadate.git</code></p>
-<p>In the source directory run:</p>
+<p>En el directorio raíz del proyecto ejecutar:</p>
 <div class="highlight"><pre>./autogen.sh
 make
 </pre></div>
 
 
-<p>You can pass the <code>--enable-docs</code> flag to autogen.sh if you have Valadoc and Gtk-Doc installed and it will build the API documentation in the docs directory.</p>
-<p>To install, you then just need to run the following with root privileges:</p>
+<p>Se puede pasar la flag <code>--enable-docs</code> al script de autogen.sh. Si Valadoc y Gtk-Doc están instalados, los documentos de la API serian construidos en el directorio de docs.</p>
+<p>Para instalar, hay que ejecutar el siguiente con los privilegios del usuario root:</p>
 <p><code>make install</code></p>
-<p>And that's it, you should be ready to roll. Of course, you'll need to go through this process everytime there's a new release so it might be easier to just install it using your system's package manager. Depending on what that is, you can do the following:</p>
+<p>Y ya esta! Listo! Por supuesto, tienes que hacer todo ese rollo cada vez que haya un nuevo lanzamiento, así que podría ser más fácil instalarlo mediante el gestor de paquetes del sistema. Dependiendo de lo que eso seria, se pueda hacer lo siguiente: </p>
 <h4>Debian</h4>
-<p>Add the repository's key</p>
+<p>Añadir la clave del repositorio</p>
 <div class="highlight"><pre>curl https://www.valadate.org/jenkins@valadate.org.gpg.key | sudo apt-key add -
 </pre></div>
 
 
-<p>Add the following to your Software Sources:</p>
+<p>Añadir la siguiente linea a las Fuentes de Software:</p>
 <div class="highlight"><pre><span class="k">deb</span> <span class="s">https://www.valadate.org/repos/debian</span> <span class="kp">valadate</span> <span class="kp">main</span>
 </pre></div>
 
 
-<p>Then you can install Valadate with:</p>
+<p>Ahora se puede instalar Valadate con:</p>
 <div class="highlight"><pre>sudo apt-get update
 sudo apt-get install valadate
 </pre></div>
 
 
 <h4>Fedora 23</h4>
-<p>Add the following to /etc/yum.repos.d/valadate.repo</p>
+<p>Añadir el siguiente al archivo /etc/yum.repos.d/valadate.repo</p>
 <div class="highlight"><pre><span class="k">[valadate]</span>
 <span class="na">name</span><span class="o">=</span><span class="s">valadate</span>
 <span class="na">baseurl</span><span class="o">=</span><span class="s">http://www.valadate.org/repos/fedora/$releasever/$basearch</span>
@@ -145,15 +145,15 @@ sudo apt-get install valadate
 </pre></div>
 
 
-<p>Then run with root privileges:</p>
+<p>Y ejecutar el siguiente con los privilegios del usuario root:</p>
 <div class="highlight"><pre>dnf update
 dnf install valadate
 </pre></div>
 
 
-<p>Those are the distributions that are available so far, but there's a Homebrew package for Mac OS X that's more or less ready to push. Given the way Valadate works, a Windows release will probably be a little while off as there are a few platform specific issues to be worked through. If you have favourite platform that you would like to see packaged, submit an issue on GitHub and I'll see what I can do.</p>
-<p>So now you've got Valadate, how do you use it?</p>
-<p>The easiest way is to create a Sub Class of the TestCase Abstract Class and add test methods to it, which are any that start with <code>test_</code>, have no parameters and return <code>void</code>. These methods will then be detected and executed automatically at runtime.</p>
+<p>Esos son las distribuciones que están disponibles hasta ahora, pero hay un paquete de Homebrew que esta más or menos listo. Dada la forma en que funciona Valadate, una versión de Windows seria un poquito lejos ya que hay unos cuestiones de la plataforma que se quedan por resolver. Si tienes una plataforma preferida y querrías un paquete para ella, manda un asunto a GitHub y veremos que pueda hacer.</p>
+<p>Pues nada, ya que tienes Valadate, como puedes usarlo?</p>
+<p>La manera más fácil es crear una Sub Clase de la Clase Abstracta de TestCase y agregarle métodos de prueba, cuales son los que empiecen con <code>test_</code>, no tienen parámetro ninguno y devuelven <code>void</code>. Esos métodos serán detectados y ejecutados cuando el programa está en marcha.</p>
 <div class="highlight"><pre><span class="kn">namespace</span> <span class="nn">MyTest</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BookTest</span> <span class="o">:</span> <span class="n">Valadate</span><span class="p">.</span><span class="n">Framework</span><span class="p">.</span><span class="n">TestCase</span> <span class="p">{</span>
 
@@ -170,12 +170,12 @@ dnf install valadate
 </pre></div>
 
 
-<p>To compile, pass the following flags and parameters where mytest-0.vala is the source code file containing the above test. </p>
+<p>Para compilar, pasa las siguientes flags y parámetros dado que mytest-0.vala es el archivo de código fuente que contiene la prueba arriba.</p>
 <div class="highlight"><pre>$ valac --library mytest-0 --gir mytest-0.gir --pkg valadate-1.0 -X -pie -X -fPIE mytest-0.vala
 </pre></div>
 
 
-<p>In order for everything to work correctly, the name of the output binary needs to exactly match that of the .gir file (less the file extension). This will then generate an executable which can be run on the Command Line:</p>
+<p>Para que todo funcione correctamente, el nombre de binario debería ser exactamente igual a lo del archivo de .gir (menos la extensión de archivo). Eso resultara en un ejecutable que se puede ejecutar por la Linea de Comando:</p>
 <div class="highlight"><pre>$ ./mtest-0
 
 /LibraryBookTest/construct_book: ** Message: mytest-0.vala:15: running
@@ -184,7 +184,7 @@ OK
 </pre></div>
 
 
-<p>To run the test binary with <a href="https://testanything.org/">TAP</a> output pass the --tap flag:</p>
+<p>Para ejecutar el binario de prueba con producción de <a href="https://testanything.org/">TAP</a> pasarle la flag --tap: </p>
 <div class="highlight"><pre>$ ./mtest-0 --tap
 
 <span class="c1"># random seed: R02Sddf35dad90ff6d1b6603ccb68028a4f0</span>
@@ -201,8 +201,9 @@ ok <span class="m">1</span> /LibraryBookTest/construct_book
 </pre></div>
 
 
-<p>The <code>[Test]</code> annotation and parameters are also available for giving test classes and methods more readable names and for supporting asynchronous tests.</p>
+<p>La anotación de <code>[Test]</code> y sus parámetros están disponibles también para dar nombres más legibles a los métodos y clases de prueba y para soportar pruebas asincrónicas.</p>
 <div class="highlight"><pre><span class="kn">namespace</span> <span class="nn">MyTest</span> <span class="p">{</span>
+
     <span class="p">[</span><span class="n">Test</span> <span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Annotated TestCase with name&quot;</span><span class="p">)]</span>
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyTest</span> <span class="o">:</span> <span class="n">Valadate</span><span class="p">.</span><span class="n">Framework</span><span class="p">.</span><span class="n">TestCase</span> <span class="p">{</span>
 
@@ -235,29 +236,29 @@ ok <span class="m">1</span> /LibraryBookTest/construct_book
 </pre></div>
 
 
-<h4>Testing Gtk applications</h4>
-<p>If you want to test Gtk based applications you will need to use the <a href="http://github.com/chebizarro/valadate-gtk">valadate-gtk</a> package (available in the same repository). It's usage is almost identical:</p>
+<h4>Como se pone a prueba las aplicaciones de Gtk</h4>
+<p>Si quieres probar una aplicación basada en GTK, tienes que utilizar el paquete de  <a href="http://github.com/chebizarro/valadate-gtk">valadate-gtk</a> (disponible en el mismo repositorio). Su uso es casi igual:</p>
 <div class="highlight"><pre>$ valac --library mytest-0 --gir mytest-0.gir --pkg valadate-gtk-1.0 -X -pie -X -fPIE mytest-0.vala
 </pre></div>
 
 
-<p>The valadate-gtk package makes sure the Gtk Test environment is properly loaded and configured, otherwise you will get all sorts of funky errors.</p>
-<h4>RTFM</h4>
-<p>The <a href="https://github.com/chebizarro/valadate/wiki">Wiki</a> is pretty scant at the moment but will eventually have detailed instructions on installing and setting up your toolchain with Valadate as well as integrating it with Continuos Integration systems. </p>
-<p>There are a number of sample projects available <a href="https://github.com/chebizarro/valadate-examples">here</a> which showcase Valadate's features and how to use it with different toolchains and platforms. This will be continuously updated as new features are added.</p>
-<p>The API reference for Vala can be found <a href="http://www.valadate.org/docs/valadoc/valadate/index.htm">here</a> and for C <a href="http://www.valadate.org/docs/gtkdoc/html/">here</a>. These documents are automatically generated by Jenkins whenever a new release is made so should always be up-to-date.</p>
-<h3>Next steps...</h3>
-<p>Obviously (hopefully), there will be a tsunami of bug reports once people start using it and finding them. I've tested it on a large array of platforms but there's no saying what will happen once it's in the wild. Aside from that, I am very much keen to get to work on adding BDD support via Gherkin and gradually replacing some of the crustier and more unwieldly elements of GTest under the hood. This will have to come in the time I can find between my regular consulting work which has recently taken off in a big way, and managing a Rock band that's just about to put an album out. Good times!</p>
-<p><img alt="We salute you" src="http://chrisdaley.biz/images/skype-rock.png" /></p>
+<p>El paquete de valadate-gtk asegura que el ambiente de Gtk está correctamente cargado y configurado, si no vas a encontrar muchos errores raros.</p>
+<h4>LEPM</h4>
+<p>El <a href="https://github.com/chebizarro/valadate/wiki">Wiki</a> está bien flaco en este momento pero eventualmente se encontrara instrucciones para instalar y configurar tu cadena de herramientas con Valadate tal como integrarse con los sistemas de CI.</p>
+<p>Además, hay unos proyectos de ejemplo disponible <a href="https://github.com/chebizarro/valadate-examples">aquí</a> que muestran su uso con otras cadenas de herramientas y plataformas. Esos proyectos serán actualizados cuando hay nuevas funciones disponibles en Valadate.</p>
+<p>La referencia de la API para Vala se encuentra <a href="http://www.valadate.org/docs/valadoc/valadate/index.htm">aquí</a> y para C  <a href="http://www.valadate.org/docs/gtkdoc/html/">aquí</a>. Esos documentos están generados por Jenkins cuando haya un nuevo lanzamiento, así que deberían ser actual. </p>
+<h3>Pasos siguientes...</h3>
+<p>Obviamente (se espera), habría un tsunami de informes de errores cada vez que la gente empiece usarlo y se los encuentran. Aparte de eso, tengo muchas ganas de empezar el trabajo necesario para añadir soporte para BDD y poco a poco remplazar las partes de GTest más crotosas y pesadas bajo el capo. Eso tendría que esperar hasta que pueda encontrar el tiempo entre mi trabajo de consultoría que recién se ha explotado y la gestión de una banda de Rock que está al punto de lanzar un disco. Que buen rollo!</p>
+<p><img alt="We salute you" src="http://chrisdaley.biz/es/../images/skype-rock.png" /></p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>
-      <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>
-      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>
-      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>
-      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>
-      <a href="http://chrisdaley.biz/tag/coc.html">CoC</a>
+      <a href="http://chrisdaley.biz/es/tag/vala.html">Vala</a>
+      <a href="http://chrisdaley.biz/es/tag/open-source.html">Open Source</a>
+      <a href="http://chrisdaley.biz/es/tag/codigo-abierto.html">Código Abierto</a>
+      <a href="http://chrisdaley.biz/es/tag/programming.html">Programming</a>
+      <a href="http://chrisdaley.biz/es/tag/tdd.html">TDD</a>
+      <a href="http://chrisdaley.biz/es/tag/bdd.html">BDD</a>
     </p>
   </div>
 <div id="disqus_thread"></div>
@@ -302,18 +303,18 @@ ok <span class="m">1</span> /LibraryBookTest/construct_book
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "name": "Towards a Test Driven Development Framework in Vala Part 6. First Release!",
-  "headline": "Towards a Test Driven Development Framework in Vala Part 6. First Release!",
+  "name": "Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!",
+  "headline": "Hacia un framework de desarrollo guiado por pruebas para Vala - sexta parte - Primer Lanzamiento!",
   "datePublished": "2016-03-31 15:00:00-07:00",
   "dateModified": "",
   "author": {
     "@type": "Person",
     "name": "Chris Daley",
-    "url": "http://chrisdaley.biz/author/chris-daley.html"
+    "url": "http://chrisdaley.biz/es/author/chris-daley.html"
   },
   "image": "../images/logo.png",
-  "url": "http://chrisdaley.biz/test-driven-development-in-vala-pt-6.html",
-  "description": "Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption! Read on to find out how you can get your hands on it..."
+  "url": "http://chrisdaley.biz/es/test-driven-development-in-vala-pt-6.html",
+  "description": "Pues bien, resulta que la gestión de una banda de Rock cuesta más tiempo que pensaba, sobre todo si el lanzamiento de su primer disco ya está en marcha. Además, resulta que la construcción de paquetes de Debian es re-difícil, especialmente si uno quiere armar un sistema de Jenkins CI para automatizar el proceso. A pesar de todo esto, me emociona mucho anunciar que la Versión 1.0 de Valadate está lista para el consumo publico, retrasado por solo pocas semanas que lo previsto. Siga leyendo para saber donde puedes agarrarlo..."
 }
 </script></body>
 </html>
