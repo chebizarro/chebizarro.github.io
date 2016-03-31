@@ -1,5 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Entrar al Panóptico</title><link href="http://chrisdaley.biz/es/" rel="alternate"></link><link href="http://chrisdaley.biz/feeds/all.atom.xml" rel="self"></link><id>http://chrisdaley.biz/es/</id><updated>2016-02-20T10:00:00-08:00</updated><entry><title>Hacia un framework de desarrollo guiado por pruebas para Vala - quinta parte - Producto Viable Mínimo</title><link href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-5.html" rel="alternate"></link><updated>2016-02-20T10:00:00-08:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-02-20:es/test-driven-development-in-vala-pt-5.html</id><summary type="html">&lt;p&gt;Las cosas se han ido a toda maquina desde mi ultimo post, con la rama de desarrollo concretizandose paso por paso. Cuando me senté a examinar la lista de los requisitos, decidí que el mejor punto de partida para iniciar la primera versión sería, por lo menos,  replicar el mismo conjunto de características del original. En resumen, esos eran:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Entrar al Panóptico</title><link href="http://chrisdaley.biz/es/" rel="alternate"></link><link href="http://chrisdaley.biz/feeds/all.atom.xml" rel="self"></link><id>http://chrisdaley.biz/es/</id><updated>2016-03-31T15:00:00-07:00</updated><entry><title>Towards a Test Driven Development Framework in Vala Part 6. First Release!</title><link href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-6-en.html" rel="alternate"></link><updated>2016-03-31T15:00:00-07:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-03-31:es/test-driven-development-in-vala-pt-6-en.html</id><summary type="html">&lt;p&gt;Well, it turns out that managing a Rock Band is more time consuming than I first thought, especially if they're getting ready to release their first album. It also turns out that building Debian packages is hard as well, particularly if you're trying to set up a Jenkins CI system to automate the process. Despite all this, I'm only a few weeks behind my initially projected release date and I'm pretty excited to announce that the day has finally come and Version 1.0 of Valadate is now ready for public consumption!&lt;/p&gt;
+&lt;p&gt;I'll go through the full feature set (warts and all) shortly, but for those who can't wait to dive in, here's how you can install it...&lt;/p&gt;
+&lt;h4&gt;From Source&lt;/h4&gt;
+&lt;p&gt;For the adventurous, you can download the source and build and install it yourself. You will need to have the automake toolchain set up on your system and the development libraries for the following installed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;glib-2.0&lt;/li&gt;
+&lt;li&gt;libxml-2.0&lt;/li&gt;
+&lt;li&gt;libxslt&lt;/li&gt;
+&lt;li&gt;json-glib-1.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You'll also need Gtk-Doc and Valadoc if you want to build the API documentation.&lt;/p&gt;
+&lt;p&gt;Grab the source:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone https://github.com/chebizarro/valadate.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In the source directory run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./autogen.sh
+make
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can pass the &lt;code&gt;--enable-docs&lt;/code&gt; flag to autogen.sh if you have Valadoc and Gtk-Doc installed and it will build the API documentation in the docs directory.&lt;/p&gt;
+&lt;p&gt;To install, you then just need to run the following with root privileges:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;make install&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And that's it, you should be ready to roll. Of course, you'll need to go through this process everytime there's a new release so it might be easier to just install it using your system's package manager. Depending on what that is, you can do the following:&lt;/p&gt;
+&lt;h4&gt;Debian&lt;/h4&gt;
+&lt;p&gt;Add the repository's key&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;curl https://www.valadate.org/jenkins@valadate.org.gpg.key | sudo apt-key add -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the following to your Software Sources:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;https://www.valadate.org/repos/debian&lt;/span&gt; &lt;span class="kp"&gt;valadate&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then you can install Valadate with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get update
+sudo apt-get install valadate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Fedora 23&lt;/h4&gt;
+&lt;p&gt;Add the following to /etc/yum.repos.d/valadate.repo&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[valadate]&lt;/span&gt;
+&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;valadate&lt;/span&gt;
+&lt;span class="na"&gt;baseurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;http://www.valadate.org/repos/fedora/$releasever/$basearch&lt;/span&gt;
+&lt;span class="na"&gt;repo_gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;gpgcheck&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;gpgkey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;http://www.valadate.org/jenkins@valadate.org.gpg.key&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then run with root privileges:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;dnf update
+dnf install valadate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Those are the distributions that are available so far, but there's a Homebrew package for Mac OS X that's more or less ready to push. Given the way Valadate works, a Windows release will probably be a little while off as there are a few platform specific issues to be worked through. If you have favourite platform that you would like to see packaged, submit an issue on GitHub and I'll see what I can do.&lt;/p&gt;
+&lt;p&gt;So now you've got Valadate, how do you use it?&lt;/p&gt;
+&lt;p&gt;The easiest way is to create a Sub Class of the TestCase Abstract Class and add test methods to it, which are any that start with &lt;code&gt;test_&lt;/code&gt;, have no parameters and return &lt;code&gt;void&lt;/code&gt;. These methods will then be detected and executed automatically at runtime.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;BookTest&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Valadate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Framework&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;test_construct_book&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// Arrange ...&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// Act ...&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// Assert ...&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To compile, pass the following flags and parameters where mytest-0.vala is the source code file containing the above test. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ valac --library mytest-0 --gir mytest-0.gir --pkg valadate-1.0 -X -pie -X -fPIE mytest-0.vala
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In order for everything to work correctly, the name of the output binary needs to exactly match that of the .gir file (less the file extension). This will then generate an executable which can be run on the Command Line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ./mtest-0
+
+/LibraryBookTest/construct_book: ** Message: mytest-0.vala:15: running
+
+OK
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To run the test binary with &lt;a href="https://testanything.org/"&gt;TAP&lt;/a&gt; output pass the --tap flag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ ./mtest-0 --tap
+
+&lt;span class="c1"&gt;# random seed: R02Sddf35dad90ff6d1b6603ccb68028a4f0&lt;/span&gt;
+
+1..1
+
+&lt;span class="c1"&gt;# Start of LibraryBookTest tests&lt;/span&gt;
+
+** Message: mytest-0.vala:15: running
+
+ok &lt;span class="m"&gt;1&lt;/span&gt; /LibraryBookTest/construct_book
+
+&lt;span class="c1"&gt;# End of LibraryBookTest tests&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;[Test]&lt;/code&gt; annotation and parameters are also available for giving test classes and methods more readable names and for supporting asynchronous tests.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Annotated TestCase with name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyTest&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Valadate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Framework&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Annotated Method With Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;annotated_test_with_name&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;assert_true&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Asynchronous Test&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;async&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;test_async&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;assert_true&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;skip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;yes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;skip_test&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;assert_true&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mtest&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;tap&lt;/span&gt;
+
+&lt;span class="mf"&gt;1..3&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Start&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt;
+&lt;span class="n"&gt;ok&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;Method&lt;/span&gt; &lt;span class="n"&gt;With&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;
+&lt;span class="n"&gt;ok&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Asynchronous&lt;/span&gt; &lt;span class="n"&gt;Test&lt;/span&gt;
+&lt;span class="n"&gt;ok&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;skip_test&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;SKIP&lt;/span&gt; &lt;span class="n"&gt;Skipping&lt;/span&gt; &lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="n"&gt;skip_test&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;End&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Annotated&lt;/span&gt; &lt;span class="n"&gt;TestCase&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Testing Gtk applications&lt;/h4&gt;
+&lt;p&gt;If you want to test Gtk based applications you will need to use the &lt;a href="http://github.com/chebizarro/valadate-gtk"&gt;valadate-gtk&lt;/a&gt; package (available in the same repository). It's usage is almost identical:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$ valac --library mytest-0 --gir mytest-0.gir --pkg valadate-gtk-1.0 -X -pie -X -fPIE mytest-0.vala
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The valadate-gtk package makes sure the Gkt Test environment is properly loaded and configured, otherwise you will get all sorts of funky errors.&lt;/p&gt;
+&lt;h4&gt;RTFM&lt;/h4&gt;
+&lt;p&gt;The &lt;a href="https://github.com/chebizarro/valadate/wiki"&gt;Wiki&lt;/a&gt; is pretty scant at the moment but will eventually have detailed instructions on installing and setting up your toolchain with Valadate as well as integrating it with Continuos Integration systems. &lt;/p&gt;
+&lt;p&gt;There are a number of sample projects available &lt;a href="https://github.com/chebizarro/valadate-examples"&gt;here&lt;/a&gt; which showcase Valadate's features and how to use it with different toolchains and platforms. This will be continuously updated as new features are added.&lt;/p&gt;
+&lt;p&gt;The API reference for Vala can be found &lt;a href="http://www.valadate.org/docs/valadoc/valadate/index.htm"&gt;here&lt;/a&gt; and for C &lt;a href="http://www.valadate.org/docs/gtkdoc/html/"&gt;here&lt;/a&gt;. These documents are automatically generated by Jenkins whenever a new release is made so should always be up-to-date.&lt;/p&gt;
+&lt;h3&gt;Next steps...&lt;/h3&gt;
+&lt;p&gt;Obviously (hopefully), there will be a tsunami of bug reports once people start using it and finding them. I've tested it on a large array of platforms but there's no saying what will happen once it's in the wild. Aside from that, I am very much keen to get to work on adding BDD support via Gherkin and gradually replacing some of the crustier and more unwieldly elements of GTest under the hood. This will have to come in the time I can find between my regular consulting work which has recently taken off in a big way, and managing a Rock band that's just about to put an album out. Good times!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="We salute you" src="http://chrisdaley.biz/es/../images/skype-rock.png" /&gt;&lt;/p&gt;</summary><category term="Vala"></category><category term="Open Source"></category><category term="Programming"></category><category term="TDD"></category><category term="BDD"></category><category term="CoC"></category></entry><entry><title>Hacia un framework de desarrollo guiado por pruebas para Vala - quinta parte - Producto Viable Mínimo</title><link href="http://chrisdaley.biz/es/test-driven-development-in-vala-pt-5.html" rel="alternate"></link><updated>2016-02-20T10:00:00-08:00</updated><author><name>Chris Daley</name></author><id>tag:chrisdaley.biz,2016-02-20:es/test-driven-development-in-vala-pt-5.html</id><summary type="html">&lt;p&gt;Las cosas se han ido a toda maquina desde mi ultimo post, con la rama de desarrollo concretizandose paso por paso. Cuando me senté a examinar la lista de los requisitos, decidí que el mejor punto de partida para iniciar la primera versión sería, por lo menos,  replicar el mismo conjunto de características del original. En resumen, esos eran:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Descubrimiento de pruebas como el JUnit o el .NET framework de pruebas&lt;/li&gt;
 &lt;li&gt;Ejecutar pruebas para todos los parámetros de un conjunto especifico&lt;/li&gt;
