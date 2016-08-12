@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/theme/css/font-awesome.min.css">
-  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Enter the Panopticon Atom">
+  <link rel="stylesheet" type="text/css" href="./theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/css/font-awesome.min.css">
+  <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Enter the Panopticon Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -18,11 +18,11 @@
 <meta property="og:title" content="Towards a Test Driven Development Framework in Vala Part 2. Requirements and System Architecture"/>
 <meta property="og:description" content="Less than a week after my first post, the Requirements gathering is well under way and I'm itching to lay down some code. Agile planning doesn't mean no planning at all though, so there's a few more steps before I start pushing anything to Github. The Requirements still need to be prioritised so that most crucial features are the ones that get worked on first, and that should take place within the context of an overall System Architecture. Read on to see how that will take place and when I can start scratching that itch."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://chrisdaley.biz/test-driven-development-in-vala-pt-2.html"/>
+<meta property="og:url" content="./test-driven-development-in-vala-pt-2.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-01-13 10:50:00-08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://chrisdaley.biz/author/chris-daley.html">
+<meta property="article:author" content="./author/chris-daley.html">
 <meta property="article:section" content="Vala"/>
 <meta property="article:tag" content="Vala"/>
 <meta property="article:tag" content="Open Source"/>
@@ -55,17 +55,17 @@
 <body>
   <aside>
     <div>
-      <a href="http://chrisdaley.biz">
+      <a href=".">
         <img src="../images/logo.png" alt="Enter the Panopticon" title="Enter the Panopticon">
       </a>
-      <h1><a href="http://chrisdaley.biz">Enter the Panopticon</a></h1>
+      <h1><a href=".">Enter the Panopticon</a></h1>
       <p>given enough eyeballs, all bugs are shallow</p>
       
       <nav>
         <ul class="list">
-		   <li class="active"><a href="http://chrisdaley.biz">English</a></li>
-		   <li><a href="http://chrisdaley.biz/es">Castellano</a></li>
-          <li><a href="http://chrisdaley.biz/pages/about.html#about">About</a></li>
+		   <li class="active"><a href="http://localhost:8000">English</a></li>
+		   <li><a href="http://localhost:8000/es">Castellano</a></li>
+          <li><a href="./pages/about.html#about">About</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -77,27 +77,27 @@
   </aside>
   <main>
     <nav>
-      <a href="http://chrisdaley.biz">Home</a>
+      <a href=".">Home</a>
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
-      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
+      <a href="http://localhost:8000/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
   <header>
     <h1 id="test-driven-development-in-vala-pt-2">Towards a Test Driven Development Framework in Vala Part 2. Requirements and System Architecture</h1>
-    <p>Posted on Wed 13 January 2016 in <a href="http://chrisdaley.biz/category/vala.html">Vala</a></p>
+    <p>Posted on Wed 13 January 2016 in <a href="./category/vala.html">Vala</a></p>
   </header>
   <div>
-    <p>Less than a week ago I <a href="http://chrisdaley.biz/test-driven-development-in-vala-pt-1.html">posted</a> a call for input on my proposal to build a Test Driven Development Framework for Vala and feedback has been slowly trickling in. You can see a summary <a href="https://gist.github.com/chebizarro/6c949fafe1e9a2c59b26">here</a> which has also been distilled into a <a href="http://bit.ly/1ZSrRA6">Trello board</a> which will become the Product Backlog and Product Roadmap. The list is looking fairly complete so far, so I figure I'm just about ready to close it off and work on a Release Plan. Then I can finally start writing code! Phew.</p>
+    <p>Less than a week ago I <a href="./test-driven-development-in-vala-pt-1.html">posted</a> a call for input on my proposal to build a Test Driven Development Framework for Vala and feedback has been slowly trickling in. You can see a summary <a href="https://gist.github.com/chebizarro/6c949fafe1e9a2c59b26">here</a> which has also been distilled into a <a href="http://bit.ly/1ZSrRA6">Trello board</a> which will become the Product Backlog and Product Roadmap. The list is looking fairly complete so far, so I figure I'm just about ready to close it off and work on a Release Plan. Then I can finally start writing code! Phew.</p>
 <p>The requirements gathered so far are pretty much in line with other testing frameworks, but here's a good time to review our Product Vision again and see if we're heading in the right direction. I've highlighted the parts of the statement which correspond to features so we can compare.</p>
 <blockquote>
 <p>For Vala developers who need to test their code, &lt; insert cool tool name &gt; is a powerful testing framework that <strong>provides behavioral, functional and unit testing features</strong> to help them write great Open Source software. Unlike other testing frameworks, &lt; insert cool tool name &gt; is <strong>designed especially for Vala</strong> while <strong>integrating seamlessly into existing toolchains</strong>.</p>
 </blockquote>
 <p>Let's look at that Requirements we've gathered so far and see if these features would meet this vision:</p>
-<p><img alt="Product Backlog" src="http://chrisdaley.biz/images/requirements.png" /></p>
+<p><img alt="Product Backlog" src="./images/requirements.png" /></p>
 <h4>provides behavioral, functional and unit testing features</h4>
 <ul>
 <li>Test discovery</li>
@@ -125,7 +125,7 @@
 <h3>The System Architecture and TDD</h3>
 <p>One of the misconceptions that newcomers to TDD have is that you don't write any code until you've written a test for it. This leaves many people new to the concept scratching their heads about where to start, as even creating a simple command line application requires a certain amount of boilerplate code to be written before you can even start processing the user's input. At this point, a lot of beginners may inadvertently write reams of redundant tests, start reinventing already well tested wheels or just give up on TDD altogether. There are very few times when your code will be executing without any dependencies (if only libc) so you will almost always be coding within an existing framework, if only loosely. Most of these interactions with other frameworks should be encapsulated in integration tests which are developed in parallel with the unit tests. The tests which inform our system design are those which test its unique features. Our System Architecture defines these interactions and boundaries and gives us a basic skeleton upon which to start laying down a codebase. Once this is in place, we can start writing actual tests.</p>
 <p>With a project like this we already have the advantage of several examples of prior art, chief amongst these the <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a> architecture. xUnit is a loose framework which includes JUnit and NUnit which stipulates that any implementation has a common architecture as shown in the diagram below:</p>
-<p><img alt="xUnit Class Diagram" src="http://chrisdaley.biz/images/architecture.png" /></p>
+<p><img alt="xUnit Class Diagram" src="./images/architecture.png" /></p>
 <p>From this diagram we can already begin to see how we will structure the code. At a minimum we will be creating separate files and tests for Test, TestRunner, TestSuite, TestCase, TestFixture and TestResult. Yep, tests for tests. I may have said this would get interesting... This will give us the minimum we need to set up a toolchain, create a repository and start pushing to it. Hooray, we're about to start writing code! Except that it still doesn't have a name...</p>
 <blockquote>
 <p>What's in a name? That which we call a rose by any other name would smell as sweet.</p>
@@ -133,17 +133,17 @@
 </blockquote>
 <p>Thanks Bill. I'm still not 100% sold on Valadate, even though it does reflect the Product Vision of being made especially for Vala and that it's not strictly limited to unit testing. Calling it VUnit would reflect its XUnit origins, but it's not like there's any rigid API to conform to. Technically it doesn't matter at this stage of development, but I would like to avoid having to refactor the code later just to change the name. There's still some more work that can done before laying down any code, so I'll let it percolate for a day or two longer before making a firm decision. Now's a good a time as any to speak up if you feel passionately one way or the other.</p>
 <p>But at least it's got a logo! Let me know what you think...</p>
-<p><img alt="A stylized solar system seen at an oblique angle" src="http://chrisdaley.biz/images/valadate_logo.png" /></p>
+<p><img alt="A stylized solar system seen at an oblique angle" src="./images/valadate_logo.png" /></p>
 <p>The base was designed by <a href="https://thenounproject.com/misirlou/">misirlou</a> and I added the nice colors. It's meant to symbolize the eponymous asteroid that gives Vala its name.</p>
 <p>That's all for now, tune in again soon when I discuss the Roadmap and Backlog as well as how I set up Jenkins CI on a Raspberry Pi.</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://chrisdaley.biz/tag/vala.html">Vala</a>
-      <a href="http://chrisdaley.biz/tag/open-source.html">Open Source</a>
-      <a href="http://chrisdaley.biz/tag/programming.html">Programming</a>
-      <a href="http://chrisdaley.biz/tag/tdd.html">TDD</a>
-      <a href="http://chrisdaley.biz/tag/bdd.html">BDD</a>
+      <a href="./tag/vala.html">Vala</a>
+      <a href="./tag/open-source.html">Open Source</a>
+      <a href="./tag/programming.html">Programming</a>
+      <a href="./tag/tdd.html">TDD</a>
+      <a href="./tag/bdd.html">BDD</a>
     </p>
   </div>
 <div id="disqus_thread"></div>
@@ -195,10 +195,10 @@
   "author": {
     "@type": "Person",
     "name": "Chris Daley",
-    "url": "http://chrisdaley.biz/author/chris-daley.html"
+    "url": "./author/chris-daley.html"
   },
   "image": "../images/logo.png",
-  "url": "http://chrisdaley.biz/test-driven-development-in-vala-pt-2.html",
+  "url": "./test-driven-development-in-vala-pt-2.html",
   "description": "Less than a week after my first post, the Requirements gathering is well under way and I'm itching to lay down some code. Agile planning doesn't mean no planning at all though, so there's a few more steps before I start pushing anything to Github. The Requirements still need to be prioritised so that most crucial features are the ones that get worked on first, and that should take place within the context of an overall System Architecture. Read on to see how that will take place and when I can start scratching that itch."
 }
 </script></body>

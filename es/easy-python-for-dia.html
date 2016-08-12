@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/style.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://chrisdaley.biz/es/../theme/css/font-awesome.min.css">
-  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
+  <link rel="stylesheet" type="text/css" href="./../theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="./../theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="./../theme/css/font-awesome.min.css">
+  <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -18,11 +18,11 @@
 <meta property="og:title" content="La manera más fácil de escribir complementos para Dia en Python."/>
 <meta property="og:description" content="Dia es software libre para la creación de diagramas libre y es multiplataforma. Ya está un poquito viejo, pero siga siendo una gran herramienta y es muy fácil agregarle funciones nuevas con complementos (plugins) desarrollados en Python. La única trampa es que tienes que reiniciar Dia cada vez que cambies el código y no hay manera de hacer las pruebas unitarias. Hasta ahora. Siga leyendo para saber más sobre cómo escribir y probar sus complementos para Dia sin tener que salir de su editor preferido."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://chrisdaley.biz/es/easy-python-for-dia.html"/>
+<meta property="og:url" content="./easy-python-for-dia.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-01-07 10:00:00-08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://chrisdaley.biz/es/author/chris-daley.html">
+<meta property="article:author" content="./author/chris-daley.html">
 <meta property="article:section" content="Python"/>
 <meta property="article:tag" content="Dia"/>
 <meta property="article:tag" content="Python"/>
@@ -59,17 +59,17 @@
 <body>
   <aside>
     <div>
-      <a href="http://chrisdaley.biz/es">
+      <a href=".">
         <img src="../images/logo.png" alt="Entrar al Panóptico" title="Entrar al Panóptico">
       </a>
-      <h1><a href="http://chrisdaley.biz/es">Entrar al Panóptico</a></h1>
+      <h1><a href=".">Entrar al Panóptico</a></h1>
       <p>Dado un número suficientemente elevado de ojos, todos los errores se vuelven obvios</p>
       
       <nav>
         <ul class="list">
-		   <li><a href="http://chrisdaley.biz">English</a></li>
-		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
-          <li><a href="http://chrisdaley.biz/es/pages/about.html#about">About</a></li>
+		   <li><a href="http://localhost:8000">English</a></li>
+		   <li class="active"><a href="http://localhost:8000/es">Castellano</a></li>
+          <li><a href="./pages/about.html#about">About</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -81,27 +81,27 @@
   </aside>
   <main>
     <nav>
-      <a href="http://chrisdaley.biz/es">Home</a>
+      <a href=".">Home</a>
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
-      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
+      <a href="http://localhost:8000/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
   <header>
     <h1 id="easy-python-for-dia">La manera más fácil de escribir complementos para Dia en Python.</h1>
-    <p>Posted on Thu 07 January 2016 in <a href="http://chrisdaley.biz/es/category/python.html">Python</a></p>
+    <p>Posted on Thu 07 January 2016 in <a href="./category/python.html">Python</a></p>
   </header>
   <div>
     <p><a href="https://wiki.gnome.org/action/show/Apps/Dia">Dia</a> es software libre para la creación de diagramas libre y es multiplataforma. Ya está un poquito viejo, pero siga siendo una gran herramienta. Es muy fácil agregarle funciones nuevas con complementos (plugins) desarrollados en Python pero el proceso mismo de escribir esos complementos es un poco más complicado.</p>
 <p>En primero, la interfaz de programación de aplicaciones (API) de Dia para Python es difícil de encontrar en  <a href="https://projects-old.gnome.org/dia/pydia.html">línea</a>. Siempre puedes generar un diagrama de la API desde adentro de Dia mismo pero ese no te daría mucha información y el formato es un poco inconveniente. La API puede ser un poquito difícil de navegar y voy a compartir algunos trucos sobre ese tema en un post más adelante pero el problema más grande se yace en probando los complementos que escribes. Dia carga todos los complementos al inicio y no se pueden modificar durante la ejecución del programa, así que el proceso de probar y depurar resulta laborioso. Es posible escribir y probar las piezas de tu complemento que no dependen en Dia aparte pero una vez que comiences la interacción con la interfaz, se atasca de nuevo.</p>
-<p><img alt="Vaya API grande!" src="http://chrisdaley.biz/es/../images/dia-python-api.png" /></p>
+<p><img alt="Vaya API grande!" src="./../images/dia-python-api.png" /></p>
 <p>Frustrado por eso y deseando desarrollar un complemento siguiendo las técnicas de desarrollo guiado por pruebas (TDD), escribí un pequeño modulo de Python que simular la API de Dia. Así que puedes escribir y probar la gran mayoría de tu complemento sin tener que ejecutar Dia en absoluto! Hay limitaciones - por ejemplo cualquiera interacción con la interfaz tiene que ser hecho dentro de Dia, o a mano o con un automation framework y no se puede generar diagramas útiles. Sin embargo, debería reducir la cantidad de tiempo y bugs que cueste poner en marcha tu complemento. No olvides de darle una licencia de software libre y compartirlo con el mundo! </p>
 <p>Si eso es algo que te serviría, puedes darle un vistazo <a href="https://github.com/chebizarro/dia-test">ahi</a>. Originalmente, lo desarrolle para satisfacer las necesidades de un proyecto determinado en lo que estaba trabajando asi que hay unas partes que no están completas pero estoy dispuesto de tomar avisos de bugs y pull requests. </p>
 <p>Es fácil instalar:</p>
-<div class="highlight"><pre>$ python setup.py install
+<div class="highlight"><pre><span class="nv">$ </span>python setup.py install
 </pre></div>
 
 
@@ -110,13 +110,13 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://chrisdaley.biz/es/tag/dia.html">Dia</a>
-      <a href="http://chrisdaley.biz/es/tag/python.html">Python</a>
-      <a href="http://chrisdaley.biz/es/tag/open-source.html">Open Source</a>
-      <a href="http://chrisdaley.biz/es/tag/programming.html">Programming</a>
-      <a href="http://chrisdaley.biz/es/tag/tdd.html">TDD</a>
-      <a href="http://chrisdaley.biz/es/tag/bdd.html">BDD</a>
-      <a href="http://chrisdaley.biz/es/tag/software-libre.html">Software Libre</a>
+      <a href="./tag/dia.html">Dia</a>
+      <a href="./tag/python.html">Python</a>
+      <a href="./tag/open-source.html">Open Source</a>
+      <a href="./tag/programming.html">Programming</a>
+      <a href="./tag/tdd.html">TDD</a>
+      <a href="./tag/bdd.html">BDD</a>
+      <a href="./tag/software-libre.html">Software Libre</a>
     </p>
   </div>
 <div id="disqus_thread"></div>
@@ -168,10 +168,10 @@
   "author": {
     "@type": "Person",
     "name": "Chris Daley",
-    "url": "http://chrisdaley.biz/es/author/chris-daley.html"
+    "url": "./author/chris-daley.html"
   },
   "image": "../images/logo.png",
-  "url": "http://chrisdaley.biz/es/easy-python-for-dia.html",
+  "url": "./easy-python-for-dia.html",
   "description": "Dia es software libre para la creación de diagramas libre y es multiplataforma. Ya está un poquito viejo, pero siga siendo una gran herramienta y es muy fácil agregarle funciones nuevas con complementos (plugins) desarrollados en Python. La única trampa es que tienes que reiniciar Dia cada vez que cambies el código y no hay manera de hacer las pruebas unitarias. Hasta ahora. Siga leyendo para saber más sobre cómo escribir y probar sus complementos para Dia sin tener que salir de su editor preferido."
 }
 </script></body>
