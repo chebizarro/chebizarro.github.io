@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="../../theme/css/style.min.css">
   <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.min.css">
   <link rel="stylesheet" type="text/css" href="../../theme/css/font-awesome.min.css">
-  <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
+  <link href="http://chrisdaley.biz/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Entrar al Panóptico Atom">
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
   <meta charset="utf-8" />
@@ -61,8 +61,8 @@
       
       <nav>
         <ul class="list">
-		   <li><a href="http://localhost:8000">English</a></li>
-		   <li class="active"><a href="http://localhost:8000/es">Castellano</a></li>
+		   <li><a href="http://chrisdaley.biz">English</a></li>
+		   <li class="active"><a href="http://chrisdaley.biz/es">Castellano</a></li>
           <li><a href="../pages/about.html#about">About</a></li>
         </ul>
       </nav>
@@ -80,7 +80,7 @@
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
       <a href="/pages/about.html">About</a>
-      <a href="http://localhost:8000/feeds/all.atom.xml">Atom</a>
+      <a href="http://chrisdaley.biz/feeds/all.atom.xml">Atom</a>
     </nav>
 
 <article>
@@ -104,6 +104,40 @@
 <h3>Randomised</h3>
 <p>The idea of generating random yet correct programs to test a compiler is one that has been used to great effect by projects such as Csmith. Looking at the way Csmith functions, it should be possible to build such a testing program with Vala.</p>
 <h3>Submitting patches with testcases</h3>
+<p>There are essentially three parts to the test harness:
+- The Valadate library and testunner
+- The Vala TestFactory in the tests folder
+- The automake test harness</p>
+<p>In short, I basically rewrote Valadate to take advantage of the vala compiler for test discovery and removed the GLib Test dependency so it now runs tests asynchronously in separate processes. This has resulted in some significant performance gains, with the entire suite of nearly 200 tests running in under 90 seconds. It's also now completely relicensed as GPL 2.0 for compatibility.</p>
+<p>The Vala TestFactory replaces the testrunner.sh script and has the following features:</p>
+<ul>
+<li>
+<p>Drop in test discovery. New tests do not need to be added to the makefile, they are found and run by the testrunner automatically. This makes it easier for new tests to be added as well as opening up the possibility of using it conjunction with a csmith style random program generator for more robust end-to-end testing.</p>
+</li>
+<li>
+<p>Each .vala or .gs file in any subdirectory of the test folder is now compiled and run as a separate end-to-end test. If the test has errors when it is compiled or when it is run, the test will fail. Any generated files will be deleted unless the test fails. Any error messages are saved in the .log file along with the other test results in TAP format.</p>
+</li>
+<li>
+<p>Each .test file is parsed for the following cases:</p>
+</li>
+<li>
+<p>D-Bus tests which generate and run a client and server program. The testrunner will not run the test until the "org.example.Test" name is available on the session bus, preventing conflicts with other concurrently running D-Bus tests.</p>
+</li>
+<li>
+<p>Vapigen GIR generation tests. Given a GIR snippet, a .vapi file is generated and diff checked against the supplied expected output. If the output varies from the expected in any way other than whitespace, the test fails.</p>
+</li>
+<li>
+<p>Invalid Code tests. The compiler should not be able to compile these tests so they fail if it does.</p>
+</li>
+<li>
+<p>The TestFactory is designed to allow new cases to be added easily. It also has a simple API for calling other system programs and interpreting the results.</p>
+</li>
+<li>
+<p>The tests are run using the compiler in the source tree by default but can use any by setting the path in the VALAC environment variable and the path to the vapi directory in VAPIDIR. This means the tests can be run against any compiler to verify that tests fail before and pass after the application of a patch for instance.</p>
+</li>
+</ul>
+<p>The automake test harness is a copy of the one used by GLib, adapted to Vala. It consumes the TAP output from the Valadate test runner and compiles the log files. </p>
+<p>The master branch of https://github.com/chebizarro/vala is the latest stable version, while the wip/valadate is the active development branch. The stable version is running entirely as expected in an Ubuntu 15.04 barebones docker container, so there are no hard coded paths or hidden dependencies that I can find. I even ran it on a batch of freshly rebuilt Linux Mint 17.1 OEM systems yesterday, with excellent results (using Vala 0.22 no less). </p>
   </div>
   <div class="tag-cloud">
     <p>
