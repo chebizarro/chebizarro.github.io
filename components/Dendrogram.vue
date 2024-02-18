@@ -1,42 +1,46 @@
 <script setup lang="ts">
 import * as d3 from 'd3'
 
+interface Record {
+  name?: string
+  length?: number
+  branchset?: Array<Record>
+  link?: string
+}
+
 export interface Props {
-  data?: string
+  data?: Record
   domains?: string[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: '(A:0.1,B:0.2,(C:0.3,D:0.4)E:0.5)F;',
+  data: () => { return {} },
   domains: () => ['Bacteria', 'Archea', 'Eukaryotes']
 })
 
 const width = 420
 const outerRadius = width / 2
 const innerRadius = outerRadius - 170
-
-
-onMounted(()=> {
-const elements = parseNewick(props.data)
-
-const color = d3
-  .scaleOrdinal()
-  .domain(props.domains)
-  .range(d3.schemeCategory10)
+const vBox = `-${outerRadius}, -${outerRadius}, ${width}, ${width}`
 
 const cluster = d3
   .cluster()
   .size([360, innerRadius])
   .separation((_: any, __: any) => 1)
 
-const legend = (svg) => {
+const color = d3
+  .scaleOrdinal()
+  .domain(props.domains)
+  .range(d3.schemeAccent)
+
+const legend = (svg: any) => {
   const g = svg
     .selectAll('g')
     .data(color.domain())
     .join('g')
     .attr(
       'transform',
-      (_, i) => `translate(${-outerRadius},${-outerRadius + i * 20})`
+      (_: any, i: number) => `translate(${-outerRadius},${-outerRadius + i * 20})`
     )
 
   g.append('rect').attr('width', 18).attr('height', 18).attr('fill', color)
@@ -48,115 +52,98 @@ const legend = (svg) => {
     .text((d) => d)
 }
 
-const root = d3
-  .hierarchy(elements, (d: { branchset: any; }) => d.branchset)
-  .sum((d: { branchset: any; }) => (d.branchset ? 0 : 1))
-  .sort(
-    (a: { value: number; data: string | any[]; }, b: { value: number; data: string | any[]; }) =>
-      a.value - b.value || d3.ascending(a.data.length, b.data.length)
-  )
+var debug = ref("")
 
-cluster(root)
-setRadius(root, (root.data.length = 0), innerRadius / maxLength(root))
-setColor(root)
+onMounted(() => {
 
-const svg = d3
-  .select('#dendrogram')
-  .attr('viewBox', [-outerRadius, -outerRadius, width, width])
-  .attr('font-family', 'sans-serif')
-  .attr('font-size', 10)
+  const root = d3
+    .hierarchy(props.data, (d: { branchset: any; }) => d.branchset)
+    .sum((d: { branchset: any; }) => (d.branchset ? 0 : 1))
+    .sort(
+      (a: { value: number; data: string | any[]; }, b: { value: number; data: string | any[]; }) =>
+        a.value - b.value || d3.ascending(a.data.length, b.data.length)
+    )
 
-svg.append('g').call(legend)
+  cluster(root)
+  setRadius(root, (root.data.length = 0), innerRadius / maxLength(root))
+  setColor(root)
 
-svg.append('style').text(`
-    .link--active {
-      stroke: #000 !important;
-      stroke-width: 1.5px;
-    }
+  const svg = d3.select('#dendrogram')
 
-    .link-extension--active {
-      stroke-opacity: .6;
-    }
+  svg.append('g').call(legend)
 
-    .label--active {
-      font-weight: bold;
-    }`)
+  const linkExtension = svg
+    .append('g')
+    .attr('fill', 'none')
+    .attr('stroke', '#000')
+    .attr('stroke-opacity', 0.25)
+    .selectAll('path')
+    .data(root.links().filter((d: { target: { children: any; }; }) => !d.target.children))
+    .join('path')
+    .each(function (d: { target: { linkExtensionNode: any; }; }) {
+      d.target.linkExtensionNode = this
+    })
+    .attr('d', linkExtensionConstant)
 
-const linkExtension = svg
-  .append('g')
-  .attr('fill', 'none')
-  .attr('stroke', '#000')
-  .attr('stroke-opacity', 0.25)
-  .selectAll('path')
-  .data(root.links().filter((d: { target: { children: any; }; }) => !d.target.children))
-  .join('path')
-  .each(function (d: { target: { linkExtensionNode: any; }; }) {
-   d.target.linkExtensionNode = this
-  })
-  .attr('d', linkExtensionConstant)
+  const link = svg
+    .append('g')
+    .attr('fill', 'none')
+    .attr('stroke', '#000')
+    .selectAll('path')
+    .data(root.links())
+    .join('path')
+    .each(function (d: { target: { linkNode: any; }; }) {
+      d.target.linkNode = this
+    })
+    .attr('d', linkConstant)
+    .attr('stroke', (d: { target: { color: any; }; }) => d.target.color)
 
-const link = svg
-  .append('g')
-  .attr('fill', 'none')
-  .attr('stroke', '#000')
-  .selectAll('path')
-  .data(root.links())
-  .join('path')
-  .each(function (d: { target: { linkNode: any; }; }) {
-   d.target.linkNode = this
-  })
-  .attr('d', linkConstant)
-  .attr('stroke', (d: { target: { color: any; }; }) => d.target.color)
-
-svg
-  .append('g')
-  .selectAll('text')
-  .data(root.leaves())
-  .join('text')
-  .attr('dy', '.31em')
-  .attr(
-    'transform',
-    (d: { x: number; }) =>
-      `rotate(${d.x - 90}) translate(${innerRadius + 4},0)${d.x < 180 ? '' : ' rotate(180)'
-      }`
-  )
-  .attr('text-anchor', (d: { x: number; }) => (d.x < 180 ? 'start' : 'end'))
-  .text((d: { data: { name: string; }; }) => d.data.name.replace(/_/g, ' '))
-  .on('mouseover', mouseovered(true))
-  .on('mouseout', mouseovered(false))
+  svg
+    .append('g')
+    .selectAll('text')
+    .data(root.leaves())
+    .join('text')
+    .attr('dy', '.31em')
+    .attr(
+      'transform',
+      (d: { x: number; }) =>
+        `rotate(${d.x - 90}) translate(${innerRadius + 4},0)${d.x < 180 ? '' : ' rotate(180)'
+        }`
+    )
+    .attr('text-anchor', (d: { x: number; }) => (d.x < 180 ? 'start' : 'end'))
+    .text((d: { data: { name: string; }; }) => d.data.name.replace(/_/g, ' '))
+    .attr('href', (d: { data: { link: string; }; }) => d.data.link)
+    .on('mouseover', mouseovered(true))
+    .on('mouseout', mouseovered(false))
+    .filter((d,i,n) => n[i].attributes['href'])
+    .on('click', (d, i) => {
+      debug.value = d.currentTarget.getAttribute('href')
+      //navigateTo({ path: '/blog' })
+    })
 
 
-function update(checked: boolean) {
-  const t = d3.transition().duration(750)
-  linkExtension
-    .transition(t)
-    .attr('d', checked ? linkExtensionVariable : linkExtensionConstant)
-  link.transition(t).attr('d', checked ? linkVariable : linkConstant)
-}
-
-function mouseovered(active: boolean) {
-  return function (_: any, d: { linkExtensionNode: any; linkNode: any; parent: any; }) {
-    d3.select(this).classed('label--active', active)
-    d3.select(d.linkExtensionNode)
-      .classed('link-extension--active', active)
-      .raise()
-    do d3.select(d.linkNode).classed('link--active', active).raise()
-    while ((d = d.parent))
+  function update(checked: boolean) {
+    const t = d3.transition().duration(750)
+    linkExtension
+      .transition(t)
+      .attr('d', checked ? linkExtensionVariable : linkExtensionConstant)
+    link.transition(t).attr('d', checked ? linkVariable : linkConstant)
   }
-}
 
-Object.assign(svg.node(), { update })
+  function mouseovered(active: boolean) {
+    return function (_: any, d: { linkExtensionNode: any; linkNode: any; parent: any; }) {
+      d3.select(this).classed('label--active', active)
+      d3.select(d.linkExtensionNode)
+        .classed('link-extension--active', active)
+        .raise()
+      do d3.select(d.linkNode).classed('link--active', active).raise()
+      while ((d = d.parent))
+    }
+  }
 
-update(true)
+  update(true)
 
-function maxLength(d: { data: string | any[]; children: any; }) {
-  return d.data.length + (d.children ? d3.max(d.children, maxLength) : 0)
-}
-
-function setRadius(d: { radius: number; data: string | any[]; children: any[]; }, y0: number, k: number) {
-  d.radius = (y0 += d.data.length) * k
-  if (d.children) d.children.forEach((d: any) => setRadius(d, y0, k))
-}
+})
 
 function setColor(d: { data: { name: any; }; color: any; parent: { color: any; }; children: any[]; }) {
   const name = d.data.name
@@ -167,6 +154,15 @@ function setColor(d: { data: { name: any; }; color: any; parent: { color: any; }
       : null
 
   if (d.children) d.children.forEach(setColor)
+}
+
+function maxLength(d: { data: string | any[]; children: any; }) {
+  return d.data.length + (d.children ? d3.max(d.children, maxLength) : 0)
+}
+
+function setRadius(d: { radius: number; data: string | any[]; children: any[]; }, y0: number, k: number) {
+  d.radius = (y0 += d.data.length) * k
+  if (d.children) d.children.forEach((d: any) => setRadius(d, y0, k))
 }
 
 function linkVariable(d: { source: { x: number; radius: number; }; target: { x: number; radius: number; }; }) {
@@ -213,14 +209,9 @@ function linkStep(startAngle: number, startRadius: number, endAngle: number, end
     endRadius * s1
   )
 }
-})
+
 // https://github.com/jasondavies/newick.js
 function parseNewick(a: string) {
-  interface Record {
-    branchset?: Array<Record>,
-    name?: string,
-    length?: number
-  }
   const e = []
   var r: Record = {}
   const s = a.split(/\s*(;|\(|\)|,|:)\s*/)
@@ -229,14 +220,14 @@ function parseNewick(a: string) {
     const n = s[t]
     switch (n) {
       case '(': {
-        const c = {}
+        const c = { link: 'http' }
         r.branchset = [c]
         e.push(r)
         r = c
         break
       }
       case ',': {
-        const c = {}
+        const c = { link: 'http' }
         e[e.length - 1].branchset?.push(c)
         r = c
         break
@@ -279,6 +270,22 @@ function parseNewick(a: string) {
 
 <template>
   <div>
-    <svg id="dendrogram" class="container-border"></svg>
+    <svg id="dendrogram" class="container-border" font-family="sans-serif" font-size="10" :viewBox="vBox">
+      <component is="style">
+        .link--active {
+        stroke: #000 !important;
+        stroke-width: 1.5px;
+        }
+
+        .link-extension--active {
+        stroke-opacity: .6;
+        }
+
+        .label--active {
+        font-weight: bold;
+        }
+      </component>
+    </svg>
+    <div>{{ debug }}</div>
   </div>
 </template>
