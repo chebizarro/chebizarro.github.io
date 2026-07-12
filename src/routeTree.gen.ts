@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WritingIndexRouteImport } from './routes/writing.index'
+import { Route as SystemsIndexRouteImport } from './routes/systems.index'
+import { Route as ResearchIndexRouteImport } from './routes/research.index'
+import { Route as WritingSlugRouteImport } from './routes/writing.$slug'
+import { Route as SystemsSlugRouteImport } from './routes/systems.$slug'
+import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WritingIndexRoute = WritingIndexRouteImport.update({
+  id: '/writing/',
+  path: '/writing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SystemsIndexRoute = SystemsIndexRouteImport.update({
+  id: '/systems/',
+  path: '/systems/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchIndexRoute = ResearchIndexRouteImport.update({
+  id: '/research/',
+  path: '/research/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WritingSlugRoute = WritingSlugRouteImport.update({
+  id: '/writing/$slug',
+  path: '/writing/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SystemsSlugRoute = SystemsSlugRouteImport.update({
+  id: '/systems/$slug',
+  path: '/systems/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchSlugRoute = ResearchSlugRouteImport.update({
+  id: '/research/$slug',
+  path: '/research/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/systems/$slug': typeof SystemsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/research/': typeof ResearchIndexRoute
+  '/systems/': typeof SystemsIndexRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/systems/$slug': typeof SystemsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/research': typeof ResearchIndexRoute
+  '/systems': typeof SystemsIndexRoute
+  '/writing': typeof WritingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/research/$slug': typeof ResearchSlugRoute
+  '/systems/$slug': typeof SystemsSlugRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/research/': typeof ResearchIndexRoute
+  '/systems/': typeof SystemsIndexRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/research/$slug'
+    | '/systems/$slug'
+    | '/writing/$slug'
+    | '/research/'
+    | '/systems/'
+    | '/writing/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/research/$slug'
+    | '/systems/$slug'
+    | '/writing/$slug'
+    | '/research'
+    | '/systems'
+    | '/writing'
+  id:
+    | '__root__'
+    | '/'
+    | '/research/$slug'
+    | '/systems/$slug'
+    | '/writing/$slug'
+    | '/research/'
+    | '/systems/'
+    | '/writing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ResearchSlugRoute: typeof ResearchSlugRoute
+  SystemsSlugRoute: typeof SystemsSlugRoute
+  WritingSlugRoute: typeof WritingSlugRoute
+  ResearchIndexRoute: typeof ResearchIndexRoute
+  SystemsIndexRoute: typeof SystemsIndexRoute
+  WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/writing/': {
+      id: '/writing/'
+      path: '/writing'
+      fullPath: '/writing/'
+      preLoaderRoute: typeof WritingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/systems/': {
+      id: '/systems/'
+      path: '/systems'
+      fullPath: '/systems/'
+      preLoaderRoute: typeof SystemsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research/': {
+      id: '/research/'
+      path: '/research'
+      fullPath: '/research/'
+      preLoaderRoute: typeof ResearchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/$slug': {
+      id: '/writing/$slug'
+      path: '/writing/$slug'
+      fullPath: '/writing/$slug'
+      preLoaderRoute: typeof WritingSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/systems/$slug': {
+      id: '/systems/$slug'
+      path: '/systems/$slug'
+      fullPath: '/systems/$slug'
+      preLoaderRoute: typeof SystemsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research/$slug': {
+      id: '/research/$slug'
+      path: '/research/$slug'
+      fullPath: '/research/$slug'
+      preLoaderRoute: typeof ResearchSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ResearchSlugRoute: ResearchSlugRoute,
+  SystemsSlugRoute: SystemsSlugRoute,
+  WritingSlugRoute: WritingSlugRoute,
+  ResearchIndexRoute: ResearchIndexRoute,
+  SystemsIndexRoute: SystemsIndexRoute,
+  WritingIndexRoute: WritingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
