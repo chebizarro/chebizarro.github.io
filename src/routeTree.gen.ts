@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SpeakingRouteImport } from './routes/speaking'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -25,6 +27,16 @@ import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
 const SpeakingRoute = SpeakingRouteImport.update({
   id: '/speaking',
   path: '/speaking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -89,6 +101,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -103,6 +117,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -118,6 +134,8 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -134,6 +152,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cv'
     | '/projects'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
@@ -148,6 +168,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cv'
     | '/projects'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
@@ -162,6 +184,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cv'
     | '/projects'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
@@ -177,6 +201,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CvRoute: typeof CvRoute
   ProjectsRoute: typeof ProjectsRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SpeakingRoute: typeof SpeakingRoute
   ResearchSlugRoute: typeof ResearchSlugRoute
   SystemsSlugRoute: typeof SystemsSlugRoute
@@ -193,6 +219,20 @@ declare module '@tanstack/react-router' {
       path: '/speaking'
       fullPath: '/speaking'
       preLoaderRoute: typeof SpeakingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -281,6 +321,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CvRoute: CvRoute,
   ProjectsRoute: ProjectsRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SpeakingRoute: SpeakingRoute,
   ResearchSlugRoute: ResearchSlugRoute,
   SystemsSlugRoute: SystemsSlugRoute,
