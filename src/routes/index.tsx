@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { writing, research, systems, formatDateShort } from "../lib/content";
+import heroAsset from "../assets/hero-diagram.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -12,7 +13,18 @@ function Index() {
 
   return (
     <div className="mx-auto max-w-6xl px-6">
-      <section className="pt-24 md:pt-36 pb-24 md:pb-32 max-w-4xl fade-up">
+      <section className="pt-16 md:pt-24 fade-up">
+        <figure className="rounded-sm overflow-hidden border border-border bg-[oklch(0.17_0.015_240)] shadow-sm">
+          <img
+            src={heroAsset.url}
+            alt="Chris Daley's engineering stack — capability engineering, agent experience, Bahia, Budabit, systems and writing — with supporting diagrams for human/AI collaboration, layered architecture, and distributed protocols."
+            className="w-full h-auto block"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      </section>
+      <section className="pt-12 md:pt-16 pb-24 md:pb-32 max-w-4xl fade-up">
         <div className="smallcaps text-copper mb-6">Chris Daley · Notebook &amp; Systems</div>
         <h1 className="font-serif text-[2.6rem] md:text-6xl leading-[1.05] tracking-tight text-foreground">
           Building resilient engineering systems
