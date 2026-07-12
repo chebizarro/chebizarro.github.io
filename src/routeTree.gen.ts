@@ -9,6 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpeakingRouteImport } from './routes/speaking'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as CvRouteImport } from './routes/cv'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WritingIndexRouteImport } from './routes/writing.index'
 import { Route as SystemsIndexRouteImport } from './routes/systems.index'
@@ -17,6 +22,31 @@ import { Route as WritingSlugRouteImport } from './routes/writing.$slug'
 import { Route as SystemsSlugRouteImport } from './routes/systems.$slug'
 import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
 
+const SpeakingRoute = SpeakingRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,6 +85,11 @@ const ResearchSlugRoute = ResearchSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
+  '/projects': typeof ProjectsRoute
+  '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/writing/$slug': typeof WritingSlugRoute
@@ -64,6 +99,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
+  '/projects': typeof ProjectsRoute
+  '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/writing/$slug': typeof WritingSlugRoute
@@ -74,6 +114,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
+  '/projects': typeof ProjectsRoute
+  '/speaking': typeof SpeakingRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/writing/$slug': typeof WritingSlugRoute
@@ -85,6 +130,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/cv'
+    | '/projects'
+    | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
     | '/writing/$slug'
@@ -94,6 +144,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/cv'
+    | '/projects'
+    | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
     | '/writing/$slug'
@@ -103,6 +158,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/contact'
+    | '/cv'
+    | '/projects'
+    | '/speaking'
     | '/research/$slug'
     | '/systems/$slug'
     | '/writing/$slug'
@@ -113,6 +173,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  CvRoute: typeof CvRoute
+  ProjectsRoute: typeof ProjectsRoute
+  SpeakingRoute: typeof SpeakingRoute
   ResearchSlugRoute: typeof ResearchSlugRoute
   SystemsSlugRoute: typeof SystemsSlugRoute
   WritingSlugRoute: typeof WritingSlugRoute
@@ -123,6 +188,41 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/speaking': {
+      id: '/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof SpeakingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,6 +277,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  CvRoute: CvRoute,
+  ProjectsRoute: ProjectsRoute,
+  SpeakingRoute: SpeakingRoute,
   ResearchSlugRoute: ResearchSlugRoute,
   SystemsSlugRoute: SystemsSlugRoute,
   WritingSlugRoute: WritingSlugRoute,
