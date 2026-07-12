@@ -28,7 +28,7 @@ export function EntryList({ entries, base }: Props) {
                 <div className="grid grid-cols-[1fr_auto] gap-4 items-baseline">
                   <Link
                     to={`${base}/$slug` as any}
-                    params={{ slug: e.meta.slug }}
+                    params={{ slug: e.meta.slug } as any}
                     className="font-serif text-xl md:text-2xl text-foreground hover:text-copper transition-colors"
                   >
                     {e.meta.title}
