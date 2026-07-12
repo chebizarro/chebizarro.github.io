@@ -1,5 +1,26 @@
-import matter from "gray-matter";
 import { marked } from "marked";
+
+// Tiny YAML frontmatter parser — enough for scalar fields, arrays and booleans.
+function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
+  const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
+  if (!m) return { data: {}, content: raw };
+  const data: Record<string, any> = {};
+  for (const line of m[1].split(/\r?\n/)) {
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const kv = /^([A-Za-z0-9_-]+)\s*:\s*(.*)$/.exec(line);
+    if (!kv) continue;
+    const key = kv[1];
+    let val: any = kv[2].trim();
+    if (val === "true") val = true;
+    else if (val === "false") val = false;
+    else if (/^".*"$|^'.*'$/.test(val)) val = val.slice(1, -1);
+    else if (/^\[.*\]$/.test(val)) {
+      val = val.slice(1, -1).split(",").map((s) => s.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
+    }
+    data[key] = val;
+  }
+  return { data, content: m[2] };
+}
 
 export type ContentKind = "writing" | "research" | "systems";
 
@@ -68,7 +89,7 @@ function extractHeadings(md: string) {
 function buildEntries(kind: ContentKind, source: Record<string, string>): ContentEntry[] {
   return Object.entries(source).map(([path, raw]) => {
     const slug = path.split("/").pop()!.replace(/\.md$/, "");
-    const { data, content } = matter(raw);
+    const { data, content } = parseFrontmatter(raw);
     const html = marked.parse(content, { renderer }) as string;
     const words = content.split(/\s+/).filter(Boolean).length;
     const meta: ContentMeta = {
