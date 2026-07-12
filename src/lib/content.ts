@@ -15,7 +15,7 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; content: st
     else if (val === "false") val = false;
     else if (/^".*"$|^'.*'$/.test(val)) val = val.slice(1, -1);
     else if (/^\[.*\]$/.test(val)) {
-      val = val.slice(1, -1).split(",").map((s) => s.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
+      val = val.slice(1, -1).split(",").map((s: string) => s.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
     }
     data[key] = val;
   }
