@@ -32,6 +32,8 @@ export interface ContentMeta {
   tags?: string[];
   status?: string;
   featured?: boolean;
+  ogImage?: string;      // For social sharing (1200x630)
+  heroImage?: string;    // For article header (any size)
   // system-specific
   repo?: string;
   stack?: string[];
@@ -100,6 +102,8 @@ function buildEntries(kind: ContentKind, source: Record<string, string>): Conten
       tags: data.tags,
       status: data.status,
       featured: !!data.featured,
+      ogImage: data.ogImage,
+      heroImage: data.heroImage,
       repo: data.repo,
       stack: data.stack,
       role: data.role,

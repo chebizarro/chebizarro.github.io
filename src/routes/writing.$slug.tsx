@@ -19,8 +19,11 @@ export const Route = createFileRoute("/writing/$slug")({
         { property: "og:title", content: loaderData.meta.title },
         { property: "og:description", content: loaderData.meta.description },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/writing/${params.slug}` },
+        { property: "og:url", content: `https://chrisdaley.biz/writing/${params.slug}` },
+        { property: "og:image", content: loaderData.meta.ogImage ? `https://chrisdaley.biz${loaderData.meta.ogImage}` : "https://chrisdaley.biz/og-default.png" },
         { property: "article:published_time", content: loaderData.meta.date },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: loaderData.meta.ogImage ? `https://chrisdaley.biz${loaderData.meta.ogImage}` : "https://chrisdaley.biz/og-default.png" },
       ],
       links: [{ rel: "canonical", href: `/writing/${params.slug}` }],
       scripts: [{

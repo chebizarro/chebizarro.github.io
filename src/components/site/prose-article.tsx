@@ -28,6 +28,17 @@ export function ProseArticle({ entry, kicker }: { entry: ContentEntry; kicker?: 
         </div>
       </div>
 
+      {entry.meta.heroImage && (
+        <figure className="mb-12 fade-up">
+          <img
+            src={entry.meta.heroImage}
+            alt={entry.meta.title}
+            className="w-full h-auto rounded-sm border border-border shadow-sm"
+            loading="eager"
+          />
+        </figure>
+      )}
+
       <div className="chart-rule mb-12" />
 
       <div className="grid lg:grid-cols-[1fr_16rem] gap-12">

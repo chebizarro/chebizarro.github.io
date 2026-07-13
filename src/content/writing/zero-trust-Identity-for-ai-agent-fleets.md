@@ -4,6 +4,8 @@ description: "What MCP doesn't give you for free"
 date: "2025-10-25"
 tags: ["ai", "security", "mcp"]
 featured: true
+ogImage: "/og-images/zero-trust-Identity.png"
+heroImage: "/images/zero-trust-Identity.png"
 ---
 
 The Model Context Protocol solved a real problem. Before MCP, every agent-to-tool integration was a bespoke adapter, and the industry was drowning in them. Now an agent can discover a tool, read its schema, and call it through one standard surface. That's genuine progress, and it deserved the adoption it got.
