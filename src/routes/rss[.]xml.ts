@@ -10,7 +10,7 @@ export const Route = createFileRoute("/rss.xml")({
           .sort((a, b) => b.meta.date.localeCompare(a.meta.date))
           .slice(0, 40);
         const esc = (s: string) => s.replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[c]!));
-        const baseUrl = "https://chebizarro.github.io/sovereign-systems-lab";
+        const baseUrl = "https://chrisdaley.biz";
         const rssItems = items.map((e) => {
           const path = `/${e.kind}/${e.meta.slug}`;
           const url = `${baseUrl}${path}`;
