@@ -4,7 +4,7 @@ description: "What MCP doesn't give you for free"
 date: "2025-10-25"
 tags: ["ai", "security", "mcp"]
 featured: true
-ogImage: "/og-images/zero-trust-Identity.png"
+ogImage: "/og-images/zero-trust-Identity-og.png"
 heroImage: "/images/zero-trust-Identity.png"
 ---
 
