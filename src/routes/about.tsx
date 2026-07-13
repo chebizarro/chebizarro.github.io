@@ -4,7 +4,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Chris Daley" },
-      { name: "description", content: "The recurring themes that have shaped a career at the intersection of AI, distributed systems, Bitcoin, Nostr and open source." },
+      { name: "description", content: "The recurring themes of a working life spent between security for movements and sovereign, Nostr-native systems." },
       { property: "og:title", content: "About — Chris Daley" },
       { property: "og:description", content: "The recurring themes of the work." },
       { property: "og:url", content: "/about" },
@@ -15,13 +15,13 @@ export const Route = createFileRoute("/about")({
 });
 
 const themes = [
-  { t: "Human capability", d: "Software as a lever for what one motivated person can do end-to-end." },
-  { t: "Distributed systems", d: "State that survives partitions, machines, decades and companies." },
-  { t: "Scientific computing", d: "Reproducible pipelines and honest measurement of what a system actually does." },
-  { t: "Bitcoin", d: "Sound settlement, portable value, payments as engineering." },
-  { t: "Nostr", d: "Signed events as a substrate for identity, publishing and collaboration." },
-  { t: "AI systems", d: "Agents as a first-class kind of software with their own design discipline." },
-  { t: "Sovereignty", d: "Owned tools, owned keys, owned data — platforms as optional." },
+  { t: "Sovereignty", d: "Owned tools, owned keys, owned data — platforms as optional. The organising principle behind everything below." },
+  { t: "Nostr", d: "Signed events as a substrate for identity, git, deployment, review and coordination — not a timeline." },
+  { t: "Security for people", d: "Years of holistic security work with activists, journalists and NGOs. Threat models with humans in them." },
+  { t: "Agent fleets", d: "Autonomous agents as first-class operators — with real identities, policies, provenance and audit trails." },
+  { t: "Memory & knowledge", d: "Reference truth, episodic recall and institutional doctrine as separate systems, each with provenance." },
+  { t: "Distributed systems", d: "State that survives partitions, machines, decades and companies. PostgreSQL canonical; everything else derived." },
+  { t: "Local inference", d: "Models running on hardware I control. Code that never leaves the building it was written in." },
   { t: "Open source", d: "Legibility, permissive licenses, and code that outlives its author." },
 ];
 
@@ -34,12 +34,26 @@ function About() {
       </h1>
       <div className="prose mt-10">
         <p>
-          I've spent the working part of my life at the intersection of a few
-          fields that most industries treat as separate — distributed
-          systems, scientific computing, cryptography, and, more recently,
-          agent-based AI. This page is not a chronology. It's the shorter,
-          truer document: the recurring ideas the work keeps returning to,
-          in whatever role or company happens to hold it that year.
+          I've had two working lives that turned out to be the same one.
+          The first was security — the holistic kind, done with activists,
+          journalists and NGOs, where the threat model has real people in
+          it and the cost of platform dependency is not theoretical. The
+          second is engineering: building the sovereign alternative instead
+          of writing another assessment recommending one. The systems on
+          this site — a Nostr-native deployment control plane, a key bunker
+          for agent fleets, code review on local models, knowledge
+          infrastructure with provenance — are what that looks like when
+          you follow the logic all the way down.
+        </p>
+        <p>
+          The road here was not a straight line: logistics for MSF and Oxfam
+          in Pakistan, Malawi and Papua New Guinea; actions and security for
+          Greenpeace from Sydney to Amsterdam to Jakarta; a decade running a
+          technical consultancy; a stint building sovereign engineering
+          infrastructure at Budabit. These days I'm Director of Engineering
+          at Feanix, building an AI-native engineering organization — and
+          the systems on this site are the open-source spine of how I think
+          that should work.
         </p>
         <p>
           If you want the dated version, the <a href="/cv">CV</a> is one
@@ -58,10 +72,11 @@ function About() {
       <div className="prose mt-16">
         <h2>How I work</h2>
         <p>
-          Local-first, text-first, keyboard-first. I prefer small tools
-          composed carefully to large platforms adopted enthusiastically.
-          I like the discipline of writing things down and the humility of
-          re-reading them later.
+          Keys before accounts. Protocols before platforms. Local before
+          remote. I run a fleet of AI agents as colleagues — each with its
+          own signed identity, policy and audit trail — and I hold the
+          systems they work in to the same standard I'd demand for any
+          human team: legible, replayable, and honest about failure.
         </p>
         <h2>Where to find me</h2>
         <p>

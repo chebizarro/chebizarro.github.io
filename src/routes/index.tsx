@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { writing, research, systems, formatDateShort } from "../lib/content";
-import heroAsset from "../assets/hero-diagram.png.asset.json";
+import heroAsset from "../assets/splash-screen.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -13,11 +13,11 @@ function Index() {
 
   return (
     <div className="mx-auto max-w-6xl px-6">
-      <section className="pt-16 md:pt-24 fade-up">
+      <section className="pt-16 md:pt-12 fade-up">
         <figure className="rounded-sm overflow-hidden border border-border bg-[oklch(0.17_0.015_240)] shadow-sm">
           <img
-            src={heroAsset.url}
-            alt="Chris Daley's engineering stack — capability engineering, agent experience, Bahia, Budabit, systems and writing — with supporting diagrams for human/AI collaboration, layered architecture, and distributed protocols."
+            src={heroAsset}
+            alt="Diagram of a sovereign systems stack — Nostr-native control planes, agent fleets, and the services that run them."
             className="w-full h-auto block"
             loading="eager"
             decoding="async"
@@ -27,22 +27,26 @@ function Index() {
       <section className="pt-12 md:pt-16 pb-24 md:pb-32 max-w-4xl fade-up">
         <div className="smallcaps text-copper mb-6">Chris Daley · Notebook &amp; Systems</div>
         <h1 className="font-serif text-[2.6rem] md:text-6xl leading-[1.05] tracking-tight text-foreground">
-          Building resilient engineering systems
-          <span className="text-muted-foreground"> where humans and AI </span>
-          work together.
+          AI-native engineering,
+          <span className="text-muted-foreground"> where agents are colleagues </span>
+          — not chat windows.
         </h1>
         <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-          Engineer, researcher and open-source developer working at the
-          intersection of AI systems, distributed infrastructure, Bitcoin,
-          Nostr and the craft of software. This site is a working notebook,
-          a research archive, and a home for the systems I ship.
+          I build engineering organizations where AI agents do real work —
+          reviewing code, writing docs, operating desktops, running
+          deployments — each with its own identity, policy and audit trail.
+          The infrastructure underneath is sovereign by design: the keys,
+          the data and the record belong to the people running it. Before
+          that, a couple of decades of security work for people who learned
+          the hard way what dependency costs. This site is a working
+          notebook and a home for the systems I ship.
         </p>
         <div className="mt-10 flex flex-wrap gap-6 text-sm">
-          <Link to="/research" className="text-foreground border-b border-copper pb-0.5 hover:text-copper transition-colors">
-            Read the research →
+          <Link to="/systems" className="text-foreground border-b border-copper pb-0.5 hover:text-copper transition-colors">
+            See the systems →
           </Link>
-          <Link to="/systems" className="text-muted-foreground hover:text-foreground transition-colors">
-            See the systems
+          <Link to="/research" className="text-muted-foreground hover:text-foreground transition-colors">
+            Read the research
           </Link>
           <Link to="/writing" className="text-muted-foreground hover:text-foreground transition-colors">
             Latest writing
@@ -55,14 +59,14 @@ function Index() {
       <section className="py-20 md:py-24 grid md:grid-cols-[14rem_1fr] gap-10">
         <div>
           <div className="smallcaps text-muted-foreground">§ I</div>
-          <h2 className="font-serif text-2xl mt-2">Current areas of research</h2>
+          <h2 className="font-serif text-2xl mt-2">Current areas of work</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
           {[
-            { title: "Agent Experience", body: "The design discipline for the environments in which agents do their best work." },
-            { title: "Context is Infrastructure", body: "Retrieval, memory and workspace as first-class engineering surfaces." },
-            { title: "Sovereign Systems", body: "Owned tools, portable identity, protocols that outlast platforms." },
-            { title: "Capability Engineering", body: "Expanding what one motivated person can do end-to-end." },
+            { title: "Agent experience (AX)", body: "Designing the environments agents do their best work in: semantic interfaces, deterministic context, closed feedback loops." },
+            { title: "Agent fleets & identity", body: "Autonomous agents as accountable colleagues — real cryptographic identities, policies, and audit trails, and no raw keys." },
+            { title: "Memory that isn't RAG", body: "What agents need to remember — reference truth, episodic recall, institutional doctrine — as separate, provenance-tracked services." },
+            { title: "Sovereign control planes", body: "Deployments, review and shared state as signed events on infrastructure you own — platforms optional." },
           ].map((r) => (
             <div key={r.title}>
               <div className="font-serif text-lg text-foreground">{r.title}</div>
@@ -163,18 +167,20 @@ function Index() {
         <div>
           <div className="smallcaps text-muted-foreground mb-3">Speaking</div>
           <p className="text-muted-foreground leading-relaxed max-w-md">
-            Occasional talks on agent experience, sovereign infrastructure
-            and the craft of software with AI in the loop.
+            Available for talks on building AI-native engineering
+            organizations, agent experience, and running fleets of AI
+            agents you can actually audit.
           </p>
-          <Link to="/speaking" className="text-copper hover:underline text-sm mt-3 inline-block">Recent &amp; upcoming →</Link>
+          <Link to="/speaking" className="text-copper hover:underline text-sm mt-3 inline-block">Speaking →</Link>
         </div>
         <div>
           <div className="smallcaps text-muted-foreground mb-3">Open source</div>
           <p className="text-muted-foreground leading-relaxed max-w-md">
-            Most of what I build ships as an open repository. Small tools,
-            long half-life, permissive licenses.
+            Most of what I build ships as an open repository — and much of
+            it was built alongside the same kinds of agents it exists to
+            support.
           </p>
-          <a href="https://github.com/" className="text-copper hover:underline text-sm mt-3 inline-block">GitHub →</a>
+          <a href="https://github.com/chebizarro" className="text-copper hover:underline text-sm mt-3 inline-block">GitHub →</a>
         </div>
       </section>
     </div>

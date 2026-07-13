@@ -1,37 +1,53 @@
 ---
 title: "Context is infrastructure"
-description: "Retrieval, memory and workspace are not features on top of a model. They are the load-bearing structure."
-date: "2026-04-18"
-tags: ["ax", "context", "infrastructure"]
+description: "Retrieval, memory and provenance are not features on top of a model. They are the load-bearing structure. Draft."
+date: "2026-05-15"
+tags: ["agents", "context", "infrastructure"]
+status: "draft"
 featured: true
 ---
 
-A working thesis: the most important thing about an AI system is the
+> **Draft.** Working thesis, grounded in systems that exist. Numbers
+> and diagrams to follow.
+
+A working thesis: the most important part of an AI system is the
 context pipeline. The model is a rendering engine; the pipeline is the
-architecture.
+architecture. I did not arrive at this by argument — I arrived at it
+by watching where the quality actually came from in systems I run in
+production.
 
-## The pipeline, named
+## Exhibit A: the code reviewer
 
-Every serious agent system I have built or reviewed has, whether it
-knows it or not, the same five stages:
+Drydock reviews patches with local LLMs. The single biggest quality
+lever was never the model — it was the context builder: a
+deterministic, seven-layer priority system that assembles what the
+reviewer sees inside a fixed 64K budget. Deterministic context means
+reproducible reviews, and reproducible reviews are the only kind an
+eval harness can grade honestly. Swap the model and quality moves a
+little. Break the context builder and quality falls off a cliff.
 
-1. **Ingest** — what does the world put in front of the agent?
-2. **Filter** — what do we choose to show it *this turn*?
-3. **Structure** — how is that information arranged in the window?
-4. **Persist** — what carries forward, and in what form?
-5. **Revise** — how does the pipeline itself learn?
+## Exhibit B: the corpus
 
-Get these right and the model is quietly competent. Get them wrong and
-no amount of prompt engineering will save you.
+Chartroom exists because "just RAG it" is not an engineering answer.
+Reference material gets deterministic ingestion, versioned snapshots,
+chunks that carry provenance back to source and commit, and a vector
+index that is explicitly *derived* — rebuildable at any time from
+canonical state. When retrieval misbehaves, there is a specific place
+to look and a specific thing to replay. That is what makes it
+infrastructure rather than vibes.
 
-## Why "infrastructure"
+## Exhibit C: the generated docs
 
-Because it needs to be *boring*. Reliable, versioned, observable,
-replaceable. The interesting behaviour lives above it. The pipeline
-itself should not be interesting.
+Cartographer writes documentation with an LLM, and every page cites
+the files and commit SHA it was derived from. Provenance is what turns
+generated text from a liability into a draft worth reviewing: a reader
+can check the chart against the territory, and staleness is detectable
+instead of ambient.
 
-## What this replaces
+## The rule
 
-The story where a clever prompt, held together with string, is what
-made the demo work. That story does not scale, does not survive on-call,
-and does not compose. Infrastructure does.
+Context work needs to be *boring* — versioned, observable, replayable,
+replaceable. The interesting behaviour lives above it. If the pipeline
+itself is interesting, something has gone wrong. A clever prompt held
+together with string made the demo work; it does not survive on-call.
+Infrastructure does.

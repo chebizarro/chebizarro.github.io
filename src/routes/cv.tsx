@@ -4,7 +4,7 @@ export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
       { title: "CV — Chris Daley" },
-      { name: "description", content: "Curriculum vitae: roles, research, publications and open-source work." },
+      { name: "description", content: "Curriculum vitae: roles, systems and open-source work." },
       { property: "og:title", content: "CV — Chris Daley" },
       { property: "og:description", content: "Curriculum vitae." },
       { property: "og:url", content: "/cv" },
@@ -15,18 +15,22 @@ export const Route = createFileRoute("/cv")({
 });
 
 const roles = [
-  { years: "2024 —", title: "Independent researcher & engineer", org: "Self-directed", notes: "Agent experience, sovereign infrastructure, open-source systems." },
-  { years: "2021 — 2024", title: "Principal engineer", org: "(previous)", notes: "Distributed systems and applied research on agentic tooling." },
-  { years: "2017 — 2021", title: "Staff engineer", org: "(previous)", notes: "Backend infrastructure for large-scale scientific data pipelines." },
-  { years: "2014 — 2017", title: "Senior engineer", org: "(previous)", notes: "Payments, ledgers, reliability." },
-  { years: "2010 — 2014", title: "Engineer", org: "(previous)", notes: "Systems programming, tooling, storage." },
+  { years: "2025 —", title: "Director of Engineering", org: "Feanix", notes: "Building an AI-native engineering organization at a biotech applying genomics and AI to global farming. Agents as first-class engineers, humans as their editors." },
+  { years: "2014 — 2026", title: "Director", org: "Cascadia Technical Mentorship", notes: "Technical mentorship and consultancy: security assessments, training, and confidential technical projects for clients who needed both engineering and discretion." },
+  { years: "2024 — 2025", title: "Principal Engineer", org: "Budabit", notes: "Sovereign infrastructure for engineering organizations: browser-native Git, decentralized CI/CD, cryptographic engineering identity, and autonomous agents — Git, Nostr and agents combined into an open platform to replace centralized developer collaboration." },
+  { years: "2013 — 2014", title: "Regional Security Manager", org: "Greenpeace Southeast Asia", notes: "Development and implementation of security plans for campaigns in high-risk areas across Southeast Asia, based in Jakarta." },
+  { years: "2012", title: "Action Coordinator & Activist", org: "Freelance", notes: "Actions and coordination for Greenpeace, Rising Tide, South East Forest Rescue and Friends of the Earth in Australia — including the super-trawler blockade at Port Lincoln." },
+  { years: "2011 — 2012", title: "Rivers Campaigner", org: "The Wilderness Society Australia", notes: "Campaigning for river protection and restoration in New South Wales, including the Murray-Darling Basin." },
+  { years: "2010", title: "Logistics Manager / Coordinator", org: "Médecins Sans Frontières", notes: "Logistics for a measles mass-vaccination campaign in Malawi — seven expatriate logisticians, hundreds of national staff — and an exploratory mission to Papua New Guinea that became a cholera intervention on the Bamu River." },
+  { years: "2006 — 2009", title: "International Actions & Logistics Manager", org: "Greenpeace International", notes: "International coordination of ship, land and air operations from Amsterdam; security planning and training, including information security. Previously warehouse and fleet management in Sydney." },
+  { years: "2006", title: "Logistics Manager", org: "Oxfam", notes: "Emergency relief logistics in the earthquake-affected North West Frontier Province of Pakistan, supporting water and sanitation projects across a broad area." },
 ];
 
 const publications = [
-  { year: "2026", title: "Agent Experience", where: "Notebook" },
-  { year: "2026", title: "Context is Infrastructure", where: "Notebook" },
-  { year: "2025", title: "The Sovereign Engineer", where: "Notebook" },
-  { year: "2024", title: "Notes on long-running agents", where: "Preprint" },
+  { year: "2026", title: "Agent experience", where: "Notebook (draft)" },
+  { year: "2026", title: "Context is infrastructure", where: "Notebook (draft)" },
+  { year: "2026", title: "Nostr as an engineering substrate", where: "Notebook" },
+  { year: "2026", title: "The sovereign engineer", where: "Notebook (draft)" },
 ];
 
 function CV() {
@@ -37,7 +41,7 @@ function CV() {
           <div className="smallcaps text-copper mb-4">§ Curriculum vitae</div>
           <h1 className="font-serif text-4xl md:text-5xl leading-tight">Chris Daley</h1>
           <p className="mt-3 text-muted-foreground">
-            Engineer · researcher · open-source developer
+            AI systems · agent experience · sovereign infrastructure — Winlock, Washington
           </p>
         </div>
         <button
@@ -82,15 +86,15 @@ function CV() {
       <section className="mt-14 grid sm:grid-cols-3 gap-6 text-sm">
         <div>
           <div className="smallcaps text-muted-foreground mb-2">Areas</div>
-          <p className="text-foreground leading-relaxed">Agent experience · distributed systems · Bitcoin · Nostr · scientific computing</p>
+          <p className="text-foreground leading-relaxed">Sovereign infrastructure · Nostr · agent fleets · holistic security · field logistics</p>
         </div>
         <div>
           <div className="smallcaps text-muted-foreground mb-2">Languages</div>
-          <p className="text-foreground font-mono">Rust · TypeScript · Go · Python</p>
+          <p className="text-foreground font-mono">Go · C · TypeScript</p>
         </div>
         <div>
           <div className="smallcaps text-muted-foreground mb-2">Available for</div>
-          <p className="text-foreground leading-relaxed">Advisory · research collaborations · speaking</p>
+          <p className="text-foreground leading-relaxed">Advisory · security work · speaking · collaborations</p>
         </div>
       </section>
     </div>

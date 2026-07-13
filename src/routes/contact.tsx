@@ -32,22 +32,34 @@ function Contact() {
       <dl className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
         <div>
           <dt className="smallcaps text-muted-foreground mb-2">Email</dt>
-          <dd><a href="mailto:hello@chrisdaley.dev" className="font-mono text-foreground hover:text-copper">hello@chrisdaley.dev</a></dd>
+          <dd><a href="mailto:chris@cascadiatm.com" className="font-mono text-foreground hover:text-copper">chris@cascadiatm.com</a></dd>
           <p className="text-xs text-muted-foreground mt-1">For anything substantive. Reply within about a week.</p>
         </div>
         <div>
           <dt className="smallcaps text-muted-foreground mb-2">Nostr</dt>
-          <dd className="font-mono text-foreground break-all text-sm">npub1…</dd>
+          <dd>
+            <a
+              href="https://njump.me/npub1ehhfg09mr8z34wz85ek46a6rww4f7c7jsujxhdvmpqnl5hnrwsqq2szjqv"
+              className="font-mono text-foreground hover:text-copper break-all text-sm"
+            >
+              npub1ehhfg09mr8z34wz85ek46a6rww4f7c7jsujxhdvmpqnl5hnrwsqq2szjqv
+            </a>
+          </dd>
           <p className="text-xs text-muted-foreground mt-1">For public conversation and correspondence in the open.</p>
         </div>
         <div>
+          <dt className="smallcaps text-muted-foreground mb-2">Signal</dt>
+          <dd><a href="https://signal.me/#eu/MHc6Ns0Ta84JUTcVj_jPKn-M79MQfYYM5sUfjDoyKLhMg0-SyJBDKbHhIFMpXzvy" className="font-mono text-foreground hover:text-copper break-all text-sm">biz.99</a></dd>
+          <p className="text-xs text-muted-foreground mt-1">For secure messaging and real-time coordination.</p>
+        </div>
+        <div>
           <dt className="smallcaps text-muted-foreground mb-2">GitHub</dt>
-          <dd><a href="https://github.com/" className="font-mono text-foreground hover:text-copper">github.com/chrisdaley</a></dd>
+          <dd><a href="https://github.com/chebizarro" className="font-mono text-foreground hover:text-copper">github.com/chebizarro</a></dd>
           <p className="text-xs text-muted-foreground mt-1">Issues and pull requests on any of the systems.</p>
         </div>
         <div>
-          <dt className="smallcaps text-muted-foreground mb-2">PGP</dt>
-          <dd className="font-mono text-foreground text-xs">DA1E · Y 2026 · fingerprint on request</dd>
+          <dt className="smallcaps text-muted-foreground mb-2">Encrypted</dt>
+          <dd className="font-mono text-foreground text-xs">NIP-17 DM to the npub above</dd>
           <p className="text-xs text-muted-foreground mt-1">For anything you'd rather not send in the clear.</p>
         </div>
       </dl>

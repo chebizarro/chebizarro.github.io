@@ -1,76 +1,69 @@
 ---
-title: "Agent Experience"
-description: "A discipline for designing the environments in which agents — human and artificial — do their best work."
-date: "2026-06-01"
-tags: ["ax", "agents", "design"]
+title: "Agent experience"
+description: "The environments agents work in matter more than the models working in them. Notes toward a discipline. Draft."
+date: "2026-06-05"
+tags: ["agents", "ax", "design"]
+status: "draft"
 featured: true
 ---
 
-We spent forty years learning how to design software for humans and
-called it *user experience*. We are now shipping software that is
-increasingly used by other software — retrieval agents, code agents,
-research agents, orchestrators — and we have no equivalent discipline.
+> **Draft.** Notes toward a discipline, from someone who spends most
+> days building the environments rather than the models.
 
-This essay is an attempt to name one.
+We spent decades learning to design software for humans and called it
+user experience. We are now shipping software whose primary users are
+other software — code reviewers, doc writers, desktop operators,
+deployment agents — and the design discipline for *their* working
+environment mostly does not exist yet. Call it agent experience. The
+models are less often the bottleneck than the shape of the world we
+hand them.
 
-## The claim
+What follows is not theory. Each claim has a system behind it.
 
-**Agent Experience** — AX — is the design of the environments,
-interfaces, tools and feedback loops that determine how well an agent
-performs a task. It is UX for a class of user that reads documentation
-literally, does not skim, has no intuition, and remembers only what you
-put in front of it.
+## Semantic beats visual
 
-The premise is simple: if we build systems assuming agents will figure
-it out, we are guaranteed to get the median behaviour of the median
-agent. If we build systems that make good behaviour the path of least
-resistance, we get something much better than the model alone.
+metadesk gives agents the operating system's accessibility tree — the
+same structure screen readers use — instead of screenshots. An agent
+clicks an element by ID and receives a delta showing what changed.
+Screenshot-driven agents burn their budget rediscovering what the OS
+would have said for free, in structured form, with stable identifiers.
+When semantics exist, hand the agent semantics.
 
-## Five surfaces that matter
+## Determinism is a kindness
 
-### 1. Documentation as interface
+Drydock's review quality lives and dies by its context builder: a
+deterministic assembly of what the model sees, inside a fixed budget.
+Deterministic environments make agent behaviour reproducible, and
+reproducible behaviour is the only kind you can evaluate, debug, or
+improve on purpose.
 
-An agent's documentation is not a courtesy — it is the API. Prose that
-a human skims becomes, for a model, a load-bearing structural element.
-Sections labelled *Common mistakes* prevent common mistakes. Examples
-show up in traces. Ambiguity multiplies.
+## Close the loop or lose the agent
 
-### 2. Tool schemas
+An agent that never sees the effect of its action cannot correct.
+metadesk returns UI deltas after every action; Drydock's meta-review
+grades reviews and feeds the grade back into prompts; Bahia publishes
+runtime observations so drift is a fact the system can see rather than
+a surprise an operator finds. The fastest wins in this field are
+feedback loops, not model upgrades.
 
-The name, description and parameter list of every tool is a small essay
-the model reads before every call. Terse schemas produce terse
-behaviour. Descriptive schemas — with worked examples, failure modes,
-and the *why* of the design — produce competent behaviour.
+## Fail loudly, in a shape with a name
 
-### 3. State and memory
+Harbormaster Watch renders empty and degraded states explicitly when
+relays have no data, instead of fabricating samples. The same rule
+saves agents: silent, ambiguous failure is where production agents go
+to die. An error the agent can name is an error it can route around.
 
-Agents do not remember. They read. The question is not *what does the
-agent know* but *what does the agent see, right now, in this call*. The
-answer is almost always: not enough, or too much of the wrong thing.
+## Identity is part of the environment
 
-### 4. Feedback loops
+An agent that signs its work is an agent whose work can be audited,
+attributed and revoked. Signet exists so every agent in my fleet has
+an identity without any of them holding a key. Accountability
+infrastructure is AX too — it is what lets you *widen* an agent's
+permissions without lying awake.
 
-An agent that never sees the effect of an action cannot improve. The
-fastest wins in this field come from closing loops — showing the agent
-the diff, the test failure, the compiler error, the screenshot — and
-letting it react.
+## Why bother naming it
 
-### 5. Failure modes
-
-Every environment has a distinctive way of going wrong. A well-designed
-AX surface fails loudly, in a shape the agent can name. The
-alternative — silent, ambiguous, contextless failure — is where most
-production agents die.
-
-## Why now
-
-The models are no longer the bottleneck for most tasks. The bottleneck
-is the shape of the world we hand them. AX is the name for the work of
-shaping that world well.
-
-I suspect the next decade of software engineering will look a lot like
-industrial design in the 1950s — a lot of people, in a lot of places,
-independently figuring out that the object *and* the workflow around it
-are what determine whether the thing gets used.
-
-We may as well name the discipline early.
+Because the work is going to happen anyway, scattered across a
+thousand codebases, and disciplines that get named early get standards
+instead of folklore. The environment is the product. We may as well
+design it like one.

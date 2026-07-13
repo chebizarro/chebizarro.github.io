@@ -5,9 +5,9 @@ export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
       { title: "Projects — Chris Daley" },
-      { name: "description", content: "Open-source repositories, experiments and side projects." },
+      { name: "description", content: "Open-source repositories, fleet services and supporting libraries." },
       { property: "og:title", content: "Projects — Chris Daley" },
-      { property: "og:description", content: "Open-source repositories and experiments." },
+      { property: "og:description", content: "Open-source repositories and fleet services." },
       { property: "og:url", content: "/projects" },
     ],
     links: [{ rel: "canonical", href: "/projects" }],
@@ -15,11 +15,14 @@ export const Route = createFileRoute("/projects")({
   component: Projects,
 });
 
-const experiments = [
-  { name: "notebook-lm-local", desc: "A local variant of the notebook-with-a-model idea, over Bahia." },
-  { name: "relay-cache", desc: "A small caching layer for high-fanout Nostr reads." },
-  { name: "loom", desc: "A tmux-shaped multi-agent workspace prototype." },
-  { name: "sextant", desc: "Position-fixing for agents inside long-running codebases." },
+const supporting: { name: string; desc: string; href?: string }[] = [
+  { name: "nostrc", desc: "A C library for Nostr — the protocol layer under metadesk and home of Signet.", href: "https://github.com/chebizarro/nostrc" },
+  { name: "flotilla-budabit", desc: "Git-centric community platform on Nostr — the Budabit work, continued in the open.", href: "https://github.com/Pleb5/flotilla-budabit" },
+  { name: "chartroom", desc: "Reference-corpus service: deterministic ingestion, provenance-aware retrieval, four retrieval modes." },
+  { name: "mnemonic", desc: "Institutional memory: replayable episodes, causal links, lessons, and human-reviewed doctrine." },
+  { name: "cartographer", desc: "LLM docs generation with provenance — every page cites its source files and commit." },
+  { name: "agent-memory", desc: "Task-scoped episodic recall for agents; Go sidecar with local embeddings." },
+  { name: "harbormaster-watch", desc: "Nostr-native ops console; renders only what it can attribute to a relay." },
 ];
 
 function Projects() {
@@ -28,10 +31,10 @@ function Projects() {
       <div className="smallcaps text-copper mb-6">§ Projects</div>
       <h1 className="font-serif text-4xl md:text-5xl leading-tight">Open source, in various states of finish.</h1>
       <p className="mt-6 text-muted-foreground max-w-2xl leading-relaxed">
-        Long-running systems have their own pages under{" "}
+        The flagships have their own pages under{" "}
         <Link to="/systems" className="text-copper hover:underline">Systems</Link>.
-        What follows is the wider catalog — experiments, sketches, and small
-        tools that occasionally graduate.
+        What follows is the wider catalog — the fleet services and libraries
+        that keep the flagships honest.
       </p>
       <div className="chart-rule mt-12 mb-10" />
 
@@ -54,11 +57,15 @@ function Projects() {
       </section>
 
       <section className="mt-14">
-        <h2 className="font-serif text-2xl mb-6">Experiments &amp; sketches</h2>
+        <h2 className="font-serif text-2xl mb-6">Fleet services &amp; libraries</h2>
         <ul className="divide-y divide-border">
-          {experiments.map((e) => (
+          {supporting.map((e) => (
             <li key={e.name} className="py-4 grid grid-cols-[10rem_1fr] gap-6 items-baseline">
-              <span className="font-mono text-sm text-foreground">{e.name}</span>
+              {e.href ? (
+                <a href={e.href} className="font-mono text-sm text-foreground hover:text-copper break-words">{e.name}</a>
+              ) : (
+                <span className="font-mono text-sm text-foreground">{e.name} <span className="text-[10px] uppercase tracking-widest text-muted-foreground">private</span></span>
+              )}
               <span className="text-muted-foreground text-sm">{e.desc}</span>
             </li>
           ))}

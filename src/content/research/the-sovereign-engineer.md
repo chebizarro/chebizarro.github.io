@@ -1,29 +1,48 @@
 ---
 title: "The sovereign engineer"
-description: "On owning your tools, your keys, your data, and the systems that shape your work."
-date: "2025-12-10"
-tags: ["sovereignty", "bitcoin", "nostr"]
+description: "On owning your tools, your keys, your data, and the systems that shape your work. Draft — being rewritten from the actual practice."
+date: "2026-06-10"
+tags: ["sovereignty", "nostr", "practice"]
+status: "draft"
+featured: true
 ---
 
-There is a version of a software career where every tool you use is
-rented, every artefact you produce is hosted on someone else's server,
-and every relationship you have with a colleague is mediated by a
-platform that can revoke it.
+> **Draft.** This one is being rewritten from lived practice rather
+> than first principles. The argument stands; the war stories are
+> still being declassified.
 
-There is another version — quieter, older, more Unix — where the tools
-are yours, the keys are yours, the data is yours, and the platforms are
-optional.
+There is a version of a software career where every tool is rented,
+every artifact lives on someone else's server, and every working
+relationship is mediated by a platform that can revoke it. I spent
+years doing security work for people — activists, journalists,
+NGOs — who discovered exactly what that dependency costs, usually at
+the worst possible moment. Which is to say: this is not an aesthetic
+position.
 
-I am interested in the second version.
+So I built the other version, and I run on it daily.
 
-## Practically
+## The stack, concretely
 
-- Keys before accounts.
-- Text files before databases.
-- Protocols before platforms.
-- Local before remote.
-- Owned before rented.
+- **Identity** is a keypair, not an account. Every service I run and
+  every agent in my fleet signs with a Nostr identity. The keys for
+  the agents live in Signet, a bunker I wrote precisely so that no
+  agent — and no compromised box — ever holds a raw private key.
+- **Code review** happens on my hardware. Drydock reviews patches with
+  local models; nothing leaves the building. Git collaboration is
+  NIP-34 events on relays I choose.
+- **Deployment truth** is signed events. Bahia publishes what was
+  deployed, by whom, and what is actually running. The audit trail is
+  the transport, not a report generated after the fact.
+- **The record** is replayable. Chartroom, Mnemonic and Arcana keep
+  reference, history and doctrine as events and provenance-tracked
+  documents. Lose any database and the state rebuilds from the log.
 
-None of this is nostalgic. It is a bet that the boring, portable,
-signable primitives will still be here in twenty years, and that most
-of what we call "the platform" will not.
+## The bet
+
+None of this is nostalgia, and none of it requires believing platforms
+are evil. It is a straightforward wager: signed, portable, boring
+primitives will still be here in twenty years, and most of what we
+currently call "the platform" will not. Price the exit before you
+need it, and the exit costs nothing.
+
+Keys before accounts. Protocols before platforms. Owned before rented.
