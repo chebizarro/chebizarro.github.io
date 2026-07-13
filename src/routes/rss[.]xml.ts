@@ -10,13 +10,15 @@ export const Route = createFileRoute("/rss.xml")({
           .sort((a, b) => b.meta.date.localeCompare(a.meta.date))
           .slice(0, 40);
         const esc = (s: string) => s.replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[c]!));
+        const baseUrl = "https://chebizarro.github.io/sovereign-systems-lab";
         const rssItems = items.map((e) => {
           const path = `/${e.kind}/${e.meta.slug}`;
+          const url = `${baseUrl}${path}`;
           return [
             "    <item>",
             `      <title>${esc(e.meta.title)}</title>`,
-            `      <link>${path}</link>`,
-            `      <guid isPermaLink="false">${path}</guid>`,
+            `      <link>${url}</link>`,
+            `      <guid isPermaLink="true">${url}</guid>`,
             `      <pubDate>${new Date(e.meta.date).toUTCString()}</pubDate>`,
             `      <description>${esc(e.meta.description)}</description>`,
             "    </item>",
@@ -27,7 +29,7 @@ export const Route = createFileRoute("/rss.xml")({
 <rss version="2.0">
   <channel>
     <title>Chris Daley — Writing &amp; Research</title>
-    <link>/</link>
+    <link>${baseUrl}</link>
     <description>Notebook, essays and systems from an engineer working at the intersection of AI, distributed infrastructure, Bitcoin and Nostr.</description>
     <language>en</language>
 ${rssItems}

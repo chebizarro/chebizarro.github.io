@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { writing, research, systems } from "../lib/content";
 
-const BASE_URL = "";
+const BASE_URL = "https://chebizarro.github.io/sovereign-systems-lab";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

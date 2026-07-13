@@ -7,10 +7,19 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    base: process.env.GITHUB_ACTIONS ? "/sovereign-systems-lab/" : "/",
+  },
   tanstackStart: {
-    // Disable server for static builds
+    server: { entry: "server" },
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
+      failOnError: true,
+    },
+    pages: [
+      { path: "/sitemap.xml", prerender: { enabled: true } },
+    ],
   },
-  nitro: {
-    preset: "static",
-  },
+  nitro: false,
 });
