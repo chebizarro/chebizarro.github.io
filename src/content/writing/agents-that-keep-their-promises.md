@@ -3,6 +3,8 @@ title: "Agents that keep their promises"
 description: "Give an agent a memory and it gets smarter. Give it commitments and it gets character."
 date: "2026-07-13"
 tags: ["agents", "memory", "identity"]
+heroImage: "/images/agents-that-keep-their-promises.png"
+ogImage: "/og-images/agents-that-keep-their-promises-og.png"
 ---
 
 Most agent memory work chases the same prize: recall. Feed the agent
