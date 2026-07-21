@@ -7,6 +7,8 @@ stack: ["Go", "SQLite", "Ollama"]
 role: "Author"
 status: "active"
 featured: true
+heroImage: "/images/drydock.png"
+ogImage: "/og-images/drydock.png"
 ---
 
 ## Overview
