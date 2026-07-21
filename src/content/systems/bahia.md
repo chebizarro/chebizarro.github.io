@@ -8,6 +8,8 @@ role: "Author"
 status: "active"
 featured: true
 repo: "https://github.com/chebizarro/bahia"
+heroImage: "/images/bahia.png"
+ogImage: "/og-images/bahia.png"
 ---
 
 ## Overview
